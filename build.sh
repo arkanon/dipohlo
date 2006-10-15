@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/08/11 (Ter) 03:09:10 BRS
 # 2015/08/09 (Dom) 17:45:56 BRS
 # 2015/08/08 (Sáb) 21:14:02 BRT
 # 2015/08/03 (Seg) 02:18:10 BRS
@@ -29,9 +30,10 @@
 #
 #
 # TODO
-#   -- led para teclas de pressão (shift, code, alt, control)
+#   -- led para teclas de pressão (shift, code, control)
 #   -- lista de teclas especiais do emulador na borda do frame
 #   -- clip de ruído branco de tv
+#   -- clip de contagem regressiva
 #   -- implementar parâmetros do make
 #
 #
@@ -471,8 +473,8 @@ EOT
         #   VeraMono - console
 
         mv     fancy/                                 dipohlo/
-        cp -a  $DATA/arte/skin/v4/console-893x280.png dipohlo/console.png
-        cp -a  $DATA/arte/skin/v4/frame-960x720.png   dipohlo/frame.png
+        cp -a  $DATA/arte/skin/v5/console-893x281.png dipohlo/console.png
+        cp -a  $DATA/arte/skin/v5/frame-961x721.png   dipohlo/frame.png
         mv     dipohlo/led-* .
         ln -fs led-on.png    mute.png
         ln -fs led-on.png    pause.png
