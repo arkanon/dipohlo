@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/07/06 (Seg) 10:50:12 BRS
 # 2015/07/05 (Dom) 09:57:48 BRS
 # 2015/07/05 (Dom) 05:26:19 BRS
 # 2015/07/04 (Sáb) 03:41:25 BRS
@@ -233,6 +234,131 @@
 
 
 
+        # <http://www.planetemu.net>
+        list="$ldir/planetemu"
+# TODO: testar se já há cache e usar ao invés de baixar novamente
+        time (
+               >| $list.html
+               for i in 0 {A..Z}
+               do
+                 echo -n "$i "
+                 curl -s http://www.planetemu.net/roms/msx-various-rom?page=$i >> $list.html
+               done
+               echo
+             ) # 00:05:09.914
+
+        # http://www.planetemu.net/rom/msx-various-rom/zoom-909-1985-sega-1
+        # http://www.planetemu.net/php/roms/download.php?id=625735
+        # http://www.planetemu.net/php/roms/download.php?token=64969c69469c9202739a94f29dabab30
+        cat $list.html | tr -d '\n' \
+         | grep -Eo '<a href="/rom/msx-various-rom/[^"]+">[^>]+</a>' \
+         | sed -r 's/>[ \t]+/>/g;s/[ \t]+</</g' \
+         | cut -d/ -f4- \
+         | sed -r 's/">/\t/g;s:</a>::g' \
+         | column -s $'\t' -t \
+        >| $list.txt
+
+        cat $list.txt | grep -if <(cat << EOT
+antarctic adventure
+arkanoid
+frogger
+h.e.r.o
+hyper rally
+theseus
+illegus
+expert
+lode runner
+magical tree
+logo
+music editor
+payload
+river raid
+road fighter
+snake-it
+super billiards
+pencil
+EOT
+)
+
+        # expert
+        # hotlogo-1.2
+        # hotlogo
+
+        # antarctic-adventure-european-version-1984-konami-a-rc-701 Antarctic Adventure - European Version (1984)(Konami)[a][RC-701]
+        # arkanoid-1986-taito-a                                     Arkanoid (1986)(Taito)[a]
+        # designer-s-pencil-the-1984-pony-canyon                    Designer's Pencil, The (1984)(Pony Canyon)
+        # frogger-1983-konami-a-rc-704                              Frogger (1983)(Konami)[a][RC-704]
+        # h-e-r-o-1984-pony-canyon-o                                H.E.R.O. (1984)(Pony Canyon)[o]
+        # hyper-rally-1985-konami-a-rc-718                          Hyper Rally (1985)(Konami)[a][RC-718]
+        # iligks-episode-i-theseus-1984-ascii-a                     Iligks Episode I - Theseus (1984)(Ascii)[a]
+        # iligks-episode-iv-the-maze-of-illegus-1984-ascii-a        Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a]
+        # lode-runner-1984-sony-a                                   Lode Runner (1984)(Sony)[a]
+        # lode-runner-ii-1985-sony                                  Lode Runner II (1985)(Sony)
+        # magical-tree-1984-konami-a-rc-713                         Magical Tree (1984)(Konami)[a][RC-713]
+        # msx-logo-1985-logo-computer-systems-nl                    MSX-Logo (1985)(Logo Computer Systems)(nl)
+        # mue-music-editor-1984-hal                                 MUE - Music Editor (1984)(Hal)
+        # payload-1985-sony-a                                       Payload (1985)(Sony)[a]
+        # river-raid-1984-pony-canyon-a                             River Raid (1984)(Pony Canyon)[a]
+        # road-fighter-1985-konami-a-rc-730                         Road Fighter (1985)(Konami)[a][RC-730]
+        # snake-it-1986-al-alamiah                                  Snake It (1986)(Al Alamiah)
+        # super-billiards-1983-hal                                  Super Billiards (1983)(Hal)
+
+        getrom()
+        {
+          export TIMEFORMAT=' - %lR'
+          time \
+          (
+            local dir=$1
+            local rom=$(cat $list.txt | grep -w "$dir"| sed -r 's/ +/\t/' | cut -f2).rom
+            echo -n "$rom "
+            local  id=$(curl -s http://www.planetemu.net/rom/msx-various-rom/$dir | grep -B1 Télécharger | grep -Eo '[0-9]+')
+            echo -n "($id)"
+            curl -Ls http://www.planetemu.net/php/roms/download.php -d id=$id | funzip > "$rom"
+          )
+        }
+
+        while read i; do getrom $i; done << EOT
+antarctic-adventure-european-version-1984-konami-a-rc-701
+arkanoid-1986-taito-a
+designer-s-pencil-the-1984-pony-canyon
+frogger-1983-konami-a-rc-704
+h-e-r-o-1984-pony-canyon-o
+hyper-rally-1985-konami-a-rc-718
+iligks-episode-i-theseus-1984-ascii-a
+iligks-episode-iv-the-maze-of-illegus-1984-ascii-a
+lode-runner-1984-sony-a
+lode-runner-ii-1985-sony
+magical-tree-1984-konami-a-rc-713
+msx-logo-1985-logo-computer-systems-nl
+mue-music-editor-1984-hal
+payload-1985-sony-a
+river-raid-1984-pony-canyon-a
+road-fighter-1985-konami-a-rc-730
+snake-it-1986-al-alamiah
+super-billiards-1983-hal
+EOT
+
+        # Antarctic Adventure - European Version (1984)(Konami)[a][RC-701].rom (624520) - 0m8.327s
+        # Arkanoid (1986)(Taito)[a].rom (624533) - 0m14.470s
+        # Designer's Pencil, The (1984)(Pony Canyon).rom (624776) - 0m6.601s
+        # Frogger (1983)(Konami)[a][RC-704].rom (624888) - 0m8.906s
+        # H.E.R.O. (1984)(Pony Canyon)[o].rom (624976) - 0m22.377s
+        # Hyper Rally (1985)(Konami)[a][RC-718].rom (625028) - 0m9.905s
+        # Iligks Episode I - Theseus (1984)(Ascii)[a].rom (625043) - 0m6.471s
+        # Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a].rom (625046) - 0m6.670s
+        # Lode Runner (1984)(Sony)[a].rom (625185) - 0m14.687s
+        # Lode Runner II (1985)(Sony).rom (625186) - 0m7.627s
+        # Magical Tree (1984)(Konami)[a][RC-713].rom (625220) - 0m13.768s
+        # MSX-Logo (1985)(Logo Computer Systems)(nl).rom (625207) - 0m7.183s
+        # MUE - Music Editor (1984)(Hal).rom (625209) - 0m6.740s
+        # Payload (1985)(Sony)[a].rom (625362) - 0m7.391s
+        # River Raid (1984)(Pony Canyon)[a].rom (625436) - 0m10.836s
+        # Road Fighter (1985)(Konami)[a][RC-730].rom (625439) - 0m21.786s
+        # Snake It (1986)(Al Alamiah).rom (625507) - 0m23.795s
+        # Super Billiards (1983)(Hal).rom (625560) - 0m17.765s
+
+
+
 ###         # <http://www.doperoms.com>
 ###         list="$ldir/doperoms"
 ###         time (
@@ -299,130 +425,6 @@
 ###         # 618217  Thseus (1984) (Ascii) (J)
 ###
 ###         # http://www.doperoms.com/files/roms/msx_1/Beam+Rider+%281984%29+%28Pony+Cannon%29+%28J%29.zip/618341/Beam+Rider+.zip
-
-
-
-        # <http://www.planetemu.net>
-        list="$ldir/planetemu"
-        time (
-               >| $list.html
-               for i in 0 {A..Z}
-               do
-                 echo -n "$i "
-                 curl -s https://www.planetemu.net/roms/msx-various-rom?page=$i >> $list.html
-               done
-               echo
-             ) # 00:05:09.914
-
-        # https://www.planetemu.net/rom/msx-various-rom/zoom-909-1985-sega-1
-        # https://www.planetemu.net/php/roms/download.php?id=625735
-        # https://www.planetemu.net/php/roms/download.php?token=64969c69469c9202739a94f29dabab30
-        cat $list.html | tr -d '\n' \
-         | grep -Eo '<a href="/rom/msx-various-rom/[^"]+">[^>]+</a>' \
-         | sed -r 's/>[ \t]+/>/g;s/[ \t]+</</g' \
-         | cut -d/ -f4- \
-         | sed -r 's/">/\t/g;s:</a>::g' \
-         | column -s $'\t' -t \
-        >| $list.txt
-
-        cat $list.txt | grep -if <(cat << EOT
-antarctic adventure
-arkanoid
-frogger
-h.e.r.o
-hyper rally
-theseus
-illegus
-expert
-lode runner
-magical tree
-logo
-music editor
-payload
-river raid
-road fighter
-snake-it
-super billiards
-pencil
-EOT
-)
-
-        # expert
-        # hotlogo-1.2
-        # hotlogo
-
-        # antarctic-adventure-european-version-1984-konami-a-rc-701 Antarctic Adventure - European Version (1984)(Konami)[a][RC-701]
-        # arkanoid-1986-taito-a                                     Arkanoid (1986)(Taito)[a]
-        # designer-s-pencil-the-1984-pony-canyon                    Designer's Pencil, The (1984)(Pony Canyon)
-        # frogger-1983-konami-a-rc-704                              Frogger (1983)(Konami)[a][RC-704]
-        # h-e-r-o-1984-pony-canyon-o                                H.E.R.O. (1984)(Pony Canyon)[o]
-        # hyper-rally-1985-konami-a-rc-718                          Hyper Rally (1985)(Konami)[a][RC-718]
-        # iligks-episode-i-theseus-1984-ascii-a                     Iligks Episode I - Theseus (1984)(Ascii)[a]
-        # iligks-episode-iv-the-maze-of-illegus-1984-ascii-a        Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a]
-        # lode-runner-1984-sony-a                                   Lode Runner (1984)(Sony)[a]
-        # lode-runner-ii-1985-sony                                  Lode Runner II (1985)(Sony)
-        # magical-tree-1984-konami-a-rc-713                         Magical Tree (1984)(Konami)[a][RC-713]
-        # msx-logo-1985-logo-computer-systems-nl                    MSX-Logo (1985)(Logo Computer Systems)(nl)
-        # mue-music-editor-1984-hal                                 MUE - Music Editor (1984)(Hal)
-        # payload-1985-sony-a                                       Payload (1985)(Sony)[a]
-        # river-raid-1984-pony-canyon-a                             River Raid (1984)(Pony Canyon)[a]
-        # road-fighter-1985-konami-a-rc-730                         Road Fighter (1985)(Konami)[a][RC-730]
-        # snake-it-1986-al-alamiah                                  Snake It (1986)(Al Alamiah)
-        # super-billiards-1983-hal                                  Super Billiards (1983)(Hal)
-
-        getrom()
-        {
-          export TIMEFORMAT=' - %lR'
-          time \
-          (
-            local dir=$1
-            local rom=$(cat $list.txt | grep -w "$dir"| sed -r 's/ +/\t/' | cut -f2).rom
-            echo -n "$rom "
-            local  id=$(curl -s https://www.planetemu.net/rom/msx-various-rom/$dir | grep -B1 Télécharger | grep -Eo '[0-9]+')
-            echo -n "($id)"
-            curl -Ls https://www.planetemu.net/php/roms/download.php -d id=$id | funzip > "$rom"
-          )
-        }
-
-        while read i; do getrom $i; done << EOT
-antarctic-adventure-european-version-1984-konami-a-rc-701
-arkanoid-1986-taito-a
-designer-s-pencil-the-1984-pony-canyon
-frogger-1983-konami-a-rc-704
-h-e-r-o-1984-pony-canyon-o
-hyper-rally-1985-konami-a-rc-718
-iligks-episode-i-theseus-1984-ascii-a
-iligks-episode-iv-the-maze-of-illegus-1984-ascii-a
-lode-runner-1984-sony-a
-lode-runner-ii-1985-sony
-magical-tree-1984-konami-a-rc-713
-msx-logo-1985-logo-computer-systems-nl
-mue-music-editor-1984-hal
-payload-1985-sony-a
-river-raid-1984-pony-canyon-a
-road-fighter-1985-konami-a-rc-730
-snake-it-1986-al-alamiah
-super-billiards-1983-hal
-EOT
-
-        # Antarctic Adventure - European Version (1984)(Konami)[a][RC-701].rom (624520) - 0m8.327s
-        # Arkanoid (1986)(Taito)[a].rom (624533) - 0m14.470s
-        # Designer's Pencil, The (1984)(Pony Canyon).rom (624776) - 0m6.601s
-        # Frogger (1983)(Konami)[a][RC-704].rom (624888) - 0m8.906s
-        # H.E.R.O. (1984)(Pony Canyon)[o].rom (624976) - 0m22.377s
-        # Hyper Rally (1985)(Konami)[a][RC-718].rom (625028) - 0m9.905s
-        # Iligks Episode I - Theseus (1984)(Ascii)[a].rom (625043) - 0m6.471s
-        # Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a].rom (625046) - 0m6.670s
-        # Lode Runner (1984)(Sony)[a].rom (625185) - 0m14.687s
-        # Lode Runner II (1985)(Sony).rom (625186) - 0m7.627s
-        # Magical Tree (1984)(Konami)[a][RC-713].rom (625220) - 0m13.768s
-        # MSX-Logo (1985)(Logo Computer Systems)(nl).rom (625207) - 0m7.183s
-        # MUE - Music Editor (1984)(Hal).rom (625209) - 0m6.740s
-        # Payload (1985)(Sony)[a].rom (625362) - 0m7.391s
-        # River Raid (1984)(Pony Canyon)[a].rom (625436) - 0m10.836s
-        # Road Fighter (1985)(Konami)[a][RC-730].rom (625439) - 0m21.786s
-        # Snake It (1986)(Al Alamiah).rom (625507) - 0m23.795s
-        # Super Billiards (1983)(Hal).rom (625560) - 0m17.765s
 
 
 
