@@ -1,1 +1,2 @@
-# dipohlo
+HotLogo Portable Distribution
+=============================
