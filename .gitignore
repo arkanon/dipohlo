@@ -1,7 +1,7 @@
 # <http://git-scm.com/docs/gitignore>
 
 # ignore dipohlo logotype while it is not defined
-/dipohlo/logo/
+/logo/
 
 # ignore vim swap files
 .*.swp
