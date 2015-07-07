@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/07/07 (Ter) 01:15:30 BRS
 # 2015/07/06 (Seg) 10:50:12 BRS
 # 2015/07/05 (Dom) 09:57:48 BRS
 # 2015/07/05 (Dom) 05:26:19 BRS
@@ -187,11 +188,11 @@
       diff -qr w   x
       rm   -r      x
 
-      diff -qr w                                      ../bin/openmsx-0.11.0-m86_64.app/share/
-      cp   -a  w/codec/                               ../bin/openmsx-0.11.0-m86_64.app/share/
-      cp   -a  w/icons/openmsx.ico                    ../bin/openmsx-0.11.0-m86_64.app/share/icons/
-      cp   -a  w/machines/{msx{1,2,2plus},turbor}.xml ../bin/openmsx-0.11.0-m86_64.app/share/machines/
-      diff -qr w                                      ../bin/openmsx-0.11.0-m86_64.app/share/
+      diff -qr w                                      ../bin/$pref-m86_64.app/share/
+      cp   -a  w/codec/                               ../bin/$pref-m86_64.app/share/
+      cp   -a  w/icons/openmsx.ico                    ../bin/$pref-m86_64.app/share/icons/
+      cp   -a  w/machines/{msx{1,2,2plus},turbor}.xml ../bin/$pref-m86_64.app/share/machines/
+      diff -qr w                                      ../bin/$pref-m86_64.app/share/
       mv       w/* .
       rmdir    w
 
@@ -266,7 +267,6 @@ h.e.r.o
 hyper rally
 theseus
 illegus
-expert
 lode runner
 magical tree
 logo
@@ -279,29 +279,6 @@ super billiards
 pencil
 EOT
 )
-
-        # expert
-        # hotlogo-1.2
-        # hotlogo
-
-        # antarctic-adventure-european-version-1984-konami-a-rc-701 Antarctic Adventure - European Version (1984)(Konami)[a][RC-701]
-        # arkanoid-1986-taito-a                                     Arkanoid (1986)(Taito)[a]
-        # designer-s-pencil-the-1984-pony-canyon                    Designer's Pencil, The (1984)(Pony Canyon)
-        # frogger-1983-konami-a-rc-704                              Frogger (1983)(Konami)[a][RC-704]
-        # h-e-r-o-1984-pony-canyon-o                                H.E.R.O. (1984)(Pony Canyon)[o]
-        # hyper-rally-1985-konami-a-rc-718                          Hyper Rally (1985)(Konami)[a][RC-718]
-        # iligks-episode-i-theseus-1984-ascii-a                     Iligks Episode I - Theseus (1984)(Ascii)[a]
-        # iligks-episode-iv-the-maze-of-illegus-1984-ascii-a        Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a]
-        # lode-runner-1984-sony-a                                   Lode Runner (1984)(Sony)[a]
-        # lode-runner-ii-1985-sony                                  Lode Runner II (1985)(Sony)
-        # magical-tree-1984-konami-a-rc-713                         Magical Tree (1984)(Konami)[a][RC-713]
-        # msx-logo-1985-logo-computer-systems-nl                    MSX-Logo (1985)(Logo Computer Systems)(nl)
-        # mue-music-editor-1984-hal                                 MUE - Music Editor (1984)(Hal)
-        # payload-1985-sony-a                                       Payload (1985)(Sony)[a]
-        # river-raid-1984-pony-canyon-a                             River Raid (1984)(Pony Canyon)[a]
-        # road-fighter-1985-konami-a-rc-730                         Road Fighter (1985)(Konami)[a][RC-730]
-        # snake-it-1986-al-alamiah                                  Snake It (1986)(Al Alamiah)
-        # super-billiards-1983-hal                                  Super Billiards (1983)(Hal)
 
         getrom()
         {
@@ -338,24 +315,31 @@ snake-it-1986-al-alamiah
 super-billiards-1983-hal
 EOT
 
-        # Antarctic Adventure - European Version (1984)(Konami)[a][RC-701].rom (624520) - 0m8.327s
-        # Arkanoid (1986)(Taito)[a].rom (624533) - 0m14.470s
-        # Designer's Pencil, The (1984)(Pony Canyon).rom (624776) - 0m6.601s
-        # Frogger (1983)(Konami)[a][RC-704].rom (624888) - 0m8.906s
-        # H.E.R.O. (1984)(Pony Canyon)[o].rom (624976) - 0m22.377s
-        # Hyper Rally (1985)(Konami)[a][RC-718].rom (625028) - 0m9.905s
-        # Iligks Episode I - Theseus (1984)(Ascii)[a].rom (625043) - 0m6.471s
-        # Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a].rom (625046) - 0m6.670s
-        # Lode Runner (1984)(Sony)[a].rom (625185) - 0m14.687s
-        # Lode Runner II (1985)(Sony).rom (625186) - 0m7.627s
-        # Magical Tree (1984)(Konami)[a][RC-713].rom (625220) - 0m13.768s
-        # MSX-Logo (1985)(Logo Computer Systems)(nl).rom (625207) - 0m7.183s
-        # MUE - Music Editor (1984)(Hal).rom (625209) - 0m6.740s
-        # Payload (1985)(Sony)[a].rom (625362) - 0m7.391s
-        # River Raid (1984)(Pony Canyon)[a].rom (625436) - 0m10.836s
-        # Road Fighter (1985)(Konami)[a][RC-730].rom (625439) - 0m21.786s
-        # Snake It (1986)(Al Alamiah).rom (625507) - 0m23.795s
-        # Super Billiards (1983)(Hal).rom (625560) - 0m17.765s
+        #   00                                                                                            http://www.generation-msx.nl/hardware/gradiente/expert-dd-plus/212/
+        #   01                                                                                            http://www.generation-msx.nl/hardware/gradiente/expert-dd-plus/212/
+        #   02                                                                                            http://www.generation-msx.nl/software/gradiente/ligue-se-ao-expert/3409/
+
+        #   03   Antarctic Adventure - European Version (1984)(Konami)[a][RC-701].rom   624520   08.327   http://www.generation-msx.nl/software/konami/antarctic-adventure/25/
+        #   04   Arkanoid (1986)(Taito)[a].rom                                          624533   14.470   http://www.generation-msx.nl/software/taito/arkanoid/887/
+        #   05   Designer\'s Pencil, The (1984)(Pony Canyon).rom                        624776   06.601   http://www.generation-msx.nl/software/activision/the-designers-pencil/3849/
+        #   06   Frogger (1983)(Konami)[a][RC-704].rom                                  624888   08.906   http://www.generation-msx.nl/software/konami/frogger/70/
+        #   07   H.E.R.O. (1984)(Pony Canyon)[o].rom                                    624976   22.377   http://www.generation-msx.nl/software/activision/hero/282/
+        #   08   Hyper Rally (1985)(Konami)[a][RC-718].rom                              625028   09.905   http://www.generation-msx.nl/software/konami/hyper-rally/580/
+        #   09   Iligks Episode I - Theseus (1984)(Ascii)[a].rom                        625043   06.471   http://www.generation-msx.nl/software/ascii/iligks-episode-one---theseus/225/
+        #   10   Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a].rom           625046   06.670   http://www.generation-msx.nl/software/ascii/iligks-episode-iv/99/
+        #   11   Lode Runner (1984)(Sony)[a].rom                                        625185   14.687   http://www.generation-msx.nl/software/doug-smith/lode-runner/359/
+        #   12   Lode Runner II (1985)(Sony).rom                                        625186   07.627   http://www.generation-msx.nl/software/compile-doug-smith/lode-runner-ii/685/
+        #   13   Magical Tree (1984)(Konami)[a][RC-713].rom                             625220   13.768   http://www.generation-msx.nl/software/konami/magical-tree/655/
+        #   14   MUE - Music Editor (1984)(Hal).rom                                     625209   06.740   http://www.generation-msx.nl/software/hal-laboratory/music-editor-mue/342/
+        #   15   Payload (1985)(Sony)[a].rom                                            625362   07.391   http://www.generation-msx.nl/software/zap/payload/432/
+        #   16   River Raid (1984)(Pony Canyon)[a].rom                                  625436   10.836   http://www.generation-msx.nl/software/activision/river-raid/356/
+        #   17   Road Fighter (1985)(Konami)[a][RC-730].rom                             625439   21.786   http://www.generation-msx.nl/software/konami/road-fighter/684/
+        #   18   Snake It (1986)(Al Alamiah).rom                                        625507   23.795   http://www.generation-msx.nl/software/the-bytebusters/snake-it/960/
+        #   19   Super Billiards (1983)(Hal).rom                                        625560   17.765   http://www.generation-msx.nl/software/hal-laboratory/super-billiards/39/
+
+        #   20   MSX-Logo (1985)(Logo Computer Systems)(nl).rom                         625207   07.183   http://www.generation-msx.nl/software/philips/msx-logo/2568/
+        #   21   hotlogo-1.2
+        #   22   hotlogo
 
 
 
@@ -433,31 +417,36 @@ EOT
 ###         repo[ 1]="http://www.msxarchive.nl/pub/msx/games/msx1"
 ###         repo[ 2]="http://www.msxarchive.nl/pub/msx/games/roms/msx1"
 ###         repo[ 3]="http://www.msxarchive.nl/pub/msx/mep-mirror/Games"
+###         repo[ 4]="http://www.msxarchive.nl/pub/msx/mep-mirror/BIOS%20ROMs"
+###         repo[ 5]="http://www.msxarchive.nl/pub/msx/misc"
+###         repo[ 6]="http://www.msxpro.com/download"
 ###
 ###         file[ 0]="-                        0 expert_ddplus_basic-bios1 rom" # http://www.generation-msx.nl/hardware/gradiente/expert-dd-plus/212/
 ###         file[ 1]="-                        0 expert_ddplus_disk        rom" # http://www.generation-msx.nl/hardware/gradiente/expert-dd-plus/212/
-###       - file[ 2]="antartic_adventure       2 antartic                  lzh" # http://www.generation-msx.nl/software/konami/antarctic-adventure/25/
-###       - file[ 3]="arkanoid                 2 arkanoid                  zip" # http://www.generation-msx.nl/software/taito/arkanoid/887/
-###         file[ 4]="frogger                  2 frogger                   zip" # http://www.generation-msx.nl/software/konami/frogger/70/
-###         file[ 5]="hero                     1 hero                      lzh" # http://www.generation-msx.nl/software/activision/hero/282/
-###         file[ 6]="hyper_rally              2 hrally                    zip" # http://www.generation-msx.nl/software/konami/hyper-rally/580/
-###         file[ 7]="iligks_episode_1_theseus                                " # http://www.generation-msx.nl/software/ascii/iligks-episode-one---theseus/225/
-###         file[ 8]="iligks_episode_4_illegus 3 ILLEGUS                   ZIP" # http://www.generation-msx.nl/software/ascii/iligks-episode-iv/99/
-###         file[ 9]="ligue_se_ao_expert                                      " # http://www.generation-msx.nl/software/gradiente/ligue-se-ao-expert/3409/
-###         file[10]="lode_runner              2 loderun                   lzh" # http://www.generation-msx.nl/software/doug-smith/lode-runner/359/
-###         file[11]="lode_runner_ii                                          " # http://www.generation-msx.nl/software/compile-doug-smith/lode-runner-ii/685/
-###         file[12]="magical_tree             2 mtree                     lzh" # http://www.generation-msx.nl/software/konami/magical-tree/655/
-###         file[13]="msx_logo                                                " # http://www.generation-msx.nl/software/philips/msx-logo/2568/
-###         file[14]="mue_music_editor                                        " # http://www.generation-msx.nl/software/hal-laboratory/music-editor-mue/342/
-###         file[15]="pay_load                 2 payload                   lzh" # http://www.generation-msx.nl/software/zap/payload/432/
-###         file[16]="river_raid               1 rivraid                   lzh" # http://www.generation-msx.nl/software/activision/river-raid/356/
-###         file[17]="road_fighter             2 road                      lzh" # http://www.generation-msx.nl/software/konami/road-fighter/684/
-###         file[18]="snake_it                 2 snakeit                   lzh" # http://www.generation-msx.nl/software/the-bytebusters/snake-it/960/
-###         file[19]="super_billiards          2 billiard                  lzh" # http://www.generation-msx.nl/software/hal-laboratory/super-billiards/39/
-###         file[20]="the_designers_pencil     3 pencil                    zip" # http://www.generation-msx.nl/software/activision/the-designers-pencil/3849/
+###         file[ 2]="-                        0 expert_plus_demo          rom" #
+###         file[ 2]="ligue_se_ao_expert       4 liguese                   zip" # http://www.generation-msx.nl/software/gradiente/ligue-se-ao-expert/3409/
 ###
-###         hotlogo-1.2
-###         hotlogo
+###         file[ 3]="antartic_adventure       2 antartic                  lzh" # http://www.generation-msx.nl/software/konami/antarctic-adventure/25/
+###         file[ 4]="arkanoid                 2 arkanoid                  zip" # http://www.generation-msx.nl/software/taito/arkanoid/887/
+###         file[ 5]="frogger                  2 frogger                   zip" # http://www.generation-msx.nl/software/konami/frogger/70/
+###         file[ 6]="hero                     1 hero                      lzh" # http://www.generation-msx.nl/software/activision/hero/282/
+###         file[ 7]="hyper_rally              2 hrally                    zip" # http://www.generation-msx.nl/software/konami/hyper-rally/580/
+###         file[ 8]="iligks_episode_1_theseus 3 theseus                   zip" # http://www.generation-msx.nl/software/ascii/iligks-episode-one---theseus/225/
+###         file[ 9]="iligks_episode_4_illegus 3 ILLEGUS                   ZIP" # http://www.generation-msx.nl/software/ascii/iligks-episode-iv/99/
+###         file[10]="lode_runner              2 loderun                   lzh" # http://www.generation-msx.nl/software/doug-smith/lode-runner/359/
+###         file[11]="lode_runner_ii           1 loderun2                  lzh" # http://www.generation-msx.nl/software/compile-doug-smith/lode-runner-ii/685/
+###         file[12]="magical_tree             2 mtree                     lzh" # http://www.generation-msx.nl/software/konami/magical-tree/655/
+###         file[13]="mue_music_editor         3 MUE                       ZIP" # http://www.generation-msx.nl/software/hal-laboratory/music-editor-mue/342/
+###         file[14]="pay_load                 2 payload                   lzh" # http://www.generation-msx.nl/software/zap/payload/432/
+###         file[15]="river_raid               1 rivraid                   lzh" # http://www.generation-msx.nl/software/activision/river-raid/356/
+###         file[16]="road_fighter             2 road                      lzh" # http://www.generation-msx.nl/software/konami/road-fighter/684/
+###         file[17]="snake_it                 2 snakeit                   lzh" # http://www.generation-msx.nl/software/the-bytebusters/snake-it/960/
+###         file[18]="super_billiards          2 billiard                  lzh" # http://www.generation-msx.nl/software/hal-laboratory/super-billiards/39/
+###         file[19]="the_designers_pencil     3 pencil                    zip" # http://www.generation-msx.nl/software/activision/the-designers-pencil/3849/
+###
+###         file[20]="msx_logo                 5 msx-logo                  rom" # http://www.generation-msx.nl/software/philips/msx-logo/2568/
+###         file[21]="hotlogo-1.2              6 rumsx                     zip"
+###         file[22]="hotlogo"
 ###
 ###         time wget -qc $repo/$file
 ###         sha1sum *.rom
