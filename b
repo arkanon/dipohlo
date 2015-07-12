@@ -1,7 +1,0 @@
-4b1b0ab36e6ddb1fa317cf43e0a4611a  antarctic.rom
-a97be3921464521ac2068ad3796b07b2  billiards.rom
-acb2cea4c65ffc93b27dcdfd525a6731  frogger.rom
-f668298ad121728414de1aaeac8d6b21  lrunner.rom
-91181b037e4a772149a00990e9f8b51c  magicalt.rom
-331f8aaf504e51c650979d6c55875d8a  payload.rom
-b808fe1910c3346d95b098692889f222  theseus.rom

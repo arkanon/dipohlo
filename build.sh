@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/07/12 (Dom) 17:12:34 BRS
 # 2015/07/07 (Ter) 01:15:30 BRS
 # 2015/07/06 (Seg) 10:50:12 BRS
 # 2015/07/05 (Dom) 09:57:48 BRS
@@ -17,6 +18,33 @@
 # 2014/03/07 (Fri) 00:52:56 BRS
 # 2014/03/05 (Wed) 22:21:10 BRS
 # 2013/04/15 (Seg) 05:49:49 BRS
+#
+# Emuladores
+#   <http://openmsx.org/>
+#   <http://fms.komkon.org/fMSX/>
+#   <http://www.bluemsx.com/>
+#
+# Informaçoes
+#
+#   Generation MSX
+#     <http://www.generation-msx.nl/hardware/>
+#     <http://www.generation-msx.nl/software/>
+#
+# ROMs
+#
+#   Planet Emulation
+#     <http://www.planetemu.net/machine/msx-1-2>
+#     <http://www.planetemu.net/roms/msx-bios>
+#     <http://www.planetemu.net/roms/msx-various-rom>
+#
+#   MSX Archive
+#     <http://www.msxarchive.nl/pub/msx/>
+#
+#   MSX Pro
+#     <http://www.msxpro.com/aplicativos.html>
+#
+#   DopeROMs
+#     <http://www.doperoms.com/roms/Msx_1/ALL.html>
 
 
 
@@ -45,7 +73,7 @@
   lib[3]="l/libGLEW-1.10.0-6.fc23"
   lib[4]="s/SDL_ttf-2.0.11-7.fc23"
 
-  export TIMEFORMAT='  ELAPSED TIME: %lR'
+  export TIMEFORMAT=' - %lR'
 
 
 
@@ -53,6 +81,141 @@
   VER="$MAJ-$BLD"
 
   echo -e "$BLD\t$(LC_TIME=C date +'%Y/%m/%d (%a) %H:%M:%S %Z')" >> build-history
+
+
+
+  planetemu()
+  # rotina finalizada
+  # <http://www.planetemu.net>
+  {
+
+    local vers ldir list pref i
+
+    vers=$FUNCNAME
+    ldir=$1
+    list="$ldir/$vers"
+    pref="http://www.$vers.net"
+
+    mkdir -p $ldir
+    mkdir -p $vers
+
+    [ ! -e $list.html ] && time (
+
+                                  echo -n "BIOS "
+                                  curl -s "$pref/roms/msx-bios" >| $list.html
+
+                                  echo -n "EXPERT "
+                                  curl -s "$pref/?section=recherche&recherche=msx+expert&rubrique=roms" >> $list.html
+
+                                  for i in 0 {A..Z}
+                                  do
+                                    echo -n "$i "
+                                    curl -s "$pref/roms/msx-various-rom?page=$i" >> $list.html
+                                  done
+
+                                ) # 00:05:09.914
+
+    # <http://www.planetemu.net/roms/msx-various-rom?page=Z>
+    # <http://www.planetemu.net/rom/msx-various-rom/zoom-909-1985-sega-1>
+    # <http://www.planetemu.net/php/roms/download.php?id=625735>
+    # <http://www.planetemu.net/php/roms/download.php?token=64969c69469c9202739a94f29dabab30>
+    cat $list.html | tr -d '\n' \
+     | grep -Eo '<a href="/(\?section=roms|rom/msx-(bios|various-rom)/)[^"]+">[^>]+</a>' \
+     | sed -r 's/>[ \t]+/>/g;s/[ \t]+</</g' \
+     | cut -d/ -f2- \
+     | sed -r 's/">/\t/g;s:</a>::g;s/amp;//g' \
+     | column -s $'\t' -t \
+    >| $list.txt
+
+    # listagem com os padrões das roms desejadas, para identificação e escolha manual da string correta da url
+    cat $list.txt | grep -if <(cat << EOT
+expert 1.
+expert dd
+antarctic adventure
+arkanoid
+frogger
+h.e.r.o
+hyper rally
+theseus
+illegus
+lode runner
+magical tree
+logo
+music editor
+payload
+river raid
+road fighter
+snake-it
+super billiards
+pencil
+EOT
+)
+
+    getrom()
+    {
+      local key=$1
+      local dir=$(cat $list.txt | grep -w "$key" | sed -r 's/ +/\t/' | cut -f1)
+      local rom=$(cat $list.txt | grep -w "$key" | sed -r 's/ +/\t/' | cut -f2).rom
+      echo -n "$rom "
+      local  id=$(curl -s "$pref/$dir" | grep -B1 Télécharger | grep -Eo '[0-9]+')
+      echo -n "($id)"
+      curl -Ls "$pref/php/roms/download.php" -d id=$id | funzip 2> /dev/null >| "$vers/$rom"
+    } # getrom
+
+    # utilização da string da url para download da rom correspondente
+    while read i; do time getrom $i; done << EOT
+2258920
+2258925
+antarctic-adventure-european-version-1984-konami-a-rc-701
+arkanoid-1986-taito-a
+designer-s-pencil-the-1984-pony-canyon
+frogger-1983-konami-a-rc-704
+h-e-r-o-1984-pony-canyon-o
+hyper-rally-1985-konami-a-rc-718
+iligks-episode-i-theseus-1984-ascii-a
+iligks-episode-iv-the-maze-of-illegus-1984-ascii-a
+lode-runner-1984-sony-a
+lode-runner-ii-1985-sony
+magical-tree-1984-konami-a-rc-713
+msx-logo-1985-logo-computer-systems-nl
+mue-music-editor-1984-hal
+payload-1985-sony-a
+river-raid-1984-pony-canyon-a
+road-fighter-1985-konami-a-rc-730
+snake-it-1986-al-alamiah
+super-billiards-1983-hal
+EOT
+
+    #   00   Expert 1.3 (Brazil) (MSX1).rom                                        2258920            <http://www.generation-msx.nl/hardware/gradiente/expert-dd-plus/212/>
+    #   01   Expert DDPlus (Brazil) (MSX1).rom                                     2258925            <http://www.generation-msx.nl/hardware/gradiente/expert-dd-plus/212/>
+
+    #   02   Antarctic Adventure - European Version (1984)(Konami)[a][RC-701].rom   624520   08.327   <http://www.generation-msx.nl/software/konami/antarctic-adventure/25/>
+    #   03   Arkanoid (1986)(Taito)[a].rom                                          624533   14.470   <http://www.generation-msx.nl/software/taito/arkanoid/887/>
+    #   04   Designer\'s Pencil, The (1984)(Pony Canyon).rom                        624776   06.601   <http://www.generation-msx.nl/software/activision/the-designers-pencil/3849/>
+    #   05   Frogger (1983)(Konami)[a][RC-704].rom                                  624888   08.906   <http://www.generation-msx.nl/software/konami/frogger/70/>
+    #   06   H.E.R.O. (1984)(Pony Canyon)[o].rom                                    624976   22.377   <http://www.generation-msx.nl/software/activision/hero/282/>
+    #   07   Hyper Rally (1985)(Konami)[a][RC-718].rom                              625028   09.905   <http://www.generation-msx.nl/software/konami/hyper-rally/580/>
+    #   08   Iligks Episode I - Theseus (1984)(Ascii)[a].rom                        625043   06.471   <http://www.generation-msx.nl/software/ascii/iligks-episode-one---theseus/225/>
+    #   09   Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a].rom           625046   06.670   <http://www.generation-msx.nl/software/ascii/iligks-episode-iv/99/>
+    #   10   Lode Runner (1984)(Sony)[a].rom                                        625185   14.687   <http://www.generation-msx.nl/software/doug-smith/lode-runner/359/>
+    #   11   Lode Runner II (1985)(Sony).rom                                        625186   07.627   <http://www.generation-msx.nl/software/compile-doug-smith/lode-runner-ii/685/>
+    #   12   Magical Tree (1984)(Konami)[a][RC-713].rom                             625220   13.768   <http://www.generation-msx.nl/software/konami/magical-tree/655/>
+    #   13   MUE - Music Editor (1984)(Hal).rom                                     625209   06.740   <http://www.generation-msx.nl/software/hal-laboratory/music-editor-mue/342/>
+    #   14   Payload (1985)(Sony)[a].rom                                            625362   07.391   <http://www.generation-msx.nl/software/zap/payload/432/>
+    #   15   River Raid (1984)(Pony Canyon)[a].rom                                  625436   10.836   <http://www.generation-msx.nl/software/activision/river-raid/356/>
+    #   16   Road Fighter (1985)(Konami)[a][RC-730].rom                             625439   21.786   <http://www.generation-msx.nl/software/konami/road-fighter/684/>
+    #   17   Snake It (1986)(Al Alamiah).rom                                        625507   23.795   <http://www.generation-msx.nl/software/the-bytebusters/snake-it/960/>
+    #   18   Super Billiards (1983)(Hal).rom                                        625560   17.765   <http://www.generation-msx.nl/software/hal-laboratory/super-billiards/39/>
+    #   19   MSX-Logo (1985)(Logo Computer Systems)(nl).rom                         625207   07.183   <http://www.generation-msx.nl/software/philips/msx-logo/2568/>
+
+    #   20   hotlogo-1.2                                                                              <http://www.msxpro.com/aplicativos.html>
+    #   21   ligue_se_ao_expert                                                                       <http://www.generation-msx.nl/software/gradiente/ligue-se-ao-expert/3409/>
+
+    #   22   hotlogo                                                                                  <http://www.generation-msx.nl/software/philips/msx-logo/2568/>
+
+  } # planetemu
+
+
 
   mkdir -p build/$MAJ
   (
@@ -77,8 +240,7 @@
          url=${bin[$n]}
         arch=${arq[$n]}
 
-        echo ${url##*/}
-
+        echo -n ${url##*/}
         time wget -qc $url
 
         mkdir tmp
@@ -143,8 +305,7 @@
             n=$((i-1))
           url="$rpm/$arch/os/Packages/${lib[$n]}.${arch/3/6}.rpm"
 
-          echo ${url##*/}
-
+          echo -n ${url##*/}
           time wget -qc $url
 
           mkdir tmp
@@ -162,6 +323,14 @@
       done
 
     ) # .lib
+
+    mkdir -p .rom
+    (
+      cd .rom
+      planetemu  ../.list
+    # msxarchive          # código em more.sh
+    # doperoms   ../.list # código em more.sh
+    ) # .rom
 
     ARCH=$(uname -m | grep -q x86_64 && echo x64 || echo x86)
 
@@ -214,248 +383,22 @@
 
 
 
-      (
-        cd systemroms
-        prefix="http://www.msxarchive.nl/pub/msx/emulator/openMSX/systemroms/machines/gradiente"
-        time wget -qc $prefix/expert_ddplus_basic-bios1.rom
-        time wget -qc $prefix/expert_ddplus_disk.rom
-        sha1sum *.rom
-        # d6720845928ee848cfa88a86accb067397685f02  expert_ddplus_basic-bios1.rom
-        # f1525de4e0b60a6687156c2a96f8a8b2044b6c56  expert_ddplus_disk.rom
-      ) # systemroms
+    # (
+    #   cd systemroms
+    #   pref="http://www.msxarchive.nl/pub/msx/emulator/openMSX/systemroms/machines/gradiente"
+    #   time wget -qc $pref/expert_ddplus_basic-bios1.rom
+    #   time wget -qc $pref/expert_ddplus_disk.rom
+    #   sha1sum *.rom
+    #   # d6720845928ee848cfa88a86accb067397685f02  expert_ddplus_basic-bios1.rom
+    #   # f1525de4e0b60a6687156c2a96f8a8b2044b6c56  expert_ddplus_disk.rom
+    # ) # systemroms
 
 
 
-      # roms a serem integradas por default na distribuição
-      (
-        cd software
-
-        ldir=../../lists
-        mkdir -p $ldir
-
-
-
-        # <http://www.planetemu.net>
-        list="$ldir/planetemu"
-# TODO: testar se já há cache e usar ao invés de baixar novamente
-        time (
-               >| $list.html
-               for i in 0 {A..Z}
-               do
-                 echo -n "$i "
-                 curl -s http://www.planetemu.net/roms/msx-various-rom?page=$i >> $list.html
-               done
-               echo
-             ) # 00:05:09.914
-
-        # http://www.planetemu.net/rom/msx-various-rom/zoom-909-1985-sega-1
-        # http://www.planetemu.net/php/roms/download.php?id=625735
-        # http://www.planetemu.net/php/roms/download.php?token=64969c69469c9202739a94f29dabab30
-        cat $list.html | tr -d '\n' \
-         | grep -Eo '<a href="/rom/msx-various-rom/[^"]+">[^>]+</a>' \
-         | sed -r 's/>[ \t]+/>/g;s/[ \t]+</</g' \
-         | cut -d/ -f4- \
-         | sed -r 's/">/\t/g;s:</a>::g' \
-         | column -s $'\t' -t \
-        >| $list.txt
-
-        cat $list.txt | grep -if <(cat << EOT
-antarctic adventure
-arkanoid
-frogger
-h.e.r.o
-hyper rally
-theseus
-illegus
-lode runner
-magical tree
-logo
-music editor
-payload
-river raid
-road fighter
-snake-it
-super billiards
-pencil
-EOT
-)
-
-        getrom()
-        {
-          export TIMEFORMAT=' - %lR'
-          time \
-          (
-            local dir=$1
-            local rom=$(cat $list.txt | grep -w "$dir"| sed -r 's/ +/\t/' | cut -f2).rom
-            echo -n "$rom "
-            local  id=$(curl -s http://www.planetemu.net/rom/msx-various-rom/$dir | grep -B1 Télécharger | grep -Eo '[0-9]+')
-            echo -n "($id)"
-            curl -Ls http://www.planetemu.net/php/roms/download.php -d id=$id | funzip > "$rom"
-          )
-        }
-
-        while read i; do getrom $i; done << EOT
-antarctic-adventure-european-version-1984-konami-a-rc-701
-arkanoid-1986-taito-a
-designer-s-pencil-the-1984-pony-canyon
-frogger-1983-konami-a-rc-704
-h-e-r-o-1984-pony-canyon-o
-hyper-rally-1985-konami-a-rc-718
-iligks-episode-i-theseus-1984-ascii-a
-iligks-episode-iv-the-maze-of-illegus-1984-ascii-a
-lode-runner-1984-sony-a
-lode-runner-ii-1985-sony
-magical-tree-1984-konami-a-rc-713
-msx-logo-1985-logo-computer-systems-nl
-mue-music-editor-1984-hal
-payload-1985-sony-a
-river-raid-1984-pony-canyon-a
-road-fighter-1985-konami-a-rc-730
-snake-it-1986-al-alamiah
-super-billiards-1983-hal
-EOT
-
-        #   00                                                                                            http://www.generation-msx.nl/hardware/gradiente/expert-dd-plus/212/
-        #   01                                                                                            http://www.generation-msx.nl/hardware/gradiente/expert-dd-plus/212/
-        #   02                                                                                            http://www.generation-msx.nl/software/gradiente/ligue-se-ao-expert/3409/
-
-        #   03   Antarctic Adventure - European Version (1984)(Konami)[a][RC-701].rom   624520   08.327   http://www.generation-msx.nl/software/konami/antarctic-adventure/25/
-        #   04   Arkanoid (1986)(Taito)[a].rom                                          624533   14.470   http://www.generation-msx.nl/software/taito/arkanoid/887/
-        #   05   Designer\'s Pencil, The (1984)(Pony Canyon).rom                        624776   06.601   http://www.generation-msx.nl/software/activision/the-designers-pencil/3849/
-        #   06   Frogger (1983)(Konami)[a][RC-704].rom                                  624888   08.906   http://www.generation-msx.nl/software/konami/frogger/70/
-        #   07   H.E.R.O. (1984)(Pony Canyon)[o].rom                                    624976   22.377   http://www.generation-msx.nl/software/activision/hero/282/
-        #   08   Hyper Rally (1985)(Konami)[a][RC-718].rom                              625028   09.905   http://www.generation-msx.nl/software/konami/hyper-rally/580/
-        #   09   Iligks Episode I - Theseus (1984)(Ascii)[a].rom                        625043   06.471   http://www.generation-msx.nl/software/ascii/iligks-episode-one---theseus/225/
-        #   10   Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a].rom           625046   06.670   http://www.generation-msx.nl/software/ascii/iligks-episode-iv/99/
-        #   11   Lode Runner (1984)(Sony)[a].rom                                        625185   14.687   http://www.generation-msx.nl/software/doug-smith/lode-runner/359/
-        #   12   Lode Runner II (1985)(Sony).rom                                        625186   07.627   http://www.generation-msx.nl/software/compile-doug-smith/lode-runner-ii/685/
-        #   13   Magical Tree (1984)(Konami)[a][RC-713].rom                             625220   13.768   http://www.generation-msx.nl/software/konami/magical-tree/655/
-        #   14   MUE - Music Editor (1984)(Hal).rom                                     625209   06.740   http://www.generation-msx.nl/software/hal-laboratory/music-editor-mue/342/
-        #   15   Payload (1985)(Sony)[a].rom                                            625362   07.391   http://www.generation-msx.nl/software/zap/payload/432/
-        #   16   River Raid (1984)(Pony Canyon)[a].rom                                  625436   10.836   http://www.generation-msx.nl/software/activision/river-raid/356/
-        #   17   Road Fighter (1985)(Konami)[a][RC-730].rom                             625439   21.786   http://www.generation-msx.nl/software/konami/road-fighter/684/
-        #   18   Snake It (1986)(Al Alamiah).rom                                        625507   23.795   http://www.generation-msx.nl/software/the-bytebusters/snake-it/960/
-        #   19   Super Billiards (1983)(Hal).rom                                        625560   17.765   http://www.generation-msx.nl/software/hal-laboratory/super-billiards/39/
-
-        #   20   MSX-Logo (1985)(Logo Computer Systems)(nl).rom                         625207   07.183   http://www.generation-msx.nl/software/philips/msx-logo/2568/
-        #   21   hotlogo-1.2
-        #   22   hotlogo
-
-
-
-###         # <http://www.doperoms.com>
-###         list="$ldir/doperoms"
-###         time (
-###                >| $list.html
-###                for i in $(seq 0 50 650)
-###                do
-###                  echo -n "$i "
-###                  curl -s http://www.doperoms.com/roms/Msx_1/ALL/$i.html >> $list.html
-###                done
-###                echo
-###              ) # 00:01:41.882
-###
-###         cat $list.html \
-###          | grep -Eo 'href="[^"]+.zip.html"' \
-###          | cut -d\" -f2 \
-###          | cut -d/ -f5,6 \
-###          | sed -r 's:/:\t:g;s:.zip.html::g' \
-###          | sort -k2 \
-###          | uniq \
-###         >| $list.txt
-###
-###         cat $list.txt | grep -if <(cat << EOT
-### antarctic adventure
-### arkanoid
-### frogger
-### hero
-### hyper rally
-### thseus
-### illegus
-### iligks
-### expert
-### lode runner
-### magical tree
-### logo
-### music editior
-### payload
-### river
-### road fighter
-### snake-it
-### super billiards
-### pencil
-### EOT
-### )
-###
-###         # illegus
-###         # expert
-###         # logo
-###         # pencil
-###
-###         # 618564  Antarctic Adventure (1984) (Konami) (J)
-###         # 618421  Arkanoid 1 (1986) (Taito) (J)
-###         # 618651  Frogger (1983) (Konami) (J)
-###         # 618388  Hero (1984) (Pony Cannon) (J)
-###         # 618398  Hyper Rally (1985) (Konami) (J)
-###         # 618526  Lode Runner 1 (1984) (Sony) (J)
-###         # 618765  Lode Runner 2 (1984) (Sony) (J)
-###         # 618496  Magical Tree (1984) (Konami) (J)
-###         # 618211  Music Editior (1984) (Hal) (J)
-###         # 618331  Payload (1985) (Sony) (J)
-###         # 618322  River Raid (1984) (Pony Cannon) (J)
-###         # 618445  Road Fighter (1985) (Konami) (J)
-###         # 618679  Snake-It (1986) (Hal) (J)
-###         # 618425  Super Billiards (1984) (Hal) (J)
-###         # 618217  Thseus (1984) (Ascii) (J)
-###
-###         # http://www.doperoms.com/files/roms/msx_1/Beam+Rider+%281984%29+%28Pony+Cannon%29+%28J%29.zip/618341/Beam+Rider+.zip
-
-
-
-###         # <http://www.msxarchive.nl>
-###         repo[ 0]="http://www.msxarchive.nl/pub/msx/emulator/openMSX/systemroms/machines/gradiente"
-###         repo[ 1]="http://www.msxarchive.nl/pub/msx/games/msx1"
-###         repo[ 2]="http://www.msxarchive.nl/pub/msx/games/roms/msx1"
-###         repo[ 3]="http://www.msxarchive.nl/pub/msx/mep-mirror/Games"
-###         repo[ 4]="http://www.msxarchive.nl/pub/msx/mep-mirror/BIOS%20ROMs"
-###         repo[ 5]="http://www.msxarchive.nl/pub/msx/misc"
-###         repo[ 6]="http://www.msxpro.com/download"
-###
-###         file[ 0]="-                        0 expert_ddplus_basic-bios1 rom" # http://www.generation-msx.nl/hardware/gradiente/expert-dd-plus/212/
-###         file[ 1]="-                        0 expert_ddplus_disk        rom" # http://www.generation-msx.nl/hardware/gradiente/expert-dd-plus/212/
-###         file[ 2]="-                        0 expert_plus_demo          rom" #
-###         file[ 2]="ligue_se_ao_expert       4 liguese                   zip" # http://www.generation-msx.nl/software/gradiente/ligue-se-ao-expert/3409/
-###
-###         file[ 3]="antartic_adventure       2 antartic                  lzh" # http://www.generation-msx.nl/software/konami/antarctic-adventure/25/
-###         file[ 4]="arkanoid                 2 arkanoid                  zip" # http://www.generation-msx.nl/software/taito/arkanoid/887/
-###         file[ 5]="frogger                  2 frogger                   zip" # http://www.generation-msx.nl/software/konami/frogger/70/
-###         file[ 6]="hero                     1 hero                      lzh" # http://www.generation-msx.nl/software/activision/hero/282/
-###         file[ 7]="hyper_rally              2 hrally                    zip" # http://www.generation-msx.nl/software/konami/hyper-rally/580/
-###         file[ 8]="iligks_episode_1_theseus 3 theseus                   zip" # http://www.generation-msx.nl/software/ascii/iligks-episode-one---theseus/225/
-###         file[ 9]="iligks_episode_4_illegus 3 ILLEGUS                   ZIP" # http://www.generation-msx.nl/software/ascii/iligks-episode-iv/99/
-###         file[10]="lode_runner              2 loderun                   lzh" # http://www.generation-msx.nl/software/doug-smith/lode-runner/359/
-###         file[11]="lode_runner_ii           1 loderun2                  lzh" # http://www.generation-msx.nl/software/compile-doug-smith/lode-runner-ii/685/
-###         file[12]="magical_tree             2 mtree                     lzh" # http://www.generation-msx.nl/software/konami/magical-tree/655/
-###         file[13]="mue_music_editor         3 MUE                       ZIP" # http://www.generation-msx.nl/software/hal-laboratory/music-editor-mue/342/
-###         file[14]="pay_load                 2 payload                   lzh" # http://www.generation-msx.nl/software/zap/payload/432/
-###         file[15]="river_raid               1 rivraid                   lzh" # http://www.generation-msx.nl/software/activision/river-raid/356/
-###         file[16]="road_fighter             2 road                      lzh" # http://www.generation-msx.nl/software/konami/road-fighter/684/
-###         file[17]="snake_it                 2 snakeit                   lzh" # http://www.generation-msx.nl/software/the-bytebusters/snake-it/960/
-###         file[18]="super_billiards          2 billiard                  lzh" # http://www.generation-msx.nl/software/hal-laboratory/super-billiards/39/
-###         file[19]="the_designers_pencil     3 pencil                    zip" # http://www.generation-msx.nl/software/activision/the-designers-pencil/3849/
-###
-###         file[20]="msx_logo                 5 msx-logo                  rom" # http://www.generation-msx.nl/software/philips/msx-logo/2568/
-###         file[21]="hotlogo-1.2              6 rumsx                     zip"
-###         file[22]="hotlogo"
-###
-###         time wget -qc $repo/$file
-###         sha1sum *.rom
-###         # d6720845928ee848cfa88a86accb067397685f02  expert_ddplus_basic-bios1.rom
-###         # f1525de4e0b60a6687156c2a96f8a8b2044b6c56  expert_ddplus_disk.rom
-
-
-
-      ) # software
+    # # roms a serem integradas por default na distribuição
+    # (
+    #   cd software
+    # ) # software
 
     ) # share
 
