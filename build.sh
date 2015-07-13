@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/07/13 (Seg) 01:20:52 BRS
 # 2015/07/12 (Dom) 17:12:34 BRS
 # 2015/07/07 (Ter) 01:15:30 BRS
 # 2015/07/06 (Seg) 10:50:12 BRS
@@ -381,24 +382,79 @@ EOT
       mv    machines-/{README,Gradiente_Expert_DD_Plus.xml} machines
       rm -r machines-
 
+      (
+        cd systemroms
 
+        echo "
 
-    # (
-    #   cd systemroms
-    #   pref="http://www.msxarchive.nl/pub/msx/emulator/openMSX/systemroms/machines/gradiente"
-    #   time wget -qc $pref/expert_ddplus_basic-bios1.rom
-    #   time wget -qc $pref/expert_ddplus_disk.rom
-    #   sha1sum *.rom
-    #   # d6720845928ee848cfa88a86accb067397685f02  expert_ddplus_basic-bios1.rom
-    #   # f1525de4e0b60a6687156c2a96f8a8b2044b6c56  expert_ddplus_disk.rom
-    # ) # systemroms
+              expert_ddplus_basic-bios1 : Expert 1.3 (Brazil) (MSX1)
+              expert_ddplus_disk        : Expert DDPlus (Brazil) (MSX1)
 
+             " \
+        | sed -r 's/(^ +| +: +)/\t/g' \
+        | while read short long
+          do
+            if [ "$short" ]
+            then
+              long="../../.rom/planetemu/$long.rom"
+              covr="../../../../data/software/$short.jpg"
+              [ -e "$long" ] && cp -a "$long" "$short.rom" || echo "ROM  de $short ignorado"
+              [ -e "$covr" ] && cp -a "$covr" .            || echo "Capa de $short ignorado"
+            fi
+          done
+          # Capa de expert_ddplus_basic-bios1 ignorado
+          # Capa de expert_ddplus_disk ignorado
 
+      ) # systemroms
 
-    # # roms a serem integradas por default na distribuição
-    # (
-    #   cd software
-    # ) # software
+      (
+        cd software
+
+        echo "
+
+              antarct  : Antarctic Adventure - European Version (1984)(Konami)[a][RC-701]
+              arkanoid : Arkanoid (1986)(Taito)[a]
+              pencil   : Designer's Pencil, The (1984)(Pony Canyon)
+              frogger  : Frogger (1983)(Konami)[a][RC-704]
+              hero     : H.E.R.O. (1984)(Pony Canyon)[o]
+              hyprally : Hyper Rally (1985)(Konami)[a][RC-718]
+              theseus  : Iligks Episode I - Theseus (1984)(Ascii)[a]
+              illegus  : Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a]
+              lrunner  : Lode Runner (1984)(Sony)[a]
+              lrunner2 : Lode Runner II (1985)(Sony)
+              mtree    : Magical Tree (1984)(Konami)[a][RC-713]
+              mue      : MUE - Music Editor (1984)(Hal)
+              payload  : Payload (1985)(Sony)[a]
+              rivraid  : River Raid (1984)(Pony Canyon)[a]
+              road     : Road Fighter (1985)(Konami)[a][RC-730]
+              snakeit  : Snake It (1986)(Al Alamiah)
+              billiard : Super Billiards (1983)(Hal)
+              msxlogo  : MSX-Logo (1985)(Logo Computer Systems)(nl)
+
+              hotlogo2 : hotlogo-1.2
+              liguese  : ligue_se_ao_expert
+
+              hotlogo  : hotlogo
+
+             " \
+        | sed -r 's/(^ +| +: +)/\t/g' \
+        | while read short long
+          do
+            if [ "$short" ]
+            then
+              long="../../.rom/planetemu/$long.rom"
+              covr="../../../../data/software/$short.jpg"
+              [ -e "$long" ] && cp -a "$long" "$short.rom" || echo "ROM  de $short ignorado"
+              [ -e "$covr" ] && cp -a "$covr" .            || echo "Capa de $short ignorado"
+            fi
+          done
+          # Capa de pencil ignorado
+          # ROM  de hotlogo2 ignorado
+          # Capa de hotlogo2 ignorado
+          # ROM  de liguese ignorado
+          # ROM  de hotlogo ignorado
+
+      ) # software
 
     ) # share
 
