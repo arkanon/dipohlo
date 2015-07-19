@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/07/19 (Dom) 20:15:11 BRS
 # 2015/07/13 (Seg) 01:20:52 BRS
 # 2015/07/12 (Dom) 17:12:34 BRS
 # 2015/07/07 (Ter) 01:15:30 BRS
@@ -48,6 +49,8 @@
 #     <http://www.doperoms.com/roms/Msx_1/ALL.html>
 
 
+  REPO="$HOME/git/dipohlo"
+  DATA="$REPO/data"
 
   NAME="DiPoHLo - Distribuição Portável do HotLogo"
    MAJ="0.11.0"
@@ -90,31 +93,32 @@
   # <http://www.planetemu.net>
   {
 
-    local vers ldir list pref i
+    local repo ldir list pref i
 
-    vers=$FUNCNAME
+    repo=$FUNCNAME
     ldir=$1
-    list="$ldir/$vers"
-    pref="http://www.$vers.net"
+    list="$ldir/$repo"
+    pref="http://www.$repo.net"
 
     mkdir -p $ldir
-    mkdir -p $vers
+    mkdir -p $repo
 
-    [ ! -e $list.html ] && time (
+    [ ! -e $list.html ] && time \
+    (
 
-                                  echo -n "BIOS "
-                                  curl -s "$pref/roms/msx-bios" >| $list.html
+      echo -n "BIOS "
+      curl -s "$pref/roms/msx-bios" >| $list.html
 
-                                  echo -n "EXPERT "
-                                  curl -s "$pref/?section=recherche&recherche=msx+expert&rubrique=roms" >> $list.html
+      echo -n "EXPERT "
+      curl -s "$pref/?section=recherche&recherche=msx+expert&rubrique=roms" >> $list.html
 
-                                  for i in 0 {A..Z}
-                                  do
-                                    echo -n "$i "
-                                    curl -s "$pref/roms/msx-various-rom?page=$i" >> $list.html
-                                  done
+      for i in 0 {A..Z}
+      do
+        echo -n "$i "
+        curl -s "$pref/roms/msx-various-rom?page=$i" >> $list.html
+      done
 
-                                ) # 00:05:09.914
+    ) # 00:05:09.914
 
     # <http://www.planetemu.net/roms/msx-various-rom?page=Z>
     # <http://www.planetemu.net/rom/msx-various-rom/zoom-909-1985-sega-1>
@@ -160,7 +164,7 @@ EOT
       echo -n "$rom "
       local  id=$(curl -s "$pref/$dir" | grep -B1 Télécharger | grep -Eo '[0-9]+')
       echo -n "($id)"
-      curl -Ls "$pref/php/roms/download.php" -d id=$id | funzip 2> /dev/null >| "$vers/$rom"
+      curl -C- -Ls "$pref/php/roms/download.php" -d id=$id | funzip 2> /dev/null >| "$repo/$rom"
     } # getrom
 
     # utilização da string da url para download da rom correspondente
@@ -218,9 +222,15 @@ EOT
 
 
 
+  cd $REPO
+
+
+
   mkdir -p build/$MAJ
   (
     cd build/$MAJ
+
+
 
     touch v$MAJ
 
@@ -229,6 +239,8 @@ EOT
       rm    -rf $i
       mkdir -p  $i
     done
+
+
 
     mkdir -p .bin
     (
@@ -244,7 +256,7 @@ EOT
         echo -n ${url##*/}
         time wget -qc $url
 
-        mkdir tmp
+        mkdir -p tmp
         (
           cd tmp
 
@@ -277,6 +289,8 @@ EOT
 
     ) # .bin
 
+
+
     # ldd bin/openmsx-0.11.0-4.fc23.i686 | grep 'not found'
     # # usr/bin/openmsx: /usr/lib/i386-linux-gnu/libstdc++.so.6: version GLIBCXX_3.4.21 not found (required by usr/bin/openmsx)
     #
@@ -288,6 +302,8 @@ EOT
     #
     # strings lib-i386/libstdc++.so.6 | grep GLIBC
     # # GLIBCXX_3.4.21
+
+
 
     mkdir -p .lib
     (
@@ -309,7 +325,7 @@ EOT
           echo -n ${url##*/}
           time wget -qc $url
 
-          mkdir tmp
+          mkdir -p tmp
           (
             cd tmp
 
@@ -325,13 +341,50 @@ EOT
 
     ) # .lib
 
+
+
     mkdir -p .rom
     (
       cd .rom
+
       planetemu  ../.list
     # msxarchive          # código em more.sh
     # doperoms   ../.list # código em more.sh
+
+      mkdir -p msxarchive
+      (
+        cd msxarchive
+        mkdir -p tmp
+        (
+          cd tmp
+          site="http://www.msxarchive.nl/pub/msx/mep-mirror/BIOS%20ROMs"
+          file="liguese.zip"
+          wget -qc $site/$file
+          7z e -y $file *.{ROM,rom} &> /dev/null
+          mv LIGUE-SE.ROM ../ligue_se_ao_expert.rom
+        ) # tmp
+        rm -r tmp
+      ) # msxarchive
+
+      mkdir -p msxpro
+      (
+        cd msxpro
+        mkdir -p tmp
+        (
+          cd tmp
+          site="http://www.msxpro.com/download"
+          file="rumsx.zip"
+          wget -qc $site/$file
+          7z e -y $file */*/*.{ROM,rom} &> /dev/null
+          mv Msx1BrAb.ROM ../hotbit-1.1-abnt.rom
+          mv Logo_Br.rom  ../hotlogo-1.2.rom
+        ) # tmp
+        rm -r tmp
+      ) # msxpro
+
     ) # .rom
+
+
 
     ARCH=$(uname -m | grep -q x86_64 && echo x64 || echo x86)
 
@@ -346,8 +399,9 @@ EOT
     echo "export            PATH=\$PATH:$bpath"
     echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:$lpath"
 
-    (
 
+
+    (
       cd share
 
       diff -qr x64 x86 && ( rm -r x86; mv x64 x )
@@ -378,26 +432,28 @@ EOT
       # VeraMono - console
 
       mv    machines machines-
-      mkdir machines
+      mkdir -p machines
       mv    machines-/{README,Gradiente_Expert_DD_Plus.xml} machines
       rm -r machines-
+
+
 
       (
         cd systemroms
 
         echo "
 
-              expert_ddplus_basic-bios1 : Expert 1.3 (Brazil) (MSX1)
-              expert_ddplus_disk        : Expert DDPlus (Brazil) (MSX1)
+              expert_ddplus_basic-bios1 : planetemu : Expert 1.3 (Brazil) (MSX1)
+              expert_ddplus_disk        : planetemu : Expert DDPlus (Brazil) (MSX1)
 
              " \
         | sed -r 's/(^ +| +: +)/\t/g' \
-        | while read short long
+        | while read short repo long
           do
             if [ "$short" ]
             then
-              long="../../.rom/planetemu/$long.rom"
-              covr="../../../../data/software/$short.jpg"
+              long="../../.rom/$repo/$long.rom"
+              covr="$DATA/software/$short.jpg"
               [ -e "$long" ] && cp -a "$long" "$short.rom" || echo "ROM  de $short ignorado"
               [ -e "$covr" ] && cp -a "$covr" .            || echo "Capa de $short ignorado"
             fi
@@ -407,58 +463,66 @@ EOT
 
       ) # systemroms
 
+
+
       (
         cd software
 
         echo "
 
-              antarct  : Antarctic Adventure - European Version (1984)(Konami)[a][RC-701]
-              arkanoid : Arkanoid (1986)(Taito)[a]
-              pencil   : Designer's Pencil, The (1984)(Pony Canyon)
-              frogger  : Frogger (1983)(Konami)[a][RC-704]
-              hero     : H.E.R.O. (1984)(Pony Canyon)[o]
-              hyprally : Hyper Rally (1985)(Konami)[a][RC-718]
-              theseus  : Iligks Episode I - Theseus (1984)(Ascii)[a]
-              illegus  : Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a]
-              lrunner  : Lode Runner (1984)(Sony)[a]
-              lrunner2 : Lode Runner II (1985)(Sony)
-              mtree    : Magical Tree (1984)(Konami)[a][RC-713]
-              mue      : MUE - Music Editor (1984)(Hal)
-              payload  : Payload (1985)(Sony)[a]
-              rivraid  : River Raid (1984)(Pony Canyon)[a]
-              road     : Road Fighter (1985)(Konami)[a][RC-730]
-              snakeit  : Snake It (1986)(Al Alamiah)
-              billiard : Super Billiards (1983)(Hal)
-              msxlogo  : MSX-Logo (1985)(Logo Computer Systems)(nl)
+              antarct  : planetemu  : Antarctic Adventure - European Version (1984)(Konami)[a][RC-701]
+              arkanoid : planetemu  : Arkanoid (1986)(Taito)[a]
+              pencil   : planetemu  : Designer's Pencil, The (1984)(Pony Canyon)
+              frogger  : planetemu  : Frogger (1983)(Konami)[a][RC-704]
+              hero     : planetemu  : H.E.R.O. (1984)(Pony Canyon)[o]
+              hyprally : planetemu  : Hyper Rally (1985)(Konami)[a][RC-718]
+              theseus  : planetemu  : Iligks Episode I - Theseus (1984)(Ascii)[a]
+              illegus  : planetemu  : Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a]
+              lrunner  : planetemu  : Lode Runner (1984)(Sony)[a]
+              lrunner2 : planetemu  : Lode Runner II (1985)(Sony)
+              mtree    : planetemu  : Magical Tree (1984)(Konami)[a][RC-713]
+              mue      : planetemu  : MUE - Music Editor (1984)(Hal)
+              payload  : planetemu  : Payload (1985)(Sony)[a]
+              rivraid  : planetemu  : River Raid (1984)(Pony Canyon)[a]
+              road     : planetemu  : Road Fighter (1985)(Konami)[a][RC-730]
+              snakeit  : planetemu  : Snake It (1986)(Al Alamiah)
+              billiard : planetemu  : Super Billiards (1983)(Hal)
+              msxlogo  : planetemu  : MSX-Logo (1985)(Logo Computer Systems)(nl)
 
-              hotlogo2 : hotlogo-1.2
-              liguese  : ligue_se_ao_expert
-
-              hotlogo  : hotlogo
+              hotlogo2 : msxpro     : hotlogo-1.2
+              liguese  : msxarchive : ligue_se_ao_expert
 
              " \
         | sed -r 's/(^ +| +: +)/\t/g' \
-        | while read short long
+        | while read short repo long
           do
             if [ "$short" ]
             then
-              long="../../.rom/planetemu/$long.rom"
-              covr="../../../../data/software/$short.jpg"
+              long="../../.rom/$repo/$long.rom"
+              covr="$DATA/software/$short.jpg"
               [ -e "$long" ] && cp -a "$long" "$short.rom" || echo "ROM  de $short ignorado"
               [ -e "$covr" ] && cp -a "$covr" .            || echo "Capa de $short ignorado"
             fi
           done
           # Capa de pencil ignorado
-          # ROM  de hotlogo2 ignorado
           # Capa de hotlogo2 ignorado
-          # ROM  de liguese ignorado
-          # ROM  de hotlogo ignorado
+
+        dump="$DATA/misc/logodump/original"
+        covr="$DATA/software/hotlogo.jpg"
+        echo -en $(printf '\\x%02x' $(cat "$dump"/* | tr '\r' '\n' | sed '{/^\. /!d;s/^\. //;s/ /\n/g}')) >| hotlogo.rom
+        cp -a "$covr" .
 
       ) # software
 
+
+
     ) # share
 
+
+
   ) # MAJ
+
+
 
 exit #-- AQUI --#
 

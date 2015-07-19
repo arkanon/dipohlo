@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# hl2hotlogo
+#
+# Arkanon <arkanon@lsd.org.br>
+# 2015/07/19 (Dom) 16:32:30 BRS
+# 2011/07/20 (Qua) 10:40:27 BRS
+
+if [ $# = 0 ]
+then
+  echo "Converte arquivo txt com extensão .hl para o formato nativo sem extensão do HotLogo"
+  echo "Uso: ${0##*/} <arquivo txt .hl> [arquivo nativo hotlogo]"
+  exit
+fi
+
+hl=$1
+
+[ "$2" ] && nt=${2%%.*} || nt=${1%%.*}
+
+tmp=$nt-tmp
+
+cat $hl \
+ | tr "\n" "|" \
+ | sed "s/#TAB|/\t/g;s/|/\r/g" \
+>| $tmp
+
+fs=$(stat -c%s $tmp)
+bs=128
+fs=$((bs-fs%bs))
+
+[ -e $nt ] && echo "Arquivo '$nt' já existe." || ( cat $tmp && printf "% ${fs}s" ) > $nt
+
+rm $tmp
+
+# EOF

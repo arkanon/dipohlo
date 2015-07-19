@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# hotlogo2hl
+#
+# Arkanon <arkanon@lsd.org.br>
+# 2015/07/19 (Dom) 16:16:31 BRS
+# 2011/07/17 (Dom) 04:23:57 BRS
+
+if [ $# = 0 ]
+then
+  echo "Converte arquivo do formato nativo sem extensão do HotLogo para txt com extensão .hl"
+  echo "Uso: ${0##*/} <arquivo nativo hotlogo> [arquivo txt .hl]"
+  exit
+fi
+
+nt=$1
+
+[ "$2" ] && hl=${2%%.*}.hl || hl=${1}.hl
+
+[ -e $hl ] \
+&& echo "Arquivo '$hl' já existe." \
+|| cat $nt \
+ | sed -r 's/\r/\n/g;s/\t/#TAB\n/g;s/aprenda /ap /g;s/atribua /atr /g;s/ +$//g' \
+ | sed -r '/^ap /,/^fim/s/^/   /g;s/^   (ap |fim)/\1/g;1s/^/\n/;$d' \
+>| $hl
+
+# EOF

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# mkrom
+#
+# Arkanon <arkanon@lsd.org.br>
+# 2015/07/19 (Dom) 19:34:29 BRS
+# 2011/07/19 (Ter) 07:27:32 BRS
+
+if [ $# = 0 ]
+then
+  echo "Converte dump decimal da memória feito pelo HotLogo em arquivo rom"
+  echo "Uso: ${0##*/} <arquivo rom final> <lista de arquivos dump do hotlogo>"
+  exit
+fi
+
+rom=$1; shift
+dmp=$*; # dump files
+
+echo -en $(printf '\\x%02x' $(cat $dmp | tr '\r' '\n' | sed '{/^\. /!d;s/^\. //;s/ /\n/g}')) >| $rom
+
+# EOF
