@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/07/21 (Ter) 14:03:24 BRS
 # 2015/07/21 (Ter) 01:58:10 BRS
 # 2015/07/19 (Dom) 20:15:11 BRS
 # 2015/07/13 (Seg) 01:20:52 BRS
@@ -22,16 +23,19 @@
 # 2014/03/05 (Wed) 22:21:10 BRS
 # 2013/04/15 (Seg) 05:49:49 BRS
 #
+#
 # Emuladores
 #   <http://openmsx.org/>
 #   <http://fms.komkon.org/fMSX/>
 #   <http://www.bluemsx.com/>
+#
 #
 # Informaçoes
 #
 #   Generation MSX
 #     <http://www.generation-msx.nl/hardware/>
 #     <http://www.generation-msx.nl/software/>
+#
 #
 # ROMs
 #
@@ -48,6 +52,12 @@
 #
 #   DopeROMs
 #     <http://www.doperoms.com/roms/Msx_1/ALL.html>
+#
+#
+# Uso
+#
+#   ( time ./build.sh ) 2>&1 | tee build-out
+
 
 
   REPO="$HOME/git/dipohlo"
@@ -56,6 +66,7 @@
   NAME="DiPoHLo - Distribuição Portável do HotLogo"
    MAJ="0.11.0"
 
+  # <ftp://rpmfind.net/linux/fedora/linux/development/rawhide/x86_64/os/Packages/s/>
    rpm="ftp://rpmfind.net/linux/fedora/linux/development/rawhide"
     sf="http://downloads.sourceforge.net/openmsx"
   pref="openmsx-$MAJ"
@@ -77,6 +88,9 @@
   lib[2]="l/libpng-1.6.17-2.fc23"
   lib[3]="l/libGLEW-1.10.0-6.fc23"
   lib[4]="s/SDL_ttf-2.0.11-7.fc23"
+# lib[5]="s/SDL-1.2.15-18.fc23"
+
+# rpm -qlp $rpmfile
 
   export TIMEFORMAT=' - %lR'
 
@@ -130,7 +144,6 @@
      | sed -r 's/>[ \t]+/>/g;s/[ \t]+</</g' \
      | cut -d/ -f2- \
      | sed -r 's/">/\t/g;s:</a>::g;s/amp;//g' \
-     | column -s $'\t' -t \
     >| $list.txt
 
     # listagem com os padrões das roms desejadas, para identificação e escolha manual da string correta da url
@@ -155,13 +168,13 @@ snake-it
 super billiards
 pencil
 EOT
-)
+) | column -s $'\t' -t
 
     getrom()
     {
       local key=$1
-      local dir=$(cat $list.txt | grep -w "$key" | sed -r 's/ +/\t/' | cut -f1)
-      local rom=$(cat $list.txt | grep -w "$key" | sed -r 's/ +/\t/' | cut -f2).rom
+      local dir=$(cat $list.txt | grep -w "$key" | cut -f1)
+      local rom=$(cat $list.txt | grep -w "$key" | cut -f2).rom
       echo -n "$rom "
       local  id=$(curl -s "$pref/$dir" | grep -B1 Télécharger | grep -Eo '[0-9]+')
       echo -n "($id)"
@@ -389,7 +402,8 @@ EOT
 
     ARCH=$(uname -m | grep -q x86_64 && echo x64 || echo x86)
 
-    ln -nfs lib-$ARCH lib
+    ln -fs  $pref-$ARCH bin/openmsx
+    ln -nfs   lib-$ARCH lib
 
     bpath=$REPO/build/$MAJ/bin
     lpath=$REPO/build/$MAJ/lib
@@ -421,21 +435,23 @@ EOT
       mv       w/* .
       rmdir    w
 
-      rm -r icons nettou_yakyuu playball extensions
-      rm -r unicodemaps/unicodemap.{??,j*,br_hotbit*,proto_fr}
-      rm -r skins/handheld
-      rm -r skins/none
-      rm -r skins/set?
-      rm -r skins/*.png
+      rm     icons/openMSX-logo-{1,3,4,6}*
+      rm -r  nettou_yakyuu playball extensions
+      rm -r  unicodemaps/unicodemap.{??,j*,br_hotbit*,proto_fr}
+
+      ls -1d skins/* | grep -vE '(gz|Grey|fancy)' | xargs rm -r
+      # fica
+      #   fancy/
+      #   ConsoleBackgroundGrey.png
+      #   Vera     - teclado virtual
+      #   VeraMono - console
 
       # scripts/ - carga de skin e do console
-      # Vera     - teclado virtual
-      # VeraMono - console
 
-      mv    machines machines-
+      mv       machines machines-
       mkdir -p machines
-      mv    machines-/{README,Gradiente_Expert_DD_Plus.xml} machines
-      rm -r machines-
+      mv       machines-/{README,Gradiente_Expert_DD_Plus.xml} machines
+      rm    -r machines-
 
 
 
@@ -529,17 +545,28 @@ EOT
 
 
 
-exit #-- DAQUI --#
+exit #-- CONTINUAR DAQUI --#
+
+   REPO="$HOME/git/dipohlo"
+   DATA="$REPO/data"
+    MAJ="0.11.0"
+
+  bpath=$REPO/build/$MAJ/bin
+  lpath=$REPO/build/$MAJ/lib
+
+  export                PATH=$PATH:$bpath
+  export     LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$lpath
 
   export OPENMSX_SYSTEM_DATA=$REPO/build/$MAJ/share
-  export   OPENMSX_USER_DATA=$REPO/build/$MAJ/share
+  export   OPENMSX_USER_DATA=$OPENMSX_SYSTEM_DATA
 
-  mv     share/skins/fancy                  share/skins/set1
-  ln -fs unicodemap.br_gradiente_1_1        share/unicodemaps/unicodemap.br_gradiente_1_3
-  cp -a  $DATA/settings.xml                 share/
-  cp -a  $DATA/Gradiente_Expert_DD_Plus.xml share/
+  mv     $OPENMSX_SYSTEM_DATA/skins/fancy   $OPENMSX_SYSTEM_DATA/skins/set1
+  ln -fs unicodemap.br_gradiente_1_1        $OPENMSX_SYSTEM_DATA/unicodemaps/unicodemap.br_gradiente_1_3
+  cp -a  $DATA/settings.xml                 $OPENMSX_SYSTEM_DATA/
+  cp -a  $DATA/frame.png                    $OPENMSX_SYSTEM_DATA/skins/set1/
+  cp -a  $DATA/Gradiente_Expert_DD_Plus.xml $OPENMSX_SYSTEM_DATA/machines/
 
-  openmsx-0.11.0-x86 -cart $OPENMSX_USER_DATA/software/hotlogo.rom -diska $DATA/disk/
+  openmsx -cart $OPENMSX_USER_DATA/software/hotlogo.rom -diska $DATA/disk/
 
 #-- ATÉ AQUI --#
 
@@ -547,7 +574,6 @@ exit #-- DAQUI --#
 
   cp -a ../data/*.xml      share
   cp -a ../data/software/* share/software
-  cp -a ../data/frame.png  share/skins/set1
   cp -a ../data/pixel.png  share/skins
   cp -a ../data/disk       .
   cp -a ../data/misc       .
