@@ -1,6 +1,9 @@
 <!DOCTYPE settings SYSTEM 'settings.dtd'>
 <settings>
   <settings>
-    <setting id="default_machine">Gradiente_Expert_DDPlus</setting>
+    <setting id="default_machine">Gradiente_Expert_DD_Plus</setting>
+    <setting id="invalid_psg_directions_callback">psgdirectioncallback</setting>
+    <setting id="di_halt_callback">dihaltcallback</setting>
   </settings>
+  <bindings/>
 </settings>

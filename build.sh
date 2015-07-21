@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/07/21 (Ter) 01:58:10 BRS
 # 2015/07/19 (Dom) 20:15:11 BRS
 # 2015/07/13 (Seg) 01:20:52 BRS
 # 2015/07/12 (Dom) 17:12:34 BRS
@@ -390,8 +391,8 @@ EOT
 
     ln -nfs lib-$ARCH lib
 
-    bpath=$PWD/build/$MAJ/bin
-    lpath=$PWD/build/$MAJ/lib
+    bpath=$REPO/build/$MAJ/bin
+    lpath=$REPO/build/$MAJ/lib
 
     export            PATH=$PATH:$bpath
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$lpath
@@ -499,18 +500,22 @@ EOT
             if [ "$short" ]
             then
               long="../../.rom/$repo/$long.rom"
-              covr="$DATA/software/$short.jpg"
-              [ -e "$long" ] && cp -a "$long" "$short.rom" || echo "ROM  de $short ignorado"
-              [ -e "$covr" ] && cp -a "$covr" .            || echo "Capa de $short ignorado"
+              capa="$DATA/software/$short-capa.jpg"
+              tela="$DATA/software/$short-tela.png"
+              [ -e "$long" ] && cp -a "$long" "$short.rom" || echo "ROM  de $short ignorada"
+              [ -e "$capa" ] && cp -a "$capa" .            || echo "Capa de $short ignorada"
+              [ -e "$tela" ] && cp -a "$tela" .            || echo "Tela de $short ignorada"
             fi
           done
           # Capa de pencil ignorado
           # Capa de hotlogo2 ignorado
 
         dump="$DATA/misc/logodump/original"
-        covr="$DATA/software/hotlogo.jpg"
+        capa="$DATA/software/hotlogo-capa.jpg"
+        tela="$DATA/software/hotlogo-tela.png"
         echo -en $(printf '\\x%02x' $(cat "$dump"/* | tr '\r' '\n' | sed '{/^\. /!d;s/^\. //;s/ /\n/g}')) >| hotlogo.rom
-        cp -a "$covr" .
+        cp -a "$capa" .
+        cp -a "$tela" .
 
       ) # software
 
@@ -524,9 +529,22 @@ EOT
 
 
 
-exit #-- AQUI --#
+exit #-- DAQUI --#
 
-  mv    share/skins/fancy  share/skins/set1
+  export OPENMSX_SYSTEM_DATA=$REPO/build/$MAJ/share
+  export   OPENMSX_USER_DATA=$REPO/build/$MAJ/share
+
+  mv     share/skins/fancy                  share/skins/set1
+  ln -fs unicodemap.br_gradiente_1_1        share/unicodemaps/unicodemap.br_gradiente_1_3
+  cp -a  $DATA/settings.xml                 share/
+  cp -a  $DATA/Gradiente_Expert_DD_Plus.xml share/
+
+  openmsx-0.11.0-x86 -cart $OPENMSX_USER_DATA/software/hotlogo.rom -diska $DATA/disk/
+
+#-- ATÉ AQUI --#
+
+
+
   cp -a ../data/*.xml      share
   cp -a ../data/software/* share/software
   cp -a ../data/frame.png  share/skins/set1
@@ -554,7 +572,6 @@ exit #-- AQUI --#
 
 # PARAMETROS="-script openmsx.tcl -machine Gradiente_Expert_DDPlus -cart share/software/hotlogo.rom -diska disk"
 #
-# OPENMSX_SYSTEM_DATA=share
 # LD_LIBRARY_PATH=lib OPENMSX_USER_DATA=share ./openmsx-bin $PARAMETROS
 #
 # wine openmsx-bin.exe $PARAMETROS
