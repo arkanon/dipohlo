@@ -1,0 +1,62 @@
+# Makefile for Git
+#
+# Arkanon <arkanon@lsd.org.br>
+# 2015/07/26 (Sun) 17:27:19 (BRT)
+# 2013/02/21 (Qui) 07:52:19 (BRS)
+# 2013/02/19 (Ter) 19:07:14 (BRS)
+#
+# Ideia original de <http://stuff.mit.edu/people/jcrost/latexmake.html>
+# Alterado do Makefile de "Porcentagens Relacionadas de Acrescimo e Desconto" de 2013/02/21 para a Dicas-L
+#
+# Uso: make push C="alteraçoes dessa versao"
+
+# >> EM CONSTRUCAO, NAO USAR MAKE COM ESTE ARQUIVO <<
+
+NAME          = dipohlo
+VER           = 0.11.0
+BUILD         =	build
+
+VI            =	vi
+GIT           =	git
+
+$(NAME).tar   :
+		tar -cvf $(NAME)-$(VER).tar .
+
+$(NAME).bz2   :	$(NAME)-$(VER).tar
+		bzip2 -9 -k $^
+
+$(NAME).7z    :	$(NAME)-$(VER).tar
+		7z a -mx=9 -m0=lzma -md=64m -mfb=273 -ms=on $(NAME)-$(VER).tar.7z $^
+
+$(NAME).zip   :
+		zip -9 $(NAME)-$(VER).zip .
+
+edit          :	$(NAME).sh
+		@ [ -e .$(NAME).sh.swp ] && echo "make: Nada a ser feito para 'edit'." || ( echo "$(VI) $^"; $(VI) $^)
+
+pull          :
+		$(GIT) pull
+
+push          :
+		$(GIT) commit -m "$(C)"
+		$(GIT) push
+
+dist          :	bz2
+
+all           :	bz2 push
+
+clean         :
+		rm -rf $(BUILD)/$(VER)/*
+
+cleanpkg      :
+		rm -rf $(BUILD)/$(VER)/.[^.]*
+
+distclean     :	clean cleanpkg
+#		rm -f $(NAME).{dvi,pdf,ps}
+
+tar           :	$(NAME).tar
+bz2           :	$(NAME).bz2
+7z            :	$(NAME).7z
+zip           :	$(NAME).zip
+
+# EOF
