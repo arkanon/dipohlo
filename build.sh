@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/07/28 (Ter) 01:46:00 BRS
 # 2015/07/21 (Ter) 14:03:24 BRS
 # 2015/07/21 (Ter) 01:58:10 BRS
 # 2015/07/19 (Dom) 20:15:11 BRS
@@ -453,6 +454,12 @@ EOT
       mv       machines-/{README,Gradiente_Expert_DD_Plus.xml} machines
       rm    -r machines-
 
+      ln -fs unicodemap.br_gradiente_1_1        unicodemaps/unicodemap.br_gradiente_1_3
+      mv     skins/fancy/                       skins/set1/
+      cp -a  $DATA/frame/frame_v2-960x720.png   skins/set1/frame.png
+      cp -a  $DATA/Gradiente_Expert_DD_Plus.xml machines/
+      cp -a  $DATA/settings.xml
+
 
 
       (
@@ -545,7 +552,9 @@ EOT
 
 
 
-exit #-- CONTINUAR DAQUI --#
+exit
+
+#-- TESTAR --#
 
    REPO="$HOME/git/dipohlo"
    DATA="$REPO/data"
@@ -560,15 +569,9 @@ exit #-- CONTINUAR DAQUI --#
   export OPENMSX_SYSTEM_DATA=$REPO/build/$MAJ/share
   export   OPENMSX_USER_DATA=$OPENMSX_SYSTEM_DATA
 
-  mv     $OPENMSX_SYSTEM_DATA/skins/fancy   $OPENMSX_SYSTEM_DATA/skins/set1
-  ln -fs unicodemap.br_gradiente_1_1        $OPENMSX_SYSTEM_DATA/unicodemaps/unicodemap.br_gradiente_1_3
-  cp -a  $DATA/settings.xml                 $OPENMSX_SYSTEM_DATA/
-  cp -a  $DATA/frame.png                    $OPENMSX_SYSTEM_DATA/skins/set1/
-  cp -a  $DATA/Gradiente_Expert_DD_Plus.xml $OPENMSX_SYSTEM_DATA/machines/
-
   openmsx -cart $OPENMSX_USER_DATA/software/hotlogo.rom -diska $DATA/disk/
 
-#-- ATÉ AQUI --#
+#-- CONTINUAR DAQUI --#
 
 
 
