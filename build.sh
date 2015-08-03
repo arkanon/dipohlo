@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/08/03 (Seg) 02:18:10 BRS
 # 2015/07/28 (Ter) 01:46:00 BRS
 # 2015/07/21 (Ter) 14:03:24 BRS
 # 2015/07/21 (Ter) 01:58:10 BRS
@@ -25,13 +26,25 @@
 # 2013/04/15 (Seg) 05:49:49 BRS
 #
 #
+# TODO
+#   -- led para teclas de pressão (shift, code, alt, control)
+#   -- lista de teclas especiais do emulador na borda do frame
+#   -- clip de ruído branco de tv
+#   -- implementar parâmetros do make
+#
+#
+# BUGS
+#   -- throttle iniciando com led ligado
+#   -- roms identificadas pelo id tornam-se desconhecidas se repositório muda o id
+#
+#
 # Emuladores
 #   <http://openmsx.org/>
 #   <http://fms.komkon.org/fMSX/>
 #   <http://www.bluemsx.com/>
 #
 #
-# Informaçoes
+# Informações
 #
 #   Generation MSX
 #     <http://www.generation-msx.nl/hardware/>
@@ -55,6 +68,12 @@
 #     <http://www.doperoms.com/roms/Msx_1/ALL.html>
 #
 #
+# Fontes TrueType
+#
+#   <http://www.fontpalace.com/font-download/Data+70+LET/>
+#   <http://kldp.net/projects/baekmuk/download>
+#
+#
 # Uso
 #
 #   ( time ./build.sh ) 2>&1 | tee build-out
@@ -68,13 +87,15 @@
    MAJ="0.11.0"
 
   # <ftp://rpmfind.net/linux/fedora/linux/development/rawhide/x86_64/os/Packages/s/>
-   rpm="ftp://rpmfind.net/linux/fedora/linux/development/rawhide"
+   rpm="http://rpmfind.net/linux/fedora/linux/development/rawhide"
     sf="http://downloads.sourceforge.net/openmsx"
   pref="openmsx-$MAJ"
 
+  last() { lynx -dump -nonumbers -listonly "$1/?C=M;O=A" | grep -i $2 | tail -n1; }
+
   # arquiteturas do emulador
-  arq[0]="x86"    ; bin[0]="$rpm/i386/os/Packages/o/$pref-4.fc23.i686.rpm"
-  arq[1]="x64"    ; bin[1]="$rpm/x86_64/os/Packages/o/$pref-4.fc23.x86_64.rpm"
+  arq[0]="x86"    ; bin[0]=$(last $rpm/i386/os/Packages/o   openmsx) # $pref-4.fc23.i686.rpm
+  arq[1]="x64"    ; bin[1]=$(last $rpm/x86_64/os/Packages/o openmsx) # $pref-4.fc23.x86_64.rpm
   arq[2]="w86"    ; bin[2]="$sf/$pref-windows-vc-x86-bin.zip"
   arq[3]="w64"    ; bin[3]="$sf/$pref-windows-vc-x64-bin.zip"
   arq[4]="m86_64" ; bin[4]="$sf/$pref-mac-x86_64-bin.dmg"
@@ -184,8 +205,8 @@ EOT
 
     # utilização da string da url para download da rom correspondente
     while read i; do time getrom $i; done << EOT
-2258920
-2258925
+2423883
+2423888
 antarctic-adventure-european-version-1984-konami-a-rc-701
 arkanoid-1986-taito-a
 designer-s-pencil-the-1984-pony-canyon
@@ -401,22 +422,6 @@ EOT
 
 
 
-    ARCH=$(uname -m | grep -q x86_64 && echo x64 || echo x86)
-
-    ln -fs  $pref-$ARCH bin/openmsx
-    ln -nfs   lib-$ARCH lib
-
-    bpath=$REPO/build/$MAJ/bin
-    lpath=$REPO/build/$MAJ/lib
-
-    export            PATH=$PATH:$bpath
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$lpath
-
-    echo "export            PATH=\$PATH:$bpath"
-    echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:$lpath"
-
-
-
     (
       cd share
 
@@ -440,25 +445,37 @@ EOT
       rm -r  nettou_yakyuu playball extensions
       rm -r  unicodemaps/unicodemap.{??,j*,br_hotbit*,proto_fr}
 
-      ls -1d skins/* | grep -vE '(gz|Grey|fancy)' | xargs rm -r
-      # fica
-      #   fancy/
-      #   ConsoleBackgroundGrey.png
-      #   Vera     - teclado virtual
-      #   VeraMono - console
-
       # scripts/ - carga de skin e do console
 
-      mv       machines machines-
-      mkdir -p machines
-      mv       machines-/{README,Gradiente_Expert_DD_Plus.xml} machines
-      rm    -r machines-
+      # diff -u ../../.share/scripts/load_icons.tcl load_icons.tcl >| ../../../data/load_icons.tcl.patch
+      patch -p1 scripts/load_icons.tcl < $DATA/load_icons.tcl.patch
+
+      rm     machines/*.xml
 
       ln -fs unicodemap.br_gradiente_1_1        unicodemaps/unicodemap.br_gradiente_1_3
-      mv     skins/fancy/                       skins/set1/
-      cp -a  $DATA/frame/frame_v2-960x720.png   skins/set1/frame.png
       cp -a  $DATA/Gradiente_Expert_DD_Plus.xml machines/
-      cp -a  $DATA/settings.xml
+      cp -a  $DATA/settings.xml                 .
+      cp -a  $DATA/softwaredb.xml               .
+
+      (
+        cd skins
+
+        ls -1d * | grep -vE '(gz|fancy)' | xargs rm -r
+        # fica
+        #   fancy/
+        #   Vera     - teclado virtual
+        #   VeraMono - console
+
+        mv     fancy/                             dipohlo/
+        cp -a  $DATA/logotipo/dipohlo-fundo.png   dipohlo/console-bg.png
+        cp -a  $DATA/frame/frame_v2-960x720.png   dipohlo/frame.png
+        mv     dipohlo/led-*                      .
+        ln -fs led-on.png                         mute.png
+        ln -fs led-on.png                         pause.png
+        ln -fs led-on.png                         breaked.png
+        ln -fs led-on.png                         throttle.png
+
+      ) # skins
 
 
 
@@ -548,35 +565,40 @@ EOT
 
 
 
+    ARCH=$(uname -m | grep -q x86_64 && echo x64 || echo x86)
+
+    ln -fs  $pref-$ARCH bin/openmsx
+    ln -nfs   lib-$ARCH lib
+
+    bpath=$REPO/build/$MAJ/bin
+    lpath=$REPO/build/$MAJ/lib
+
+    export            PATH=$PATH:$bpath
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$lpath
+
+    export OPENMSX_SYSTEM_DATA=$REPO/build/$MAJ/share
+    export   OPENMSX_USER_DATA=$OPENMSX_SYSTEM_DATA
+
+    echo "
+export            PATH=\$PATH:$bpath
+export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:$lpath
+
+export OPENMSX_SYSTEM_DATA=$REPO/build/$MAJ/share
+export   OPENMSX_USER_DATA=\$OPENMSX_SYSTEM_DATA
+
+openmsx -cart $OPENMSX_USER_DATA/software/hotlogo.rom -diska $DATA/disk/
+"
+
+
+
   ) # MAJ
 
 
 
 exit
 
-#-- TESTAR --#
-
-   REPO="$HOME/git/dipohlo"
-   DATA="$REPO/data"
-    MAJ="0.11.0"
-
-  bpath=$REPO/build/$MAJ/bin
-  lpath=$REPO/build/$MAJ/lib
-
-  export                PATH=$PATH:$bpath
-  export     LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$lpath
-
-  export OPENMSX_SYSTEM_DATA=$REPO/build/$MAJ/share
-  export   OPENMSX_USER_DATA=$OPENMSX_SYSTEM_DATA
-
-  openmsx -cart $OPENMSX_USER_DATA/software/hotlogo.rom -diska $DATA/disk/
-
-#-- CONTINUAR DAQUI --#
 
 
-
-  cp -a ../data/*.xml      share
-  cp -a ../data/software/* share/software
   cp -a ../data/pixel.png  share/skins
   cp -a ../data/disk       .
   cp -a ../data/misc       .
@@ -596,13 +618,14 @@ exit
   )
   cp -a ../data/profile cygwin/etc
 
-  # diff -u ../../.share/scripts/load_icons.tcl load_icons.tcl >| ../../../data/load_icons.tcl.patch
-  patch -p1 share/scripts/load_icons.tcl < ../data/load_icons.tcl.patch
+
 
 # PARAMETROS="-script openmsx.tcl -machine Gradiente_Expert_DDPlus -cart share/software/hotlogo.rom -diska disk"
 #
 # LD_LIBRARY_PATH=lib OPENMSX_USER_DATA=share ./openmsx-bin $PARAMETROS
 #
 # wine openmsx-bin.exe $PARAMETROS
+
+
 
 # EOF

@@ -1,13 +1,18 @@
 <!DOCTYPE settings SYSTEM 'settings.dtd'>
 <settings>
   <settings>
-    <setting id="default_machine">Gradiente_Expert_DD_Plus</setting>
-    <setting id="invalid_psg_directions_callback">psgdirectioncallback</setting>
-    <setting id="di_halt_callback">dihaltcallback</setting>
-    <setting id="scale_factor">3</setting>
-    <setting id="horizontal_stretch">288.0</setting>
-    <setting id="scanline">100</setting>
+
+    <setting id="accuracy">screen</setting>
     <setting id="blur">0</setting>
+    <setting id="consolebackground">skins/dipohlo/console-bg.png</setting>
+    <setting id="default_machine">Gradiente_Expert_DD_Plus</setting>
+    <setting id="di_halt_callback">dihaltcallback</setting>
+    <setting id="horizontal_stretch">288.0</setting>
+    <setting id="invalid_psg_directions_callback">psgdirectioncallback</setting>
+    <setting id="osd_leds_set">dipohlo</setting>
+    <setting id="scale_factor">3</setting>
+    <setting id="scanline">100</setting>
+
   </settings>
   <bindings/>
 </settings>

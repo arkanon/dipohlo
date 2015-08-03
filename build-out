@@ -1,26 +1,26 @@
-openmsx-0.11.0-4.fc23.i686.rpm - 0m29.120s
-openmsx-0.11.0-4.fc23.x86_64.rpm - 0m28.193s
-openmsx-0.11.0-windows-vc-x86-bin.zip - 1m15.390s
-openmsx-0.11.0-windows-vc-x64-bin.zip - 1m10.452s
-openmsx-0.11.0-mac-x86_64-bin.dmg - 0m44.447s
-libstdc++-5.1.1-4.fc23.i686.rpm - 0m6.976s
-libao-1.2.0-5.fc23.i686.rpm - 0m3.664s
-libpng-1.6.17-2.fc23.i686.rpm - 0m4.263s
-libGLEW-1.10.0-6.fc23.i686.rpm - 0m4.077s
-SDL_ttf-2.0.11-7.fc23.i686.rpm - 0m3.452s
-libstdc++-5.1.1-4.fc23.x86_64.rpm - 0m8.169s
-libao-1.2.0-5.fc23.x86_64.rpm - 0m4.120s
-libpng-1.6.17-2.fc23.x86_64.rpm - 0m4.859s
-libGLEW-1.10.0-6.fc23.x86_64.rpm - 0m4.842s
-SDL_ttf-2.0.11-7.fc23.x86_64.rpm - 0m3.529s
-BIOS EXPERT 0 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z  - 0m37.905s
+openmsx-0.11.0-4.fc23.i686.rpm - 0m13.412s
+openmsx-0.11.0-4.fc23.x86_64.rpm - 0m2.300s
+openmsx-0.11.0-windows-vc-x86-bin.zip - 0m36.850s
+openmsx-0.11.0-windows-vc-x64-bin.zip - 0m8.429s
+openmsx-0.11.0-mac-x86_64-bin.dmg - 0m9.449s
+libstdc++-5.1.1-4.fc23.i686.rpm - 0m2.048s
+libao-1.2.0-5.fc23.i686.rpm - 0m0.871s
+libpng-1.6.17-2.fc23.i686.rpm - 0m1.015s
+libGLEW-1.10.0-6.fc23.i686.rpm - 0m0.998s
+SDL_ttf-2.0.11-7.fc23.i686.rpm - 0m1.031s
+libstdc++-5.1.1-4.fc23.x86_64.rpm - 0m0.924s
+libao-1.2.0-5.fc23.x86_64.rpm - 0m1.036s
+libpng-1.6.17-2.fc23.x86_64.rpm - 0m0.997s
+libGLEW-1.10.0-6.fc23.x86_64.rpm - 0m0.944s
+SDL_ttf-2.0.11-7.fc23.x86_64.rpm - 0m1.002s
+BIOS EXPERT 0 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z  - 3m12.459s
 rom/msx-bios/philips-nms-8220-designer-pencil-v1-0-1986-philips-designv1-rom            Philips NMS-8220 Designer Pencil v1.0 (1986)(Philips)[DESIGNV1.ROM]
 rom/msx-bios/philips-nms-8220-designer-pencil-v2-0-1986-philips-designv2-rom            Philips NMS-8220 Designer Pencil v2.0 (1986)(Philips)[DESIGNV2.ROM]
-?section=roms&dat=1174&action=showrom&id=2258918                                        Expert 1.0 (Brazil) (MSX1)
-?section=roms&dat=1174&action=showrom&id=2258919                                        Expert 1.1 (Brazil) (MSX1)
-?section=roms&dat=1174&action=showrom&id=2258920                                        Expert 1.3 (Brazil) (MSX1)
-?section=roms&dat=1174&action=showrom&id=2258925                                        Expert DDPlus (Brazil) (MSX1)
-?section=roms&dat=1174&action=showrom&id=2258926                                        Expert DDX+ (MSX2+)
+?section=roms&dat=1187&action=showrom&id=2423881                                        Expert 1.0 (Brazil) (MSX1)
+?section=roms&dat=1187&action=showrom&id=2423882                                        Expert 1.1 (Brazil) (MSX1)
+?section=roms&dat=1187&action=showrom&id=2423883                                        Expert 1.3 (Brazil) (MSX1)
+?section=roms&dat=1187&action=showrom&id=2423888                                        Expert DDPlus (Brazil) (MSX1)
+?section=roms&dat=1187&action=showrom&id=2423889                                        Expert DDX+ (MSX2+)
 rom/msx-various-rom/antarctic-adventure-european-version-1984-konami-a-rc-701           Antarctic Adventure - European Version (1984)(Konami)[a][RC-701]
 rom/msx-various-rom/antarctic-adventure-european-version-1984-konami-rc-701             Antarctic Adventure - European Version (1984)(Konami)[RC-701]
 rom/msx-various-rom/antarctic-adventure-european-version-1984-konami-scc-rc-701-2       Antarctic Adventure - European Version (1984)(Konami)[SCC+][RC-701]
@@ -70,98 +70,111 @@ rom/msx-various-rom/road-fighter-1985-konami-rc-730                             
 rom/msx-various-rom/road-fighter-1985-konami-scc-rc-730                                 Road Fighter (1985)(Konami)[SCC+][RC-730]
 rom/msx-various-rom/snake-it-1986-al-alamiah                                            Snake It (1986)(Al Alamiah)
 rom/msx-various-rom/super-billiards-1983-hal                                            Super Billiards (1983)(Hal)
-Expert 1.3 (Brazil) (MSX1).rom (2258920) - 0m3.977s
-Expert DDPlus (Brazil) (MSX1).rom (2258925) - 0m3.682s
-Antarctic Adventure - European Version (1984)(Konami)[a][RC-701].rom (624520) - 0m3.393s
-Arkanoid (1986)(Taito)[a].rom (624533) - 0m3.660s
-Designer's Pencil, The (1984)(Pony Canyon).rom (624776) - 0m3.469s
-Frogger (1983)(Konami)[a][RC-704].rom (624888) - 0m3.439s
-H.E.R.O. (1984)(Pony Canyon)[o].rom (624976) - 0m3.778s
-Hyper Rally (1985)(Konami)[a][RC-718].rom (625028) - 0m3.557s
-Iligks Episode I - Theseus (1984)(Ascii)[a].rom (625043) - 0m3.421s
-Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a].rom (625046) - 0m3.981s
-Lode Runner (1984)(Sony)[a].rom (625185) - 0m3.673s
-Lode Runner II (1985)(Sony).rom (625186) - 0m5.501s
-Magical Tree (1984)(Konami)[a][RC-713].rom (625220) - 0m3.410s
-MSX-Logo (1985)(Logo Computer Systems)(nl).rom (625207) - 0m3.668s
-MUE - Music Editor (1984)(Hal).rom (625209) - 0m5.342s
-Payload (1985)(Sony)[a].rom (625362) - 0m3.694s
-River Raid (1984)(Pony Canyon)[a].rom (625436) - 0m3.678s
-Road Fighter (1985)(Konami)[a][RC-730].rom (625439) - 0m3.404s
-Snake It (1986)(Al Alamiah).rom (625507) - 0m5.979s
-Super Billiards (1983)(Hal).rom (625560) - 0m3.440s
-export            PATH=$PATH:/home/paulo.bagatini/git/dipohlo/build/0.11.0/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/paulo.bagatini/git/dipohlo/build/0.11.0/lib
+Expert 1.3 (Brazil) (MSX1).rom (2423883) - 0m6.290s
+Expert DDPlus (Brazil) (MSX1).rom (2423888) - 0m7.605s
+Antarctic Adventure - European Version (1984)(Konami)[a][RC-701].rom (624520) - 0m5.884s
+Arkanoid (1986)(Taito)[a].rom (624533) - 0m10.281s
+Designer's Pencil, The (1984)(Pony Canyon).rom (624776) - 0m13.416s
+Frogger (1983)(Konami)[a][RC-704].rom (624888) - 0m21.029s
+H.E.R.O. (1984)(Pony Canyon)[o].rom (624976) - 0m6.244s
+Hyper Rally (1985)(Konami)[a][RC-718].rom (625028) - 0m7.449s
+Iligks Episode I - Theseus (1984)(Ascii)[a].rom (625043) - 0m10.548s
+Iligks Episode IV - The Maze of Illegus (1984)(Ascii)[a].rom (625046) - 0m7.640s
+Lode Runner (1984)(Sony)[a].rom (625185) - 0m5.338s
+Lode Runner II (1985)(Sony).rom (625186) - 0m5.278s
+Magical Tree (1984)(Konami)[a][RC-713].rom (625220) - 0m4.820s
+MSX-Logo (1985)(Logo Computer Systems)(nl).rom (625207) - 0m5.669s
+MUE - Music Editor (1984)(Hal).rom (625209) - 0m5.132s
+Payload (1985)(Sony)[a].rom (625362) - 0m5.880s
+River Raid (1984)(Pony Canyon)[a].rom (625436) - 0m5.298s
+Road Fighter (1985)(Konami)[a][RC-730].rom (625439) - 0m4.951s
+Snake It (1986)(Al Alamiah).rom (625507) - 0m5.438s
+Super Billiards (1983)(Hal).rom (625560) - 0m4.905s
 Somente em w: codec
 Somente em w/icons: openmsx.ico
-Somente em w/machines: Boosted_MSX2+_JP.txt
 Somente em w/machines: Boosted_MSX2_EN.txt
+Somente em w/machines: Boosted_MSX2+_JP.txt
 Somente em w/machines: Boosted_MSXturboR_with_IDE.txt
-Somente em w/machines: C-BIOS_MSX1.xml
-Somente em w/machines: C-BIOS_MSX1_BR.xml
-Somente em w/machines: C-BIOS_MSX1_JP.xml
-Somente em w/machines: C-BIOS_MSX2+.xml
-Somente em w/machines: C-BIOS_MSX2+_BR.xml
-Somente em w/machines: C-BIOS_MSX2+_JP.xml
-Somente em w/machines: C-BIOS_MSX2.xml
-Somente em w/machines: C-BIOS_MSX2_BR.xml
-Somente em w/machines: C-BIOS_MSX2_JP.xml
 Somente em w/machines: cbios_basic.rom
 Somente em w/machines: cbios_disk.rom
 Somente em w/machines: cbios_logo_msx1.rom
-Somente em w/machines: cbios_logo_msx2+.rom
 Somente em w/machines: cbios_logo_msx2.rom
-Somente em w/machines: cbios_main_msx1.rom
+Somente em w/machines: cbios_logo_msx2+.rom
 Somente em w/machines: cbios_main_msx1_br.rom
 Somente em w/machines: cbios_main_msx1_jp.rom
-Somente em w/machines: cbios_main_msx2+.rom
+Somente em w/machines: cbios_main_msx1.rom
+Somente em w/machines: cbios_main_msx2_br.rom
 Somente em w/machines: cbios_main_msx2+_br.rom
+Somente em w/machines: cbios_main_msx2_jp.rom
 Somente em w/machines: cbios_main_msx2+_jp.rom
 Somente em w/machines: cbios_main_msx2.rom
-Somente em w/machines: cbios_main_msx2_br.rom
-Somente em w/machines: cbios_main_msx2_jp.rom
+Somente em w/machines: cbios_main_msx2+.rom
+Somente em w/machines: C-BIOS_MSX1_BR.xml
+Somente em w/machines: C-BIOS_MSX1_JP.xml
+Somente em w/machines: C-BIOS_MSX1.xml
+Somente em w/machines: C-BIOS_MSX2_BR.xml
+Somente em w/machines: C-BIOS_MSX2+_BR.xml
+Somente em w/machines: C-BIOS_MSX2_JP.xml
+Somente em w/machines: C-BIOS_MSX2+_JP.xml
+Somente em w/machines: C-BIOS_MSX2.xml
+Somente em w/machines: C-BIOS_MSX2+.xml
 Somente em w/machines: cbios_music.rom
 Somente em w/machines: cbios_sub.rom
 Somente em x/machines: msx1.xml
-Somente em x/machines: msx2.xml
 Somente em x/machines: msx2plus.xml
+Somente em x/machines: msx2.xml
 Somente em x/machines: turbor.xml
 Somente em w: codec
 Somente em w/icons: openmsx.ico
-Somente em w/machines: Boosted_MSX2+_JP.txt
 Somente em w/machines: Boosted_MSX2_EN.txt
+Somente em w/machines: Boosted_MSX2+_JP.txt
 Somente em w/machines: Boosted_MSXturboR_with_IDE.txt
-Somente em w/machines: C-BIOS_MSX1.xml
-Somente em w/machines: C-BIOS_MSX1_BR.xml
-Somente em w/machines: C-BIOS_MSX1_JP.xml
-Somente em w/machines: C-BIOS_MSX2+.xml
-Somente em w/machines: C-BIOS_MSX2+_BR.xml
-Somente em w/machines: C-BIOS_MSX2+_JP.xml
-Somente em w/machines: C-BIOS_MSX2.xml
-Somente em w/machines: C-BIOS_MSX2_BR.xml
-Somente em w/machines: C-BIOS_MSX2_JP.xml
 Somente em w/machines: cbios_basic.rom
 Somente em w/machines: cbios_disk.rom
 Somente em w/machines: cbios_logo_msx1.rom
-Somente em w/machines: cbios_logo_msx2+.rom
 Somente em w/machines: cbios_logo_msx2.rom
-Somente em w/machines: cbios_main_msx1.rom
+Somente em w/machines: cbios_logo_msx2+.rom
 Somente em w/machines: cbios_main_msx1_br.rom
 Somente em w/machines: cbios_main_msx1_jp.rom
-Somente em w/machines: cbios_main_msx2+.rom
+Somente em w/machines: cbios_main_msx1.rom
+Somente em w/machines: cbios_main_msx2_br.rom
 Somente em w/machines: cbios_main_msx2+_br.rom
+Somente em w/machines: cbios_main_msx2_jp.rom
 Somente em w/machines: cbios_main_msx2+_jp.rom
 Somente em w/machines: cbios_main_msx2.rom
-Somente em w/machines: cbios_main_msx2_br.rom
-Somente em w/machines: cbios_main_msx2_jp.rom
+Somente em w/machines: cbios_main_msx2+.rom
+Somente em w/machines: C-BIOS_MSX1_BR.xml
+Somente em w/machines: C-BIOS_MSX1_JP.xml
+Somente em w/machines: C-BIOS_MSX1.xml
+Somente em w/machines: C-BIOS_MSX2_BR.xml
+Somente em w/machines: C-BIOS_MSX2+_BR.xml
+Somente em w/machines: C-BIOS_MSX2_JP.xml
+Somente em w/machines: C-BIOS_MSX2+_JP.xml
+Somente em w/machines: C-BIOS_MSX2.xml
+Somente em w/machines: C-BIOS_MSX2+.xml
 Somente em w/machines: cbios_music.rom
 Somente em w/machines: cbios_sub.rom
 Somente em w: codec
 Somente em w/icons: openmsx.ico
 Os arquivos w/machines/msx1.xml e ../bin/openmsx-0.11.0-m86_64.app/share/machines/msx1.xml são diferentes
-Os arquivos w/machines/msx2.xml e ../bin/openmsx-0.11.0-m86_64.app/share/machines/msx2.xml são diferentes
 Os arquivos w/machines/msx2plus.xml e ../bin/openmsx-0.11.0-m86_64.app/share/machines/msx2plus.xml são diferentes
+Os arquivos w/machines/msx2.xml e ../bin/openmsx-0.11.0-m86_64.app/share/machines/msx2.xml são diferentes
 Os arquivos w/machines/turbor.xml e ../bin/openmsx-0.11.0-m86_64.app/share/machines/turbor.xml são diferentes
+patching file scripts/load_icons.tcl
+Hunk #1 succeeded at 194 (offset 2 lines).
+Hunk #2 succeeded at 285 (offset 3 lines).
 Capa de expert_ddplus_basic-bios1 ignorado
 Capa de expert_ddplus_disk ignorado
-6m59.344s
+
+export            PATH=$PATH:/home/arkanon/git/dipohlo/build/0.11.0/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/arkanon/git/dipohlo/build/0.11.0/lib
+
+export OPENMSX_SYSTEM_DATA=/home/arkanon/git/dipohlo/build/0.11.0/share
+export   OPENMSX_USER_DATA=$OPENMSX_SYSTEM_DATA
+
+openmsx -cart /home/arkanon/git/dipohlo/build/0.11.0/share/software/hotlogo.rom -diska /home/arkanon/git/dipohlo/data/disk/
+
+
+real	7m52.972s
+user	0m8.524s
+sys	0m4.960s

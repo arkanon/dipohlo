@@ -1,60 +1,61 @@
+# vim: ft=sh
 
-  PC Key                 MSX Key / Function
-  ---------------------  ------------------
+# Arkanon <paulo.bagatini@softplan.com.br>
+# 2015/08/03 (Seg) 02:04:04 BRT
+# 2011/07/23 (Sáb) 05:59:34 BRT
 
-  ' / "                  * / @
-  2 / @                  2 / "
-  8 / *                  8 / '
-  ] / }                  [ / ]
-  [ / {                  ' / `
-  ; / :                  ~ / ^
-  / / ?                  ; / :
-  \ / |                  { / }
-  R Control              / / ?
-# R Control              <DeadKey>
+
+
+vi .config/openbox/lubuntu-rc.xml
+    <!-- Keybindings to toggle fullscreen -->
+    <keybind key="A-F11">
+      <action name="ToggleFullscreen"/>
+    </keybind>
+openbox --reconfigure
+
+
+
+# PC Key                 MSX Key / Function
+# ---------------------  ------------------
 
   L Control              <Control>
+  R Control              <DeadKey>
 
+  L Alt                  <Graph>
   R Alt                  <Code> / <Kana>
-  L Alt                  <Graph
 
-  R Super                <Yes>
   L Super                <No>
+  R Super                <Yes>
 
-  Control + F1           toggle grabinput
-  Control + F2           toggle all trainer cheats
-  Control + F3           toggle scale (1/2)
-
-  F6                     toggle osd keyboard
   F7                     <Select>
   F8                     <Stop>
+  Insert                 <Insert>
 
-  F9 pressed             throttle off
-  F9 released            throttle on
+# ---
 
+  Control+F1             toggle grabinput
+  Control+F2             toggle all trainer cheats
+  Control+F3             toggle scale (1/2)
+
+  Alt+F4 | Control+Pause quit emulator
+
+  F6                     toggle osd keyboard
+
+  Alt+F7                 quick loadstate (from 'quicksave' slot)
+  Alt+F8                 quick savestate (to   'quicksave' slot)
+
+  F9                     toggle throttle
   F10                    toggle console display
+  F11                    toggle audio mute
+  F12 | ALT+Enter        toggle full screen mode
 
-  F11                    quick savestate (to   'quicksave' slot)
-  F12                    quick loadstate (from 'quicksave' slot)
-
-  Shift   + PrintScreen  capture doublesize raw screenshot
-  Control + PrintScreen  capture scaled screenshot with osd
-
-  Home                   start doublesize screen recording
-  End                    stop  doublesize screen recording
+    Shift+PrintScreen    capture doublesize raw screenshot
+  Control+PrintScreen    capture scaled screenshot with osd
 
   PageUp                 backward 1 sec in time, using the reverse feature
   PageDown               forward  1 sec in time, using the reverse feature
 
   Menu                   toggle osd menu
-  Alt + Enter            toggle full screen mode
-  ScrollLock             toggle audio mute
-
   Pause                  pause emulation
-
-  Control + Shift + Del  machine reset
-
-  Control + Pause        quit emulator (not in Windows)
-  Alt + F4               quit emulator
 
 # EOF
