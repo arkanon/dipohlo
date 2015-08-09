@@ -4,7 +4,7 @@
 
     <setting id="accuracy">screen</setting>
     <setting id="blur">0</setting>
-    <setting id="consolebackground">skins/dipohlo/console-bg.png</setting>
+    <setting id="consolebackground">skins/dipohlo/console.png</setting>
     <setting id="default_machine">Gradiente_Expert_DD_Plus</setting>
     <setting id="di_halt_callback">dihaltcallback</setting>
     <setting id="horizontal_stretch">288.0</setting>

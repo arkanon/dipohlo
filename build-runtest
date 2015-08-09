@@ -1,0 +1,21 @@
+# vim: ft=sh
+
+# 2015/08/03 (Mon) 01:49:51 BRS
+
+  HOME="/home/arkanon"
+  ARCH="x86"
+   MAJ="0.11.0"
+
+  REPO="$HOME/git/dipohlo"
+  DATA="$REPO/data"
+   BLD="$REPO/build/$MAJ"
+
+  export                PATH=$PATH:$BLD/bin
+  export     LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BLD/lib
+
+  export OPENMSX_SYSTEM_DATA=$BLD/share
+  export   OPENMSX_USER_DATA=$OPENMSX_SYSTEM_DATA
+
+# openmsx -cart $OPENMSX_USER_DATA/software/hotlogo.rom -diska $DATA/disk/ &
+
+# EOF

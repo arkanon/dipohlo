@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/08/08 (Sáb) 21:14:02 BRT
 # 2015/08/03 (Seg) 02:18:10 BRS
 # 2015/07/28 (Ter) 01:46:00 BRS
 # 2015/07/21 (Ter) 14:03:24 BRS
@@ -118,10 +119,15 @@
 
 
 
-  BLD=$(($(tail -n1 build-history 2> /dev/null | cut -f1)+1)) # update build number
-  VER="$MAJ-$BLD"
+  cd $REPO
 
-  echo -e "$BLD\t$(LC_TIME=C date +'%Y/%m/%d (%a) %H:%M:%S %Z')" >> build-history
+
+
+   BLD=$(($(tail -n1 build-history 2> /dev/null | cut -f1)+1)) # update build number
+   VER="$MAJ-$BLD"
+  BLDD=$(LC_TIME=C date +'%Y/%m/%d (%a) %H:%M:%S %Z')
+
+  echo -e "$BLD\t$BLDD" >> build-history
 
 
 
@@ -255,10 +261,6 @@ EOT
     #   22   hotlogo                                                                                  <http://www.generation-msx.nl/software/philips/msx-logo/2568/>
 
   } # planetemu
-
-
-
-  cd $REPO
 
 
 
@@ -466,14 +468,14 @@ EOT
         #   Vera     - teclado virtual
         #   VeraMono - console
 
-        mv     fancy/                             dipohlo/
-        cp -a  $DATA/logotipo/dipohlo-fundo.png   dipohlo/console-bg.png
-        cp -a  $DATA/frame/frame_v2-960x720.png   dipohlo/frame.png
-        mv     dipohlo/led-*                      .
-        ln -fs led-on.png                         mute.png
-        ln -fs led-on.png                         pause.png
-        ln -fs led-on.png                         breaked.png
-        ln -fs led-on.png                         throttle.png
+        mv     fancy/                                          dipohlo/
+        cp -a  $DATA/arte/logotipo/dipohlo-console-893x280.png dipohlo/console.png
+        cp -a  $DATA/arte/frame/frame_v3-960x720.png           dipohlo/frame.png
+        mv     dipohlo/led-* .
+        ln -fs led-on.png    mute.png
+        ln -fs led-on.png    pause.png
+        ln -fs led-on.png    breaked.png
+        ln -fs led-on.png    throttle.png
 
       ) # skins
 
@@ -570,24 +572,29 @@ EOT
     ln -fs  $pref-$ARCH bin/openmsx
     ln -nfs   lib-$ARCH lib
 
-    bpath=$REPO/build/$MAJ/bin
-    lpath=$REPO/build/$MAJ/lib
+    cat << EOT | tee build-runtest
+# vim: ft=sh
 
-    export            PATH=$PATH:$bpath
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$lpath
+# $BLDD
 
-    export OPENMSX_SYSTEM_DATA=$REPO/build/$MAJ/share
-    export   OPENMSX_USER_DATA=$OPENMSX_SYSTEM_DATA
+  HOME="$HOME"
+  ARCH="$ARCH"
+   MAJ="$MAJ"
 
-    echo "
-export            PATH=\$PATH:$bpath
-export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:$lpath
+  REPO="\$HOME/git/dipohlo"
+  DATA="\$REPO/data"
+   BLD="\$REPO/build/\$MAJ"
 
-export OPENMSX_SYSTEM_DATA=$REPO/build/$MAJ/share
-export   OPENMSX_USER_DATA=\$OPENMSX_SYSTEM_DATA
+  export                PATH=\$PATH:\$BLD/bin
+  export     LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$BLD/lib
 
-openmsx -cart $OPENMSX_USER_DATA/software/hotlogo.rom -diska $DATA/disk/
-"
+  export OPENMSX_SYSTEM_DATA=\$REPO/build/\$MAJ/share
+  export   OPENMSX_USER_DATA=\$OPENMSX_SYSTEM_DATA
+
+# openmsx -cart \$OPENMSX_USER_DATA/software/hotlogo.rom -diska \$DATA/disk/ &
+
+# EOF
+EOT
 
 
 
