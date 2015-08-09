@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/08/09 (Dom) 17:45:56 BRS
 # 2015/08/08 (Sáb) 21:14:02 BRT
 # 2015/08/03 (Seg) 02:18:10 BRS
 # 2015/07/28 (Ter) 01:46:00 BRS
@@ -449,7 +450,8 @@ EOT
 
       # scripts/ - carga de skin e do console
 
-      # diff -u ../../.share/scripts/load_icons.tcl load_icons.tcl >| ../../../data/load_icons.tcl.patch
+      # cp -a   scripts/load_icons.tcl      scripts/load_icons.tcl.orig
+      # diff -u scripts/load_icons.tcl.orig scripts/load_icons.tcl >| $DATA/load_icons.tcl.patch
       patch -p1 scripts/load_icons.tcl < $DATA/load_icons.tcl.patch
 
       rm     machines/*.xml
@@ -468,9 +470,9 @@ EOT
         #   Vera     - teclado virtual
         #   VeraMono - console
 
-        mv     fancy/                                          dipohlo/
-        cp -a  $DATA/arte/logotipo/dipohlo-console-893x280.png dipohlo/console.png
-        cp -a  $DATA/arte/frame/frame_v3-960x720.png           dipohlo/frame.png
+        mv     fancy/                                 dipohlo/
+        cp -a  $DATA/arte/skin/v4/console-893x280.png dipohlo/console.png
+        cp -a  $DATA/arte/skin/v4/frame-960x720.png   dipohlo/frame.png
         mv     dipohlo/led-* .
         ln -fs led-on.png    mute.png
         ln -fs led-on.png    pause.png
