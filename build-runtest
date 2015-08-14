@@ -2,11 +2,14 @@
 
 # 2015/08/03 (Mon) 01:49:51 BRS
 
-  HOME="/home/arkanon"
-  ARCH="x86"
+  ARCH=$(uname -m | grep -q x86_64 && echo x64 || echo x86)
    MAJ="0.11.0"
+  pref="openmsx-$MAJ"
 
-  REPO="$HOME/git/dipohlo"
+  ln -fs  $pref-$ARCH bin/openmsx
+  ln -nfs   lib-$ARCH lib
+
+  REPO="/home/paulo.bagatini/git/a/git/dipohlo"
   DATA="$REPO/data"
    BLD="$REPO/build/$MAJ"
 

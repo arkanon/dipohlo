@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/08/14 (Sex) 11:43:54 BRS
 # 2015/08/11 (Ter) 03:09:10 BRS
 # 2015/08/09 (Dom) 17:45:56 BRS
 # 2015/08/08 (Sáb) 21:14:02 BRT
@@ -581,11 +582,14 @@ EOT
 
 # $BLDD
 
-  HOME="$HOME"
-  ARCH="$ARCH"
+  ARCH=\$(uname -m | grep -q x86_64 && echo x64 || echo x86)
    MAJ="$MAJ"
+  pref="openmsx-\$MAJ"
 
-  REPO="\$HOME/git/dipohlo"
+  ln -fs  \$pref-\$ARCH bin/openmsx
+  ln -nfs   lib-\$ARCH lib
+
+  REPO="$PWD"
   DATA="\$REPO/data"
    BLD="\$REPO/build/\$MAJ"
 
