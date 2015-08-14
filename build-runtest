@@ -6,12 +6,12 @@
    MAJ="0.11.0"
   pref="openmsx-$MAJ"
 
-  ln -fs  $pref-$ARCH bin/openmsx
-  ln -nfs   lib-$ARCH lib
-
   REPO="/home/paulo.bagatini/git/a/git/dipohlo"
   DATA="$REPO/data"
    BLD="$REPO/build/$MAJ"
+
+  ln -fs  $pref-$ARCH $BLD/bin/openmsx
+  ln -nfs   lib-$ARCH $BLD/lib
 
   export                PATH=$PATH:$BLD/bin
   export     LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BLD/lib
