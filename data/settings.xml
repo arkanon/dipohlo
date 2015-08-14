@@ -1,10 +1,10 @@
 <!DOCTYPE settings SYSTEM 'settings.dtd'>
 <settings>
+
   <settings>
 
     <setting id="accuracy">screen</setting>
     <setting id="blur">0</setting>
-    <setting id="consolebackground">skins/dipohlo/console.png</setting>
     <setting id="default_machine">Gradiente_Expert_DD_Plus</setting>
     <setting id="di_halt_callback">dihaltcallback</setting>
     <setting id="horizontal_stretch">288.0</setting>
@@ -12,7 +12,43 @@
     <setting id="osd_leds_set">dipohlo</setting>
     <setting id="scale_factor">3</setting>
     <setting id="scanline">100</setting>
+    <setting id="fullspeedwhenloading">true</setting>
+    <setting id="pause_on_lost_focus">true</setting>
+
+    <setting id="consolecolumns">136</setting>
+    <setting id="consolerows">5</setting>
+    <setting id="consolebackground">skins/dipohlo/console-136x05.png</setting>
+
+<!--
+
+    <setting id="consolefontsize">12</setting>
+    <setting id="consolefontsize">10</setting>
+
+    <setting id="consolecolumns">160</setting>
+    <setting id="consolecolumns">136</setting>
+    <setting id="consolecolumns">127</setting>
+
+    <setting id="consolerows">60</setting>
+    <setting id="consolerows">51</setting>
+    <setting id="consolerows">20</setting>
+    <setting id="consolerows">6</setting>
+    <setting id="consolerows">5</setting>
+
+    <setting id="consolebackground">skins/dipohlo/console-136x51.png</setting>
+    <setting id="consolebackground">skins/dipohlo/console-136x20.png</setting>
+    <setting id="consolebackground">skins/dipohlo/console-136x05.png</setting>
+    <setting id="consolebackground">skins/dipohlo/console-127x51.png</setting>
+    <setting id="consolebackground">skins/dipohlo/console-127x20.png</setting>
+    <setting id="consolebackground">skins/dipohlo/console-127x05.png</setting>
+
+-->
 
   </settings>
-  <bindings/>
+
+  <bindings>
+    <bind key="keyb F4">record start -doublesize -stereo</bind>
+    <bind key="keyb F5">record stop</bind>
+    <bind key="keyb F6">toggle_osd_keyboard</bind>
+  </bindings>
+
 </settings>

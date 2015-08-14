@@ -1,0 +1,1 @@
+/home/arkanon/.openMSX/screenshots

@@ -595,7 +595,7 @@ EOT
   export OPENMSX_SYSTEM_DATA=\$REPO/build/\$MAJ/share
   export   OPENMSX_USER_DATA=\$OPENMSX_SYSTEM_DATA
 
-# openmsx -cart \$OPENMSX_USER_DATA/software/hotlogo.rom -diska \$DATA/disk/ &
+# openmsx -cart \$OPENMSX_USER_DATA/software/hotlogo.rom -diska \$DATA/disk/ -script <( echo "after time 14 { type arquivos\r }" ) &
 
 # EOF
 EOT
