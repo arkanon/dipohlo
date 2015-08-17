@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/08/16 (Dom) 15:45:28 BRT
 # 2015/08/14 (Sex) 11:47:16 BRS
 # 2015/08/11 (Ter) 03:09:10 BRS
 # 2015/08/09 (Dom) 17:45:56 BRS
@@ -467,20 +468,21 @@ EOT
       (
         cd skins
 
-        ls -1d * | grep -vE '(gz|fancy)' | xargs rm -r
-        # fica
-        #   fancy/
+        ls -1d * | grep -v Vera | xargs rm -r
+        # ficam as fontes:
         #   Vera     - teclado virtual
         #   VeraMono - console
 
-        mv     fancy/                                 dipohlo/
-        cp -a  $DATA/arte/skin/v5/console-893x281.png dipohlo/console.png
-        cp -a  $DATA/arte/skin/v5/frame-961x721.png   dipohlo/frame.png
-        mv     dipohlo/led-* .
-        ln -fs led-on.png    mute.png
-        ln -fs led-on.png    pause.png
-        ln -fs led-on.png    breaked.png
-        ln -fs led-on.png    throttle.png
+        mkdir -p                                         dipohlo/
+        cp    -a  $DATA/skin.tcl                         dipohlo/
+        cp    -a  $DATA/arte/skin/v7/console-894x281.png dipohlo/console.png
+        cp    -a  $DATA/arte/skin/v7/frame-961x721.png   dipohlo/frame.png
+        cp    -a  $DATA/arte/skin/led-blue-off.png       led-off.png
+        cp    -a  $DATA/arte/skin/led-blue-on.png        led-on.png
+        ln    -fs led-on.png                             mute.png
+        ln    -fs led-on.png                             pause.png
+        ln    -fs led-on.png                             breaked.png
+        ln    -fs led-on.png                             throttle.png
 
       ) # skins
 

@@ -6,7 +6,8 @@
    MAJ="0.11.0"
   pref="openmsx-$MAJ"
 
-  REPO="/home/paulo.bagatini/git/a/git/dipohlo"
+# REPO="$HOME/git/a/git/dipohlo"
+  REPO="$HOME/git/dipohlo"
   DATA="$REPO/data"
    BLD="$REPO/build/$MAJ"
 
