@@ -462,6 +462,8 @@ proc key_matrix {keynum state} {
 }
 
 namespace export toggle_osd_keyboard
+namespace export disable_osd_keyboard
+namespace export enable_osd_keyboard
 
 };# namespace osd_keyboard
 
