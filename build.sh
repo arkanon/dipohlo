@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/08/19 (Qua) 21:44:41 BRS
 # 2015/08/16 (Dom) 15:45:28 BRT
 # 2015/08/14 (Sex) 11:47:16 BRS
 # 2015/08/11 (Ter) 03:09:10 BRS
@@ -83,6 +84,10 @@
 # Uso
 #
 #   ( time ./build.sh ) 2>&1 | tee build-out
+#
+#   ---
+#
+#   file="git.img" ; mount | grep "$file" ; loop=$(losetup -j "$file" | cut -d: -f1) ; sudo blockdev --setrw $loop ; sudo mount -o remount,rw $loop ; mount | grep "$file"
 
 
 
@@ -479,10 +484,11 @@ EOT
         cp    -a  $DATA/arte/skin/v7/frame-961x721.png   dipohlo/frame.png
         cp    -a  $DATA/arte/skin/led-blue-off.png       led-off.png
         cp    -a  $DATA/arte/skin/led-blue-on.png        led-on.png
-        ln    -fs led-on.png                             mute.png
-        ln    -fs led-on.png                             pause.png
-        ln    -fs led-on.png                             breaked.png
-        ln    -fs led-on.png                             throttle.png
+        cp    -a  $DATA/arte/ttf/data_70_let.ttf         .
+      # ln    -fs led-on.png                             mute.png
+      # ln    -fs led-on.png                             pause.png
+      # ln    -fs led-on.png                             breaked.png
+      # ln    -fs led-on.png                             throttle.png
 
       ) # skins
 
@@ -588,7 +594,7 @@ EOT
    MAJ="$MAJ"
   pref="openmsx-\$MAJ"
 
-  REPO="$PWD"
+  REPO="\$PWD"
   DATA="\$REPO/data"
    BLD="\$REPO/build/\$MAJ"
 
