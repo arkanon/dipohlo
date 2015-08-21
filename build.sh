@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/08/20 (Qui) 20:27:37 BRS
 # 2015/08/19 (Qua) 21:44:41 BRS
 # 2015/08/16 (Dom) 15:45:28 BRT
 # 2015/08/14 (Sex) 11:47:16 BRS
@@ -33,9 +34,9 @@
 #
 #
 # TODO
-#   -- led para teclas de pressão (shift, code, control)
-#   -- lista de teclas especiais do emulador na borda do frame
-#   -- clip de ruído branco de tv
+#   ok lista de teclas especiais do emulador na borda do frame
+#   ok clip de ruído branco de tv (comando power do console)
+#   -- led para teclas de pressão (shift, graph, code, control)
 #   -- clip de contagem regressiva
 #   -- implementar parâmetros do make
 #
@@ -87,7 +88,7 @@
 #
 #   ---
 #
-#   file="git.img" ; mount | grep "$file" ; loop=$(losetup -j "$file" | cut -d: -f1) ; sudo blockdev --setrw $loop ; sudo mount -o remount,rw $loop ; mount | grep "$file"
+### file="git.img" ; mount | grep "$file" ; loop=$(losetup -j "$file" | cut -d: -f1) ; sudo blockdev --setrw $loop ; sudo mount -o remount,rw $loop ; mount | grep "$file"
 
 
 
@@ -478,17 +479,17 @@ EOT
         #   Vera     - teclado virtual
         #   VeraMono - console
 
-        mkdir -p                                         dipohlo/
-        cp    -a  $DATA/skin.tcl                         dipohlo/
-        cp    -a  $DATA/arte/skin/v7/console-894x281.png dipohlo/console.png
-        cp    -a  $DATA/arte/skin/v7/frame-961x721.png   dipohlo/frame.png
-        cp    -a  $DATA/arte/skin/led-blue-off.png       led-off.png
-        cp    -a  $DATA/arte/skin/led-blue-on.png        led-on.png
-        cp    -a  $DATA/arte/ttf/data_70_let.ttf         .
-      # ln    -fs led-on.png                             mute.png
-      # ln    -fs led-on.png                             pause.png
-      # ln    -fs led-on.png                             breaked.png
-      # ln    -fs led-on.png                             throttle.png
+        mkdir -p                                              dipohlo/
+        cp    -a  $DATA/skin.tcl                              dipohlo/
+        cp    -a  $DATA/arte/skin/v7/console-894x281.png      dipohlo/console.png
+        cp    -a  $DATA/arte/skin/v7/frame-961x721.png        dipohlo/frame.png
+        cp    -a  $DATA/arte/skin/led-blue-off.png            led-off.png
+        cp    -a  $DATA/arte/skin/led-blue-on.png             led-on.png
+        cp    -a  $DATA/arte/ttf/data_seventy_std_regular.otf .
+      # ln    -fs led-on.png                                  mute.png
+      # ln    -fs led-on.png                                  pause.png
+      # ln    -fs led-on.png                                  breaked.png
+      # ln    -fs led-on.png                                  throttle.png
 
       ) # skins
 

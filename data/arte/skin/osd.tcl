@@ -1,6 +1,7 @@
 # osd.tcl
 
 # Arkanon <arkanon@lsd.org.br>
+# 2015/08/20 (Qui) 20:26:07 BRT
 # 2015/08/19 (Qua) 22:32:46 BRS
 # 2015/08/19 (Qua) 01:12:31 BRS
 
@@ -22,11 +23,11 @@
   proc check_mouse {} \
   {
     global power pause throttle mute fullscreen console
+    if { [ is_cursor_in "fullscreen" ] } { if { $fullscreen } { set fullscreen false } { set fullscreen true } }
     if { [ is_cursor_in "power"      ] } { if { $power      } { set power      false } { set power      true } }
     if { [ is_cursor_in "pause"      ] } { if { $pause      } { set pause      false } { set pause      true } }
     if { [ is_cursor_in "throttle"   ] } { if { $throttle   } { set throttle   false } { set throttle   true } }
     if { [ is_cursor_in "mute"       ] } { if { $mute       } { set mute       false } { set mute       true } }
-    if { [ is_cursor_in "fullscreen" ] } { if { $fullscreen } { set fullscreen false } { set fullscreen true } }
     if { [ is_cursor_in "console"    ] } { if { $console    } { set console    false } { set console    true } }
     if { [ is_cursor_in "keyboard"   ] } { toggle_osd_keyboard }
     if { [ is_cursor_in "menu"       ] } { main_menu_toggle    }
@@ -40,27 +41,29 @@
   after time 0 { set power false }
 
   set esq 16
-  set top 97
+  set top 99
   set inc 24
-  set cor "0x7090aae8 0xa0c0dde8 0x90b0cce8 0xc0e0ffe8"
-  set tam 25
-  set fnt "skins/data_70_let.ttf"
+  set cor 0x7090aae8
+  set co2 0x7090aa40
+  set tam 22
+# set fnt "skins/data_70_let.ttf"
+  set fnt "skins/data_seventy_std_regular.otf"
 
+  area "fullscreen" $esq [expr {$top- 1*$inc}] $cor $tam $fnt "Tela Cheia"
   area "power"      $esq [expr {$top+ 0*$inc}] $cor $tam $fnt "Power"
-  area "caps"       $esq [expr {$top+ 1*$inc}] $cor $tam $fnt "Caps"
-  area "code"       $esq [expr {$top+ 2*$inc}] $cor $tam $fnt "Code"
-  area "breaked"    $esq [expr {$top+ 3*$inc}] $cor $tam $fnt "Breaked"
-  area "turbo"      $esq [expr {$top+ 4*$inc}] $cor $tam $fnt "Turbo"
-  area "floppy"     $esq [expr {$top+ 5*$inc}] $cor $tam $fnt "Disquete"
+  area "caps"       $esq [expr {$top+ 1*$inc}] $co2 $tam $fnt "Caps"
+  area "code"       $esq [expr {$top+ 2*$inc}] $co2 $tam $fnt "Code"
+  area "breaked"    $esq [expr {$top+ 3*$inc}] $co2 $tam $fnt "Breaked"
+  area "turbo"      $esq [expr {$top+ 4*$inc}] $co2 $tam $fnt "Turbo"
+  area "floppy"     $esq [expr {$top+ 5*$inc}] $co2 $tam $fnt "Disquete"
   area "pause"      $esq [expr {$top+ 6*$inc}] $cor $tam $fnt "Pausa"
   area "throttle"   $esq [expr {$top+ 7*$inc}] $cor $tam $fnt "Trote"
   area "mute"       $esq [expr {$top+ 8*$inc}] $cor $tam $fnt "Mudo"
-  area "fullscreen" $esq [expr {$top+ 9*$inc}] $cor $tam $fnt "Tela Cheia"
-  area "console"    $esq [expr {$top+10*$inc}] $cor $tam $fnt "Console"
-  area "keyboard"   $esq [expr {$top+11*$inc}] $cor $tam $fnt "Teclado"
-  area "menu"       $esq [expr {$top+12*$inc}] $cor $tam $fnt "Menu"
-  area "reset"      $esq [expr {$top+13*$inc}] $cor $tam $fnt "Reset"
-  area "quit"       $esq [expr {$top+14*$inc}] $cor $tam $fnt "Sair"
+  area "console"    $esq [expr {$top+ 9*$inc}] $cor $tam $fnt "Console"
+  area "keyboard"   $esq [expr {$top+10*$inc}] $cor $tam $fnt "Teclado"
+  area "menu"       $esq [expr {$top+11*$inc}] $cor $tam $fnt "Menu"
+  area "reset"      $esq [expr {$top+12*$inc}] $cor $tam $fnt "Reset"
+  area "quit"       $esq [expr {$top+13*$inc}] $cor $tam $fnt "Sair"
 
   check_mouse
 
