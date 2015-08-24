@@ -12,7 +12,7 @@
     <setting id="horizontal_stretch">320.0</setting>
     <setting id="invalid_psg_directions_callback">psgdirectioncallback</setting>
     <setting id="osd_leds_set">dipohlo</setting>
-    <setting id="pause_on_lost_focus">true</setting>
+    <setting id="pause_on_lost_focus">false</setting>
     <setting id="save_settings_on_exit">false</setting>
     <setting id="scale_factor">3</setting>
     <setting id="scanline">100</setting>

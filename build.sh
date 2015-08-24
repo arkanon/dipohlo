@@ -5,6 +5,8 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/08/23 (Dom) 20:26:24 BRS
+# 2015/08/22 (Sáb) 19:28:40 BRS
 # 2015/08/20 (Qui) 20:27:37 BRS
 # 2015/08/19 (Qua) 21:44:41 BRS
 # 2015/08/16 (Dom) 15:45:28 BRT
@@ -460,8 +462,8 @@ EOT
 
       # scripts/ - carga de skin e do console
 
-      # cp -a   scripts/load_icons.tcl      scripts/load_icons.tcl.orig
-      # diff -u scripts/load_icons.tcl.orig scripts/load_icons.tcl >| $DATA/load_icons.tcl.patch
+      # [ -e $OPENMSX_SYSTEM_DATA/scripts/load_icons.tcl.orig ] || cp -a $OPENMSX_SYSTEM_DATA/scripts/load_icons.tcl $OPENMSX_SYSTEM_DATA/scripts/load_icons.tcl.orig
+      # diff -u $OPENMSX_SYSTEM_DATA/scripts/load_icons.tcl.orig $OPENMSX_SYSTEM_DATA/scripts/load_icons.tcl >| $DATA/load_icons.tcl.patch
       patch -p1 scripts/load_icons.tcl < $DATA/load_icons.tcl.patch
 
       rm     machines/*.xml
@@ -608,7 +610,7 @@ EOT
   export OPENMSX_SYSTEM_DATA=\$REPO/build/\$MAJ/share
   export   OPENMSX_USER_DATA=\$OPENMSX_SYSTEM_DATA
 
-# openmsx -cart \$OPENMSX_USER_DATA/software/hotlogo.rom -diska \$DATA/disk/ -script <( echo "after time 14 { type arquivos\r }" ) &
+# openmsx -cart \$OPENMSX_USER_DATA/software/hotlogo.rom -diska \$DATA/disk/ -script \$DATA/arte/skin/osd.tcl -script <( echo 'after time 14 { type "arquivos\r"; after time 2 { type "carregue \"" } }' ) &
 
 # EOF
 EOT

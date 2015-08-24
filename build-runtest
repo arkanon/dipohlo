@@ -19,6 +19,6 @@
   export OPENMSX_SYSTEM_DATA=$BLD/share
   export   OPENMSX_USER_DATA=$OPENMSX_SYSTEM_DATA
 
-# openmsx -cart $OPENMSX_USER_DATA/software/hotlogo.rom -diska $DATA/disk/ -script <( echo "after time 14 { type arquivos\r }" ) &
+# openmsx -cart $OPENMSX_USER_DATA/software/hotlogo.rom -diska $DATA/disk/ -script  data/arte/skin/osd.tcl -script <( echo 'after time 14 { type "arquivos\r"; after time 2 { type "carregue \"" } }' )
 
 # EOF
