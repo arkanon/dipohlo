@@ -1,0 +1,23 @@
+<svg height="420" width="420" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 420 420" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <rect x="0" y="0" width="420" height="420" fill="#eee"/>
+
+  <g fill="#888" stroke="none">
+    <rect x="58" y="0" width="4" height="420"/>
+    <rect x="118" y="0" width="4" height="420"/>
+    <rect x="178" y="0" width="4" height="420"/>
+    <rect x="238" y="0" width="4" height="420"/>
+    <rect x="298" y="0" width="4" height="420"/>
+    <rect x="358" y="0" width="4" height="420"/>
+  </g>
+  
+  <g fill="#222" stroke="none">
+    <rect x="36" y="0" width="36" height="280"/>
+    <rect x="108" y="0" width="36" height="280"/>
+    <rect x="216" y="0" width="36" height="280"/>
+    <rect x="282" y="0" width="36" height="280"/>
+    <rect x="348" y="0" width="36" height="280"/>
+  </g>
+
+
+</svg>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="210mm" height="297mm" id="svg5567" version="1.1" inkscape:version="0.48.4 r9939" sodipodi:docname="Documento nuevo 4">
+  <defs id="defs3">
+    <filter color-interpolation-filters="sRGB" inkscape:label="Drop Shadow" id="filter4260-2-5-5-5-5-61-5-1-7-5-7-70-8-9-4">
+      <feFlood flood-opacity="0.498039" flood-color="rgb(0,0,0)" result="flood" id="feFlood4262-6-85-3-3-2-4-8-2-1-4-7-1-8-8-1"/>
+      <feComposite in="flood" in2="SourceGraphic" operator="in" result="composite1" id="feComposite4264-1-8-4-1-2-3-91-3-2-4-1-2-6-0-6"/>
+      <feGaussianBlur in="composite1" stdDeviation="2" result="blur" id="feGaussianBlur4266-7-6-6-7-8-22-9-6-3-7-1-7-7-1-9"/>
+      <feOffset dx="5.2" dy="5.2" result="offset" id="feOffset4268-4-6-5-9-5-5-91-9-1-5-1-9-0-8-5"/>
+      <feComposite in="SourceGraphic" in2="offset" operator="over" result="composite2" id="feComposite4270-1-1-6-9-6-3-66-7-9-7-6-9-0-8-2"/>
+    </filter>
+    <filter color-interpolation-filters="sRGB" inkscape:label="Drop Shadow" id="filter4260-2-5-5-5-5-61-5-1-7-5-7-70-8-9-4-8">
+      <feFlood flood-opacity="0.498039" flood-color="rgb(0,0,0)" result="flood" id="feFlood4262-6-85-3-3-2-4-8-2-1-4-7-1-8-8-1-8"/>
+      <feComposite in="flood" in2="SourceGraphic" operator="in" result="composite1" id="feComposite4264-1-8-4-1-2-3-91-3-2-4-1-2-6-0-6-2"/>
+      <feGaussianBlur in="composite1" stdDeviation="2" result="blur" id="feGaussianBlur4266-7-6-6-7-8-22-9-6-3-7-1-7-7-1-9-4"/>
+      <feOffset dx="5.2" dy="5.2" result="offset" id="feOffset4268-4-6-5-9-5-5-91-9-1-5-1-9-0-8-5-5"/>
+      <feComposite in="SourceGraphic" in2="offset" operator="over" result="composite2" id="feComposite4270-1-1-6-9-6-3-66-7-9-7-6-9-0-8-2-5"/>
+    </filter>
+  </defs>
+  <sodipodi:namedview inkscape:document-units="mm" id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="0.38383789" inkscape:cx="-29.107102" inkscape:cy="73.363959" inkscape:current-layer="layer1" showgrid="false" inkscape:window-width="2560" inkscape:window-height="1350" inkscape:window-x="-11" inkscape:window-y="-11" inkscape:window-maximized="1"/>
+  <metadata id="metadata4">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:title/>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1">
+    <g transform="matrix(2.1513158,0,0,2.1513158,1384.4455,-5839.0897)" id="g5650">
+      <g transform="matrix(1.0204397,0,0,0.85428085,11.973907,291.14545)" id="g7221-5-0">
+        <g id="g7214-1-7" transform="translate(-2.0081267,-2.0081263)">
+          <g transform="matrix(0.97344232,0,0,1.3182183,860.70257,3727.4032)" id="g6730-1-7-2-4-7">
+            <g transform="translate(-200.092,225.52501)" id="g6679-1-6-8-0-3-1">
+              <g id="g5608">
+                <rect style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:6.04453325;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter4260-2-5-5-5-5-61-5-1-7-5-7-70-8-9-4-8)" id="rect3356-2-0-8-9-1-4-9-9-53-6-35-2-3-5-9" width="250" height="250" x="-1292.8342" y="-807.75415" rx="60" ry="60"/>
+              </g>
+              <text sodipodi:linespacing="125%" id="text6669-4-9-3-4-2-1" y="-651.65063" x="-1189.7336" style="font-size:100px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Tw Cen MT;-inkscape-font-specification:Tw Cen MT Bold" xml:space="preserve"><tspan y="-651.65063" x="-1189.7336" id="tspan6671-6-3-5-1-7-5" sodipodi:role="line"/></text>
+            </g>
+          </g>
+        </g>
+        <text xml:space="preserve" style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Tw Cen MT;-inkscape-font-specification:Tw Cen MT Bold" x="-578.34045" y="3060.489" id="text7168-1-6" sodipodi:linespacing="125%"><tspan sodipodi:role="line" id="tspan7170-9-6" x="-578.34045" y="3060.489" style="font-size:75px">alt</tspan></text>
+      </g>
+      <g transform="translate(-624.78239,211.57404)" id="g6732">
+        <g id="g6699-3" transform="matrix(1.0940026,0,0,0.85586974,-794.03925,595.24491)">
+          <path inkscape:connector-curvature="0" id="rect7565-5-8-1" d="m 763.57617,2586.5862 0,4.3457 21.73047,0 0,-4.3457 -21.73047,0 z" style="fill:#000000;fill-opacity:0.9174603;stroke:#000000;stroke-width:0.76499999;stroke-miterlimit:4;stroke-opacity:0.75873018;stroke-dasharray:none;stroke-dashoffset:0"/>
+          <path inkscape:connector-curvature="0" id="rect7572-5-4-4" d="m 784.65039,2586.9766 -5.43945,1.0293 21.63867,57.5214 5.4375,-1.0293 -21.63672,-57.5214 z" style="fill:#000000;fill-opacity:0.9174603;stroke:#000000;stroke-width:0.97979176;stroke-miterlimit:4;stroke-opacity:0.75873018;stroke-dasharray:none;stroke-dashoffset:0"/>
+          <rect inkscape:transform-center-y="-87.833801" inkscape:transform-center-x="20.083889" y="2586.6091" x="799.15985" height="4.2997952" width="24.69594" id="rect7565-5-8-7-5" style="fill:#000000;fill-opacity:0.9174603;stroke:#000000;stroke-width:0.81119359;stroke-miterlimit:4;stroke-opacity:0.75873018;stroke-dasharray:none;stroke-dashoffset:0"/>
+          <path inkscape:connector-curvature="0" id="rect7565-5-8-6-3" d="m 800.64258,2639.834 0,4.3457 21.73047,0 0,-4.3457 -21.73047,0 z" style="fill:#000000;fill-opacity:0.9174603;stroke:#000000;stroke-width:0.76499999;stroke-miterlimit:4;stroke-opacity:0.75873018;stroke-dasharray:none;stroke-dashoffset:0"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

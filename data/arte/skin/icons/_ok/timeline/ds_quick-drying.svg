@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Fireworks 10, Export SVG Extension by Aaron Beall (http://fireworks.abeall.com) . Version: 0.6.1  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg id="Vector-icons-icon-1" viewBox="0 0 140 140" style="background-color:#ffffff00" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" x="0px" y="0px" width="140px" height="140px">
+	<defs>
+		<!-- Library -->
+		<symbol id="Symbol" overflow="visible">
+			<g id="Layer%201">
+				<path d="M -33 0 C -33 -18.5018 -18.0018 -33.5 0.5 -33.5 C 19.0018 -33.5 34 -18.5018 34 0 C 34 18.5018 19.0018 33.5 0.5 33.5 C -18.0018 33.5 -33 18.5018 -33 0 ZM -38 0 C -38 21.2632 -20.7632 38.5 0.5 38.5 C 21.7632 38.5 39 21.2632 39 0 C 39 -21.2632 21.7632 -38.5 0.5 -38.5 C -20.7632 -38.5 -38 -21.2632 -38 0 Z" fill="#103e95"/>
+				<path id="Ellipse" d="M -4.5 0 C -4.5 -2.7615 -2.2615 -5 0.5 -5 C 3.2615 -5 5.5 -2.7615 5.5 0 C 5.5 2.7615 3.2615 5 0.5 5 C -2.2615 5 -4.5 2.7615 -4.5 0 Z" fill="#154193"/>
+				<path id="Ellipse2" d="M -1 -15.5 C -1 -24.0605 -0.3284 -28 0.5 -28 C 1.3284 -28 2 -24.0605 2 -15.5 C 2 -6.9395 1.3284 0 0.5 0 C -0.3284 0 -1 -6.9395 -1 -15.5 Z" fill="#154193"/>
+				<path id="Ellipse3" d="M 7.2003 8.1502 C 4.1415 5.6957 1.1066 2.1874 1.4739 1.3724 C 1.8525 0.5322 5.6695 2.7146 8.9734 5.2013 C 12.5458 7.8902 15.1193 10.9059 14.471 11.7064 C 13.8449 12.4795 10.493 10.7922 7.2003 8.1502 Z" fill="#154193"/>
+				<path d="M -58.7654 0 C -58.7654 -32.4558 -32.4557 -58.7654 0 -58.7654 C 32.4557 -58.7654 58.7654 -32.4558 58.7654 0 C 58.7654 32.4557 32.4557 58.7654 0 58.7654 C -32.4557 58.7654 -58.7654 32.4557 -58.7654 0 ZM -70 0 C -70 38.6604 -38.6604 70 0 70 C 38.6604 70 70 38.6604 70 0 C 70 -38.6604 38.6604 -70 0 -70 C -38.6604 -70 -70 -38.6604 -70 0 Z" fill="#d2dfef"/>
+				<g>
+					<path id="Line" d="M -15.5 -27.5 L -13.5 -25.1667 " stroke="#154193" stroke-width="2" fill="none"/>
+					<path id="Line2" d="M -27.5 -16.5 L -24.5 -15.1667 " stroke="#154193" stroke-width="2" fill="none"/>
+					<path id="Line3" d="M 27.5 -16.5 L 24.5 -15.1667 " stroke="#154193" stroke-width="2" fill="none"/>
+					<path id="Line4" d="M 15.5 -27.5 L 13.5 -25.1667 " stroke="#154193" stroke-width="2" fill="none"/>
+					<path id="Line5" d="M 0.5 -32.5 L 0.5 -30.1667 " stroke="#154193" stroke-width="2" fill="none"/>
+					<path d="M -31 0 L -29 0 " stroke="#154193" stroke-width="2" fill="none"/>
+					<path d="M 30 0 L 32 0 " stroke="#154193" stroke-width="2" fill="none"/>
+					<path id="Line6" d="M -15.5 27 L -13.5 24.6667 " stroke="#154193" stroke-width="2" fill="none"/>
+					<path id="Line7" d="M -27.5 16 L -24.5 14.6667 " stroke="#154193" stroke-width="2" fill="none"/>
+					<path id="Line8" d="M 27.5 16 L 24.5 14.6667 " stroke="#154193" stroke-width="2" fill="none"/>
+					<path id="Line9" d="M 15.5 27 L 13.5 24.6667 " stroke="#154193" stroke-width="2" fill="none"/>
+					<path id="Line10" d="M 0.5 32 L 0.5 29.6667 " stroke="#154193" stroke-width="2" fill="none"/>
+				</g>
+			</g>
+
+		</symbol>
+		<!-- End Library -->
+
+	</defs>
+	<use id="Symbol2" xlink:href="#Symbol" transform="matrix(1, 0, 0, 1, 70, 70)"/>
+</svg>
