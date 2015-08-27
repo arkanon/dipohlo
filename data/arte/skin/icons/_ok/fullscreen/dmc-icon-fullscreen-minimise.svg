@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="432.5px" height="432.5px" viewBox="0 0 432.5 432.5" enable-background="new 0 0 432.5 432.5" xml:space="preserve">
+<g id="full_screen">
+	<rect x="-577.5" y="0.5" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" width="432" height="432"/>
+	<g>
+		
+			<rect x="-283.385" y="113.52" transform="matrix(1.649419e-04 1 -1 1.649419e-04 -103.1388 356.9786)" fill="#333333" width="106.594" height="26.784"/>
+		
+			<rect x="-323.837" y="73.621" transform="matrix(-1 1.641830e-04 -1.641830e-04 -1 -540.5262 173.9345)" fill="#333333" width="107.134" height="26.649"/>
+		
+			<rect x="-317.384" y="107.519" transform="matrix(-0.7089 0.7053 -0.7053 -0.7089 -366.0347 392.8828)" fill="#333333" width="106.593" height="26.784"/>
+	</g>
+	<g>
+		
+			<rect x="-544.736" y="294.52" transform="matrix(-1.649102e-04 -1 1 -1.649102e-04 -799.4312 -183.4766)" fill="#333333" width="106.594" height="26.784"/>
+		<rect x="-504.824" y="334.554" fill="#333333" width="107.134" height="26.648"/>
+		
+			<rect x="-510.736" y="300.519" transform="matrix(0.7089 -0.7053 0.7053 0.7089 -354.5367 -231.251)" fill="#333333" width="106.593" height="26.785"/>
+	</g>
+	<rect x="0.5" y="0.5" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" width="432" height="432"/>
+</g>
+<g id="minimise">
+	<g>
+		
+			<rect x="210.263" y="112.52" transform="matrix(-1.649102e-04 -1 1 -1.649102e-04 137.6926 389.4927)" fill="#333333" width="106.594" height="26.783"/>
+		<rect x="250.176" y="152.553" fill="#333333" width="107.135" height="26.649"/>
+		
+			<rect x="244.264" y="118.52" transform="matrix(0.7089 -0.7053 0.7053 0.7089 -6.4248 248.2554)" fill="#333333" width="106.593" height="26.784"/>
+	</g>
+	<g>
+		
+			<rect x="109.614" y="293.519" transform="matrix(1.649419e-04 1 -1 1.649419e-04 469.7959 143.9489)" fill="#333333" width="106.595" height="26.784"/>
+		
+			<rect x="69.162" y="253.62" transform="matrix(-1 1.641830e-04 -1.641830e-04 -1 245.5028 533.8685)" fill="#333333" width="107.135" height="26.648"/>
+		
+			<rect x="75.615" y="287.519" transform="matrix(-0.7089 0.7053 -0.7053 -0.7089 432.5269 423.3183)" fill="#333333" width="106.593" height="26.785"/>
+	</g>
+</g>
+</svg>
