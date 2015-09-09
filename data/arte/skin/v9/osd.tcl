@@ -1,6 +1,7 @@
 # osd.tcl
 
 # Arkanon <arkanon@lsd.org.br>
+# 2015/09/09 (Qua) 02:21:32 BRT
 # 2015/08/23 (Dom) 21:46:48 BRS
 # 2015/08/22 (Sáb) 19:13:39 BRS
 # 2015/08/20 (Qui) 20:26:07 BRT
@@ -43,7 +44,7 @@
 
     global power pause throttle mute fullscreen console pause_on_lost_focus on off recording
 
-    if { [ is_cursor_in "fullscreen" ] } { if { $fullscreen          } { set fullscreen          false ; cor "fullscreen" $off } { set fullscreen          true ; cor "fullscreen" $on  } }
+    if { [ is_cursor_in "fullscreen" ] } { if { $fullscreen          } { set fullscreen          false ; cor "fullscreen" $off } { set fullscreen          true ; cor "fullscreen" $on ; escala 3 } }
 
     if { [ is_cursor_in "power"      ] } { if { $power               } { set power               false ; cor "power"      $off } { set power               true ; cor "power"      $on  } }
     if { [ is_cursor_in "pause"      ] } { if { $pause               } { set pause               false ; cor "pause"      $off } { set pause               true ; cor "pause"      $on  } }
@@ -80,7 +81,7 @@
   # set ch                [ expr { round(280*$f/3)+1 } ]
     set frame             "$::env(OPENMSX_SYSTEM_DATA)/skins/$osd_leds_set/frame-${f}x-${fw}x${fh}.png"
 
-    osd configure osd_frame -z 0 -x 0 -y 0 -w $fw -h $fh -scaled false -image $frame
+    osd configure osd_frame -z 0 -x 0 -y 0 -w [expr {$fw-1}] -h [expr {$fh-1}] -scaled false -image $frame
 
     set cbgs [ list { list "300x89" 59  8  9 } { list "593x183" 84 13 12 } { list "894x281" 127 20 12 } ]
     set sizes             [ lindex $cbgs [expr {$f-1}] ]

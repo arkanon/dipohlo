@@ -5,6 +5,7 @@
 # Build Script
 #
 # Arkanon <arkanon@lsd.org.br>
+# 2015/09/08 (Ter) 21:49:15 BRS
 # 2015/08/23 (Dom) 20:26:24 BRS
 # 2015/08/22 (Sáb) 19:28:40 BRS
 # 2015/08/20 (Qui) 20:27:37 BRS
@@ -96,6 +97,7 @@
 
   REPO="$HOME/git/dipohlo"
   DATA="$REPO/data"
+ SKINV="9"
 
   NAME="DiPoHLo - Distribuição Portável do HotLogo"
    MAJ="0.11.0"
@@ -483,8 +485,8 @@ EOT
 
         mkdir -p                                              dipohlo/
         cp    -a  $DATA/skin.tcl                              dipohlo/
-        cp    -a  $DATA/arte/skin/v7/console-894x281.png      dipohlo/console.png
-        cp    -a  $DATA/arte/skin/v7/frame-961x721.png        dipohlo/frame.png
+        cp    -a  $DATA/arte/skin/v$SKINV/console-894x281.png dipohlo/console.png
+        cp    -a  $DATA/arte/skin/v$SKINV/frame-961x721.png   dipohlo/frame.png
         cp    -a  $DATA/arte/skin/led-blue-off.png            led-off.png
         cp    -a  $DATA/arte/skin/led-blue-on.png             led-on.png
         cp    -a  $DATA/arte/ttf/data_seventy_std_regular.otf .
@@ -595,6 +597,7 @@ EOT
 
   ARCH=\$(uname -m | grep -q x86_64 && echo x64 || echo x86)
    MAJ="$MAJ"
+ SKINV="$SKINV"
   pref="openmsx-\$MAJ"
 
   REPO="\$PWD"
@@ -610,7 +613,7 @@ EOT
   export OPENMSX_SYSTEM_DATA=\$REPO/build/\$MAJ/share
   export   OPENMSX_USER_DATA=\$OPENMSX_SYSTEM_DATA
 
-# openmsx -cart \$OPENMSX_USER_DATA/software/hotlogo.rom -diska \$DATA/disk/ -script \$DATA/arte/skin/osd.tcl -script <( echo 'after time 14 { type "arquivos\r"; after time 2 { type "carregue \"" } }' ) &
+# openmsx -cart \$OPENMSX_USER_DATA/software/hotlogo.rom -diska \$DATA/disk/ -script \$DATA/arte/skin/v\$SKINV/osd.tcl -script <( echo 'after time 14 { type "arquivos\r"; after time 2 { type "carregue \"" } }' ) &
 
 # EOF
 EOT

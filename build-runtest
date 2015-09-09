@@ -4,6 +4,7 @@
 
   ARCH=$(uname -m | grep -q x86_64 && echo x64 || echo x86)
    MAJ="0.11.0"
+ SKINV="9"
   pref="openmsx-$MAJ"
 
   REPO="$PWD"
@@ -19,6 +20,6 @@
   export OPENMSX_SYSTEM_DATA=$BLD/share
   export   OPENMSX_USER_DATA=$OPENMSX_SYSTEM_DATA
 
-# openmsx -cart $OPENMSX_USER_DATA/software/hotlogo.rom -diska $DATA/disk/ -script  $DATA/arte/skin/osd.tcl -script <( echo 'after time 14 { type "arquivos\r"; after time 2 { type "carregue \"" } }' )
+# openmsx -cart $OPENMSX_USER_DATA/software/hotlogo.rom -diska $DATA/disk/ -script  $DATA/arte/skin/v$SKINV/osd.tcl -script <( echo 'after time 14 { type "arquivos\r"; after time 2 { type "carregue \"" } }' )
 
 # EOF
