@@ -1,6 +1,7 @@
 # osd.tcl
 
 # Arkanon <arkanon@lsd.org.br>
+# 2015/09/11 (Sex) 01:56:15 BRS
 # 2015/09/09 (Qua) 23:05:49 BRS
 # 2015/09/09 (Qua) 02:21:32 BRT
 # 2015/08/23 (Dom) 21:46:48 BRS
@@ -11,29 +12,21 @@
 
 
 
-  proc area {widget row col ion ioff l} \
+  proc area {widget row col stat tip} \
   {
-
     global esq top inc skin_set_dir
-
-    if { ! [ osd exists $widget ] } \
-    {
-      osd create rectangle $widget
-      if { $ion  != "" } { osd create rectangle $widget.on  }
-      if { $ioff != "" } { osd create rectangle $widget.off }
-    }
-
-    if { [ osd exists $widget.on  ] } { osd configure $widget.on  -x [expr {$esq+0.5+$col*$inc}] -y [expr {$top+0.5+$row*$inc}] -scale 1 -image [try_dirs $skin_set_dir $ion  ""] }
-    if { [ osd exists $widget.off ] } { osd configure $widget.off -x [expr {$esq+0.0+$col*$inc}] -y [expr {$top+0.0+$row*$inc}] -scale 1 -image [try_dirs $skin_set_dir $ioff ""] }
-
+    if { ! [ osd exists $widget ] } { osd create rectangle $widget }
+    if { $stat == "" } { set image $widget } { set image "$widget-$stat" }
+    osd configure $widget -scale 1 -image [try_dirs $skin_set_dir $image ""]
+    if { $row  != "" } { osd configure $widget -x [expr {$esq+$col*$inc}] -y [expr {$top+$row*$inc}] }
   }
 
   proc cor {widget c} \
   {
-    osd configure $widget -rgba $c
+  # osd configure $widget -rgba $c
   }
 
-  proc is_cursor_in {widget} \
+  proc cursor_in {widget} \
   {
     set x 2
     set y 2
@@ -88,29 +81,32 @@
   proc check_mouse {} \
   {
 
-    global power pause throttle mute fullscreen console pause_on_lost_focus on off recording
+    global power pause throttle mute pause_on_lost_focus console ; # fullscreen on off recording
 
-    if { [ is_cursor_in "fullscreen" ] } { if { $fullscreen          } { set fullscreen          false ; cor "fullscreen" $off } { set fullscreen          true ; cor "fullscreen" $on ; escala 3 } }
+    if { [ cursor_in power      ] } {                       set power               [ expr { ! $power               } ] ; area power     "" "" $power               "" }
+    if { [ cursor_in reset      ] } { reset }
+    if { [ cursor_in quit       ] } { quit  }
 
-    if { [ is_cursor_in "power"      ] } { if { $power               } { set power               false ; cor "power"      $off } { set power               true ; cor "power"      $on  } }
-    if { [ is_cursor_in "pause"      ] } { if { $pause               } { set pause               false ; cor "pause"      $off } { set pause               true ; cor "pause"      $on  } }
-    if { [ is_cursor_in "throttle"   ] } { if { $throttle            } { set throttle            false ; cor "throttle"   $on  } { set throttle            true ; cor "throttle"   $off } }
-    if { [ is_cursor_in "mute"       ] } { if { $mute                } { set mute                false ; cor "mute"       $off } { set mute                true ; cor "mute"       $on  } }
+    if { [ cursor_in pause      ] } {                       set pause               [ expr { ! $pause               } ] ; area pause     "" "" $pause               "" }
+    if { [ cursor_in throttle   ] } {                       set throttle            [ expr { ! $throttle            } ] ; area throttle  "" "" $throttle            "" }
+    if { [ cursor_in mute       ] } {                       set mute                [ expr { ! $mute                } ] ; area mute      "" "" $mute                "" }
 
-    if { [ is_cursor_in "polf"       ] } { if { $pause_on_lost_focus } { set pause_on_lost_focus false ; cor "polf"       $off } { set pause_on_lost_focus true ; cor "polf"       $on  } }
-    if { [ is_cursor_in "console"    ] } { if { $console             } { set console             false ; cor "console"    $off } { set console             true ; cor "console"    $on  } }
-    if { [ is_cursor_in "keyboard"   ] } { toggle_osd_keyboard ; if { [ osd exists kb    ] } { cor "keyboard" $on } { cor "keyboard" $off } }
-    if { [ is_cursor_in "menu"       ] } { main_menu_toggle    ; if { [ osd exists menu1 ] } { cor "menu"     $on } { cor "menu"     $off } }
-    if { [ is_cursor_in "reset"      ] } { reset }
-    if { [ is_cursor_in "quit"       ] } { quit  }
-    if { [ is_cursor_in "x1"         ] } { escala 1 }
-    if { [ is_cursor_in "x2"         ] } { escala 2 }
-    if { [ is_cursor_in "x3"         ] } { escala 3 }
-    if { [ is_cursor_in "ssraw"      ] } { screenshot -raw -doublesize }
-    if { [ is_cursor_in "ssosd"      ] } { screenshot -with-osd }
-    if { [ is_cursor_in "save"       ] } { savestate }
-    if { [ is_cursor_in "load"       ] } { loadstate }
-    if { [ is_cursor_in "record"     ] } { if { $recording } { set recording false ; cor "record" $off ; record stop } { set recording true ; cor "record" $on ; record start -doublesize -stereo } }
+    if { [ cursor_in autopause  ] } {                       set pause_on_lost_focus [ expr { ! $pause_on_lost_focus } ] ; area autopause "" "" $pause_on_lost_focus "" }
+
+    if { [ cursor_in console    ] } {                       set console             [ expr { ! $console             } ] ; area console   "" "" $console             "" }
+    if { [ cursor_in keyboard   ] } { toggle_osd_keyboard ; set keyboard            [ osd exists kb                   ] ; area keyboard  "" "" $keyboard            "" }
+    if { [ cursor_in menu       ] } { main_menu_toggle    ; set menu                [ osd exists menu1                ] ; area menu      "" "" $menu                "" }
+
+  # if { [ cursor_in x1         ] } { escala 1 }
+  # if { [ cursor_in x2         ] } { escala 2 }
+  # if { [ cursor_in x3         ] } { escala 3 }
+  # if { [ cursor_in fullscreen ] } { if { $fullscreen } { set fullscreen false ; cor "fullscreen" $off } { set fullscreen true ; cor "fullscreen" $on ; escala 3 } }
+
+  # if { [ cursor_in ssraw      ] } { screenshot -raw -doublesize }
+  # if { [ cursor_in ssosd      ] } { screenshot -with-osd }
+  # if { [ cursor_in save       ] } { savestate }
+  # if { [ cursor_in load       ] } { loadstate }
+  # if { [ cursor_in record     ] } { if { $recording } { set recording false ; cor "record" $off ; record stop } { set recording true ; cor "record" $on ; record start -doublesize -stereo } }
 
     after "mouse button1 down" { check_mouse }
 
@@ -119,6 +115,7 @@
   proc escala {f} \
   {
 
+    global power pause throttle mute pause_on_lost_focus console
     global esq top inc skin_set_dir scale_factor osd_leds_set consolecolumns consolerows consolefontsize consolebackground consolefont on off
     set scale_factor      $f
     set fw                [ expr { (320*$f)+1 } ]
@@ -142,41 +139,43 @@
     set top [expr {70*$f/3}]
     set inc [expr {30*$f/3}]
 
-    area "power"      0 0 "powered_on"    "powered_off"    "Power"      ; #
-    area "reset"      0 1 "reset"         ""               "Reset"      ; #
-    area "quit"       0 2 "quit"          ""               "Sair"       ; # A-F4
+    area power      0 0 $power               "Power"     ; #
+    area reset      0 1 ""                   "Reset"     ; #
+    area quit       0 2 ""                   "Sair"      ; # A-F4
 
-  # area "polf"       0 0 "autopaused_on" "autopaused_off" "Autopausa"  ; #
-    area "pause"      1 0 "paused_on"     "paused_off"     "Pausa"      ; # PAUSE
-    area "throttle"   1 1 "throttle_on"   "throttle_off"   "Trote"      ; # F9
-    area "mute"       1 2 "volume_mute"   ""               "Mudo"       ; # F11
+    area pause      1 0 $pause               "Pausa"     ; # PAUSE
+    area throttle   1 1 $throttle            "Trote"     ; # F9
+    area mute       1 2 $mute                "Mudo"      ; # F11
 
-  # area "save"       0 0 "powered_on"    "Salvar"     ; # A-F8
-  # area "load"       0 0 "powered_on"    "Carregar"   ; # A-F7
-  # area "ssraw"      0 0 "powered_on"    "Tela"       ; # S-PrtScr
-  # area "ssosd"      0 0 "powered_on"    "Tela+OSD"   ; # C-PrtScr
-  # area "record"     0 0 "powered_on"    "Gravando"   ; # F4
+    area autopause  2 0 $pause_on_lost_focus "Autopausa" ; #
 
-  # area "x1"         0 0 "powered_on"    "x1"         ; #
-  # area "x2"         0 0 "powered_on"    "x2"         ; #
-  # area "x3"         0 0 "powered_on"    "x3"         ; #
-  # area "fullscreen" 0 0 "powered-on"    "Tela Cheia" ; # F12
+    area console   10 0 false                "Console"   ; # F10
+    area keyboard  10 1 0                    "Teclado"   ; # F6
+    area menu      10 2 0                    "Menu"      ; # MENU
 
-  # area "caps"       0 0 "powered_on"    "Caps"       ; # CAPS
-  # area "code"       0 0 "powered_on"    "Code"       ; # rALT
-  # area "led_pause"  0 0 "powered_on"    "Paused"     ; #
-  # area "turbo"      0 0 "powered_on"    "Turbo"      ; #
-  # area "floppy"     0 0 "powered_on"    "Disquete"   ; #
-  # area "breaked"    0 0 "powered_on"    "Breaked"    ; #
+  # area x1         0 0 "" "x1"         ; #
+  # area x2         0 0 "" "x2"         ; #
+  # area x3         0 0 "" "x3"         ; #
+  # area fullscreen 0 0 "" "Tela Cheia" ; # F12
 
-  # area "console"    0 0 "powered_on"    "Console"    ; # F10
-  # area "keyboard"   0 0 "powered_on"    "Teclado"    ; # F6
-  # area "menu"       0 0 "powered_on"    "Menu"       ; # MENU
+  # area save       0 0 "" "Salvar"     ; # A-F8
+  # area load       0 0 "" "Carregar"   ; # A-F7
+  # area ssraw      0 0 "" "Tela"       ; # S-PrtScr
+  # area ssosd      0 0 "" "Tela+OSD"   ; # C-PrtScr
+  # area record     0 0 "" "Gravando"   ; # F4
+
+  # area caps       0 0 "" "Caps"       ; # CAPS
+  # area code       0 0 "" "Code"       ; # rALT
+  # area led_pause  0 0 "" "Paused"     ; #
+  # area turbo      0 0 "" "Turbo"      ; #
+  # area floppy     0 0 "" "Disquete"   ; #
+  # area breaked    0 0 "" "Breaked"    ; #
 
     # PgUp bwd 1s
     # PgDn fwd 1s
 
   }
+
 
 
   set esq 0
@@ -188,6 +187,8 @@
   set on  0x7090aae8
   set off 0x7090aa40
   set recording false
+
+  set throttle true ; # valor inicial e nomes dos ícones invertido. BUG na implementação do throttle?
 
   after time 0 { set power false }
 

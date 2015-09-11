@@ -7647,26 +7647,6 @@
        r="22.5" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient31013"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-4580.526,2647.149)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient31015"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-5506.8763,2751.0305)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
        xlink:href="#linearGradient4959-6"
        id="linearGradient35693"
        gradientUnits="userSpaceOnUse"
@@ -7715,26 +7695,6 @@
        fx="4.4999995"
        fy="5.9999995"
        r="22.5" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient35913"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.0056306,0,0,1.3793137,612.9775,894.33223)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient35915"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.0056306,0,0,4,612.9775,-3321.8199)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
     <clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath36403">
@@ -7916,126 +7876,6 @@
        fx="4.4999995"
        fy="5.9999995"
        r="22.5" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient66907"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.66666665,0,0,0.66666665,569.19372,4286.8675)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient66909"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.66666665,0,0,0.66666664,569.19372,4286.8675)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient68613"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.99554068,0,0,1.4432915,609.98199,798.24197)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient68615"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1,0,0,4,610.97009,-3321.8199)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient70685"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.66666665,0,0,0.66666665,565.43196,4272.949)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient70687"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.66666665,0,0,0.66666664,565.43196,4272.949)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient70697"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.99554068,0,0,1.4432915,609.98199,798.24197)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient70699"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1,0,0,4,610.97009,-3321.8199)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient70755"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.99554068,0,0,1.4432915,609.98199,798.24197)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient70757"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1,0,0,4,610.97009,-3321.8199)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient70765"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.33482643,0,0,0.33333332,1003.0764,3883.2731)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4959"
-       id="linearGradient70767"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.33333333,0,0,0.33333332,1002.7456,3883.2734)"
-       x1="64.044044"
-       y1="1595.0345"
-       x2="-946.12048"
-       y2="839.83948" />
     <clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath70944">
@@ -8243,9 +8083,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.17913661"
-     inkscape:cx="1303.0412"
-     inkscape:cy="1880.7638"
+     inkscape:zoom="5.7323715"
+     inkscape:cx="768.65392"
+     inkscape:cy="1332.8545"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -36516,12 +36356,74 @@
     </g>
     <g
        id="g11027">
+      <g
+         id="g14848"
+         inkscape:export-filename="/home/arkanon/git/dipohlo/build/0.11.0/share/skins/dipohlo/icons/autopause-false.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <g
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/paused_off.png"
+           style="stroke:#091322;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1"
+           transform="matrix(0.3077,0,0,0.3077,-1701.0284,2988.1678)"
+           id="g14792">
+          <g
+             style="stroke:#091322;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1"
+             id="g14796"
+             transform="translate(12.99213,-80.270235)">
+            <path
+               sodipodi:nodetypes="cc"
+               inkscape:connector-curvature="0"
+               id="path14798"
+               d="m -2595.7914,4293.8793 0,-20.9996"
+               style="fill:none;stroke:#091322;stroke-width:9.00000381;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1" />
+            <path
+               style="fill:none;stroke:#091322;stroke-width:9.00000381;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
+               d="m -2577.7914,4293.8793 0,-20.9996"
+               id="path14800"
+               inkscape:connector-curvature="0"
+               sodipodi:nodetypes="cc" />
+          </g>
+        </g>
+        <g
+           id="g14835"
+           style="stroke-linecap:butt;stroke-linejoin:round;fill:#091322;fill-opacity:1;stroke:#091322;stroke-opacity:1"
+           transform="matrix(-0.14631287,-0.16030896,0.16030896,-0.14631287,-3516.553,4442.027)"
+           inkscape:transform-center-x="-22.329327"
+           inkscape:transform-center-y="-3.4179472">
+          <path
+             sodipodi:nodetypes="cc"
+             inkscape:connector-curvature="0"
+             id="path14837"
+             d="m -2620.5488,3925.2438 0,27.1766"
+             style="fill:#091322;stroke:#091322;stroke-width:9.00000477000000032;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;fill-opacity:1" />
+          <path
+             sodipodi:type="star"
+             style="fill:#091322;fill-opacity:1;stroke:#091322;stroke-width:40.25508117999999769;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             id="path14839"
+             sodipodi:sides="3"
+             sodipodi:cx="107.52427"
+             sodipodi:cy="1211.2775"
+             sodipodi:r1="89.986046"
+             sodipodi:r2="44.993023"
+             sodipodi:arg1="2.6743262"
+             sodipodi:arg2="3.7215238"
+             inkscape:flatsided="false"
+             inkscape:rounded="0"
+             inkscape:randomized="0"
+             d="m 27.184463,1251.8115 42.703125,-65.1887 42.703122,-65.1886 35.10346,69.5763 35.10346,69.5763 -77.80658,-4.3877 z"
+             inkscape:transform-center-x="4.5404146"
+             inkscape:transform-center-y="-12.464667"
+             transform="matrix(0.09799688,0.00980179,0.00512831,-0.1723943,-2637.2798,4153.5696)" />
+        </g>
+      </g>
       <path
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/size.png"
          id="rect10099"
-         d="m -2539.1246,4420.1437 c -0.6845,0 -1.1742,0.5215 -1.1742,1.2061 l 0,5.459 c 0.2966,-0.071 0.6024,-0.127 0.9203,-0.127 l 33.357,0 c 2.1829,0 3.9989,1.784 3.9989,3.9673 l 0,23.772 c 0,0.3283 -0.05,0.6453 -0.1269,0.9521 l 25.6445,0 c 0.6846,0 1.2062,-0.4898 1.2062,-1.1743 l 0,-32.8491 c 0,-0.6846 -0.5216,-1.2061 -1.2062,-1.2061 l -62.6196,0 z m -0.2539,9.585 c -0.548,0 -0.9203,0.3724 -0.9203,0.9204 l 0,5.9985 c 0.3828,-0.1171 0.7551,-0.1904 1.1742,-0.1904 l 20.0903,0 c 2.3202,0 4.253,1.9331 4.253,4.2529 l 0,13.4888 c 0,0.4192 -0.073,0.7912 -0.1905,1.1743 l 8.9503,0 c 0.5477,0 0.952,-0.4041 0.952,-0.9521 l 0,-23.772 c 0,-0.548 -0.4043,-0.9204 -0.952,-0.9204 l -33.357,0 z m 0.2539,9.7754 c -0.6845,0 -1.1742,0.5214 -1.1742,1.206 l 0,5.6177 c 0.2323,-0.046 0.4534,-0.064 0.6981,-0.064 l 8.3155,0 c 2.0466,0 3.745,1.6984 3.745,3.7452 l 0,4.6655 c 0,0.2448 -0.017,0.4657 -0.063,0.6982 l 8.5692,0 c 0.6848,0 1.2062,-0.4898 1.2062,-1.1743 l 0,-13.4888 c 0,-0.6846 -0.5214,-1.206 -1.2062,-1.206 l -20.0903,0 z m -0.4761,9.8071 c -0.4112,0 -0.6981,0.2867 -0.6981,0.6983 l 0,4.1894 c 0,0.1711 0.038,0.3339 0.095,0.4761 0.1133,0.2843 0.3187,0.4898 0.603,0.603 0.1422,0.057 0.305,0.095 0.4761,0.095 l 7.8394,0 c 0.4113,0 0.6982,-0.2868 0.6982,-0.6983 l 0,-4.6655 c 0,-0.4115 -0.2869,-0.6982 -0.6982,-0.6982 l -8.3155,0 z"
+         d="m -2539.1246,4472.1437 c -0.6845,0 -1.1742,0.5215 -1.1742,1.2061 l 0,5.459 c 0.2966,-0.071 0.6024,-0.127 0.9203,-0.127 l 33.357,0 c 2.1829,0 3.9989,1.784 3.9989,3.9673 l 0,23.772 c 0,0.3283 -0.05,0.6453 -0.1269,0.9521 l 25.6445,0 c 0.6846,0 1.2062,-0.4898 1.2062,-1.1743 l 0,-32.8491 c 0,-0.6846 -0.5216,-1.2061 -1.2062,-1.2061 l -62.6196,0 z m -0.2539,9.585 c -0.548,0 -0.9203,0.3724 -0.9203,0.9204 l 0,5.9985 c 0.3828,-0.1171 0.7551,-0.1904 1.1742,-0.1904 l 20.0903,0 c 2.3202,0 4.253,1.9331 4.253,4.2529 l 0,13.4888 c 0,0.4192 -0.073,0.7912 -0.1905,1.1743 l 8.9503,0 c 0.5477,0 0.952,-0.4041 0.952,-0.9521 l 0,-23.772 c 0,-0.548 -0.4043,-0.9204 -0.952,-0.9204 l -33.357,0 z m 0.2539,9.7754 c -0.6845,0 -1.1742,0.5214 -1.1742,1.206 l 0,5.6177 c 0.2323,-0.046 0.4534,-0.064 0.6981,-0.064 l 8.3155,0 c 2.0466,0 3.745,1.6984 3.745,3.7452 l 0,4.6655 c 0,0.2448 -0.017,0.4657 -0.063,0.6982 l 8.5692,0 c 0.6848,0 1.2062,-0.4898 1.2062,-1.1743 l 0,-13.4888 c 0,-0.6846 -0.5214,-1.206 -1.2062,-1.206 l -20.0903,0 z m -0.4761,9.8071 c -0.4112,0 -0.6981,0.2867 -0.6981,0.6983 l 0,4.1894 c 0,0.1711 0.038,0.3339 0.095,0.4761 0.1133,0.2843 0.3187,0.4898 0.603,0.603 0.1422,0.057 0.305,0.095 0.4761,0.095 l 7.8394,0 c 0.4113,0 0.6982,-0.2868 0.6982,-0.6983 l 0,-4.6655 c 0,-0.4115 -0.2869,-0.6982 -0.6982,-0.6982 l -8.3155,0 z"
          style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#7373e7;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.99999976;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
          inkscape:connector-curvature="0" />
       <g
@@ -36529,12 +36431,12 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/volume_up.png"
          id="g10158"
-         transform="matrix(0.19544501,0,0,0.19544501,-2087.4704,3575.1487)"
+         transform="matrix(0.19544501,0,0,0.19544501,-2087.4704,3601.1487)"
          style="stroke-linecap:butt;stroke-linejoin:round">
         <polygon
            transform="matrix(1.7999664,0,0,1.7999664,-2148.071,3882.6899)"
            style="fill:#7373e7;fill-opacity:1;stroke:#7373e7;stroke-width:7.87192678;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-           points="21.989,47.699 39.389,62.75 39.389,13.769 39.389,13.769 22.235,28.606 6,28.606 6,47.699 "
+           points="39.389,13.769 22.235,28.606 6,28.606 6,47.699 21.989,47.699 39.389,62.75 39.389,13.769 "
            id="polygon10160" />
         <g
            id="g10162"
@@ -36562,12 +36464,12 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/volume_down.png"
          id="g10170"
-         transform="matrix(0.19544501,0,0,0.19544501,-2063.4692,3604.8947)"
+         transform="matrix(0.19544501,0,0,0.19544501,-2063.4692,3630.8947)"
          style="stroke-linecap:butt;stroke-linejoin:round">
         <polygon
            transform="matrix(1.7999664,0,0,1.7999664,-2270.8738,3882.6899)"
            id="polygon10172"
-           points="39.389,13.769 22.235,28.606 6,28.606 6,47.699 21.989,47.699 39.389,62.75 39.389,13.769 "
+           points="6,47.699 21.989,47.699 39.389,62.75 39.389,13.769 39.389,13.769 22.235,28.606 6,28.606 "
            style="fill:#7373e7;fill-opacity:1;stroke:#7373e7;stroke-width:7.87192678;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
         <path
            inkscape:connector-curvature="0"
@@ -36580,12 +36482,12 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/volume_mute.png"
          id="g10184"
-         transform="matrix(0.19544501,0,0,0.19544501,-2033.0635,3632.1407)"
+         transform="matrix(0.19544501,0,0,0.19544501,-2033.0635,3660.1407)"
          style="stroke-linecap:butt;stroke-linejoin:round">
         <polygon
            transform="matrix(1.7999664,0,0,1.7999664,-2426.4457,3882.6899)"
            style="fill:#7373e7;fill-opacity:1;stroke:#7373e7;stroke-width:7.87192678;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-           points="39.389,13.769 22.235,28.606 6,28.606 6,47.699 21.989,47.699 39.389,62.75 39.389,13.769 "
+           points="21.989,47.699 39.389,62.75 39.389,13.769 39.389,13.769 22.235,28.606 6,28.606 6,47.699 "
            id="polygon10186" />
         <g
            style="stroke-linecap:butt;stroke-linejoin:round"
@@ -36645,7 +36547,7 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/load_state.png"
          style="stroke-linecap:butt;stroke-linejoin:round"
-         transform="matrix(0.3077,0,0,0.3077,-1686.6435,3097.0362)"
+         transform="matrix(0.3077,0,0,0.3077,-1686.6435,3123.0362)"
          id="g10214">
         <path
            sodipodi:open="true"
@@ -36695,7 +36597,7 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/state_save.png"
          id="g10224"
-         transform="matrix(0.3077,0,0,0.3077,-1716.5228,3097.0362)"
+         transform="matrix(0.3077,0,0,0.3077,-1716.5228,3123.0362)"
          style="stroke-linecap:butt;stroke-linejoin:round">
         <path
            sodipodi:type="arc"
@@ -36744,7 +36646,7 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/quit.png"
          id="g10204"
-         transform="matrix(0,0.3077,-0.3077,0,-1305.3862,5183.5494)"
+         transform="matrix(0,0.3077,-0.3077,0,-1305.3862,5209.5494)"
          style="stroke-linecap:butt;stroke-linejoin:round">
         <path
            sodipodi:type="arc"
@@ -36848,7 +36750,7 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/reset.png"
          style="stroke-linecap:butt;stroke-linejoin:round"
-         transform="matrix(0.3077,0,0,0.3077,-1806.8009,3127.4786)"
+         transform="matrix(0.3077,0,0,0.3077,-1806.8009,3153.4786)"
          id="g10240">
         <path
            style="fill:none;stroke:#7373e7;stroke-width:9.00000477;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
@@ -36897,7 +36799,7 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/menu_off.png"
          id="g10176"
-         transform="matrix(0,-0.44444119,0.76192059,0,-5669.5632,3161.2564)"
+         transform="matrix(0,-0.44444119,0.76192059,0,-5669.5632,3187.2564)"
          style="stroke:#091322;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1">
         <path
            style="fill:none;stroke:#091322;stroke-width:6.87376976;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
@@ -37012,7 +36914,7 @@
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/screenshot.png"
-         transform="matrix(0.3077,0,0,0.3077,-1900.1634,3174.5821)"
+         transform="matrix(0.3077,0,0,0.3077,-1900.1634,3226.5821)"
          style="stroke-linecap:butt;stroke-linejoin:round"
          id="g10330">
         <path
@@ -37128,7 +37030,7 @@
       </g>
       <g
          style="stroke:#7373e7;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1"
-         transform="matrix(0,-0.44444119,0.76192059,0,-5699.4425,3161.2564)"
+         transform="matrix(0,-0.44444119,0.76192059,0,-5699.4425,3187.2564)"
          id="g10692"
          inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/menu_on.png"
          inkscape:export-xdpi="90"
@@ -37151,6 +37053,81 @@
            id="path10698"
            d="m -2543.5246,4179.6703 0,-20.9996"
            style="fill:none;stroke:#7373e7;stroke-width:6.87376976;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1" />
+      </g>
+      <g
+         id="g14816"
+         inkscape:export-filename="/home/arkanon/git/dipohlo/build/0.11.0/share/skins/dipohlo/icons/autopause-true.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <g
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/paused_on.png"
+           id="g14782"
+           transform="matrix(0.3077,0,0,0.3077,-1730.9076,2988.1678)"
+           style="stroke:#7373e7;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1">
+          <g
+             transform="translate(12.99213,-80.270235)"
+             id="g14786"
+             style="stroke:#7373e7;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1">
+            <path
+               style="fill:none;stroke:#7373e7;stroke-width:9.00000381;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
+               d="m -2595.7914,4293.8793 0,-20.9996"
+               id="path14788"
+               inkscape:connector-curvature="0"
+               sodipodi:nodetypes="cc" />
+            <path
+               sodipodi:nodetypes="cc"
+               inkscape:connector-curvature="0"
+               id="path14790"
+               d="m -2577.7914,4293.8793 0,-20.9996"
+               style="fill:none;stroke:#7373e7;stroke-width:9.00000381;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1" />
+          </g>
+        </g>
+        <g
+           inkscape:transform-center-y="-3.4179472"
+           inkscape:transform-center-x="-22.329327"
+           transform="matrix(-0.14631287,-0.16030896,0.16030896,-0.14631287,-3546.4322,4442.027)"
+           style="stroke-linecap:butt;stroke-linejoin:round"
+           id="g14806">
+          <path
+             style="fill:none;stroke:#7373e7;stroke-width:9.00000477;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
+             d="m -2620.5488,3925.2438 0,27.1766"
+             id="path14808"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cc" />
+          <path
+             transform="matrix(0.09799688,0.00980179,0.00512831,-0.1723943,-2637.2798,4153.5696)"
+             inkscape:transform-center-y="-12.464667"
+             inkscape:transform-center-x="4.5404146"
+             d="m 27.184463,1251.8115 42.703125,-65.1887 42.703122,-65.1886 35.10346,69.5763 35.10346,69.5763 -77.80658,-4.3877 z"
+             inkscape:randomized="0"
+             inkscape:rounded="0"
+             inkscape:flatsided="false"
+             sodipodi:arg2="3.7215238"
+             sodipodi:arg1="2.6743262"
+             sodipodi:r2="44.993023"
+             sodipodi:r1="89.986046"
+             sodipodi:cy="1211.2775"
+             sodipodi:cx="107.52427"
+             sodipodi:sides="3"
+             id="path14810"
+             style="fill:#7373e7;fill-opacity:1;stroke:#7373e7;stroke-width:40.25508118;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             sodipodi:type="star" />
+        </g>
+      </g>
+      <g
+         style="stroke-linecap:butt;stroke-linejoin:round"
+         transform="matrix(0.19544501,0,0,0.19544501,-2061.0635,3660.1407)"
+         id="g14857"
+         inkscape:export-filename="/home/arkanon/git/dipohlo/data/arte/skin/icons/volume_mute.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <polygon
+           id="polygon14859"
+           points="39.389,13.769 22.235,28.606 6,28.606 6,47.699 21.989,47.699 39.389,62.75 39.389,13.769 "
+           style="fill:#7373e7;fill-opacity:1;stroke:#7373e7;stroke-width:7.87192678;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           transform="matrix(1.7999664,0,0,1.7999664,-2426.4457,3882.6899)" />
       </g>
     </g>
     <g
