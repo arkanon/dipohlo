@@ -5,19 +5,28 @@
 <head>
   <meta charset="UTF-8">
   <title>jsDOSBox</title>
-  <link type="text/css" rel="stylesheet" href="styles.css">
-  <script type="text/javascript" language="javascript" src="scripts/jsdosbox.nocache.js"></script>
+  <link   type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="scripts/jsdosbox.nocache.js"></script>
 </head>
 
 <body>
+
   <noscript><div>Your web browser must have JavaScript enabled in order for this application to display correctly.</div></noscript>
-  <input id="autorun"    type="hidden" value="apps/fmsx.zip -t zip !c:!fmsx-dos.exe" />
-  <input id="frameskip"  type="hidden" value="1"     />
-  <input id="nosound"    type="hidden" value="false" />
-  <input id="sbtype"     type="hidden" value="sb2"   />
-  <input id="override"   type="hidden" value="true"  />
-  <input id="cycles"     type="hidden" value="fixed" />
-  <input id="cyclelimit" type="hidden" value="7000"  />
+
+<!--
+  <input id="autorun"         type="hidden" value="apps/hotlogo.zip -t zip !c:!fmsx-dos.exe" >
+-->
+  <input id="autorun"         type="hidden" value="apps/hotlogo.raw        !c:!fmsx-dos.exe" >
+
+  <input id="frameskip"       type="hidden" value="1"      >
+  <input id="verbose"         type="hidden" value="true"   >
+  <input id="nosound"         type="hidden" value="false"  >
+  <input id="sbtype"          type="hidden" value="sb2"    >
+  <input id="override"        type="hidden" value="true"   >
+  <input id="cycles"          type="hidden" value="fixed"  >
+  <input id="cyclelimit"      type="hidden" value="7000"   >
+  <input id="backgroundcolor" type="hidden" value="999999" >
+
 </body>
 
 </html>

@@ -1,13 +1,4 @@
 
-h1
-{
-  font-size: 2em;
-  font-weight: bold;
-  color: #777777;
-  margin: 40px 0px 70px;
-  text-align: center;
-}
-
 .sendButton
 {
   display: block;
@@ -32,5 +23,10 @@ h1
 #closeButton
 {
   margin: 15px 6px 6px;
+}
+
+#credits
+{
+  margin-right: 30px;
 }
 
