@@ -4,6 +4,7 @@
 
 <!--
 
+     2016/09/11 20:04:50
      2016/09/11 00:54:00
      2016/09/01 23:29:41
      2016/09/01 04:47:00
@@ -11,6 +12,8 @@
      http://jsbeautifier.org
      http://dopiaza.org/tools/datauri
      file:///media/arkanon/backup-export/projetos/___arkanon/git/meus/dipohlo/wmsx.html?STATE_URL=/media/arkanon/backup-export/projetos/___arkanon/git/meus/dipohlo/webmsx-hotlogo.wst
+
+     goTo: sendCmd
 
 -->
 
@@ -37,11 +40,31 @@
       margin: auto;
     }
 
+    #cmd-block
+    {
+      float: left;
+    }
+
+    #cmd-block textarea
+    {
+      border: 0 solid black;
+      margin: 0;
+    }
+
   </style>
+
+  <script>
+
+  </script>
 
 </head>
 
 <body>
+
+  <!-- sendCmd -->
+  <div id="cmd-block">
+    <textarea id="cmd-area"></textarea><br>
+  </div>
 
   <div id="wmsx-screen"></div>
 
@@ -77,7 +100,7 @@
              BASIC_RUN                    : "",
              BASIC_LOAD                   : "",
              BASIC_ENTER                  : "",
-             BASIC_TYPE                   : "arquivos\rcarregue \"",
+             BASIC_TYPE                   : "arquivos\rcarregue \"", // document.getElementById('cmd-area').value,
 
              // Extensions
              EXTENSIONS                   : {},
@@ -8733,10 +8756,14 @@
       this.connectVDP = function(a, b, c, d)
       {
         vdp = a, vram = b, register = c, status = d
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         STOP()
-      }, this.startCommand = function(a)
+      },
+
+      this.startCommand = function(a)
       {
         switch (240 & a)
         {
@@ -8779,13 +8806,19 @@
           case 0:
             STOP()
         }
-      }, this.cpuWrite = function(a)
+      },
+
+      this.cpuWrite = function(a)
       {
         writeHandler ? writeHandler(a) : (writeReady = !0, TR = 0)
-      }, this.cpuRead = function()
+      },
+
+      this.cpuRead = function()
       {
         readHandler ? readHandler() : TR = 0
-      }, this.updateStatus = function()
+      },
+
+      this.updateStatus = function()
       {
         if (CE & finishingCycle > 0)
         {
@@ -8793,7 +8826,9 @@
           a >= finishingCycle && finish()
         }
         status[2] = -130 & status[2] | TR << 7 | CE
-      }, this.setVDPModeData = function(a)
+      },
+
+      this.setVDPModeData = function(a)
       {
         modeData = a, modeWidth = modeData.width, modePPB = modeData.ppb || 1, modePPBShift = modePPB >> 1, modePPBMask = -1 << modePPBShift, layoutLineBytes = modeData.layLineBytes || 256
       };
@@ -8834,38 +8869,58 @@
           LOP: LOP,
           dp: destPos
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         CE = a.ce, TR = a.tr, writeReady = a.wr, writeHandler = COMMAND_HANDLERS[a.wh], readHandler = COMMAND_HANDLERS[a.rh], finishingCycle = a.fc, SX = a.SX, SY = a.SY, DX = a.DX, DY = a.DY, NX = a.NX, NY = a.NY, ENY = a.ENY, DIX = a.DIX, DIY = a.DIY, CX = a.CX, CY = a.CY, LOP = a.LOP, destPos = a.dp
-      }, this.eval = function(str)
+      },
+
+      this.eval = function(str)
       {
         return eval(str)
       }
-    }, wmsx.VideoSignal = function(a)
+    },
+
+    wmsx.VideoSignal = function(a)
     {
       "use strict";
       this.connectMonitor = function(a)
       {
         b = a
-      }, this.newFrame = function(a, c, d)
+      },
+
+      this.newFrame = function(a, c, d)
       {
         b.newFrame(a, c, d)
-      }, this.signalOff = function()
+      },
+
+      this.signalOff = function()
       {
         b && b.signalOff()
-      }, this.showOSD = function(a, c, d)
+      },
+
+      this.showOSD = function(a, c, d)
       {
         b && b.showOSD(a, c, d)
-      }, this.setDisplayMetrics = function(a, c)
+      },
+
+      this.setDisplayMetrics = function(a, c)
       {
         b && b.setDisplayMetrics(a, c)
-      }, this.setPixelMetrics = function(a, c)
+      },
+
+      this.setPixelMetrics = function(a, c)
       {
         b && b.setPixelMetrics(a, c)
-      }, this.setDebugMode = function(a)
+      },
+
+      this.setDebugMode = function(a)
       {
         b && b.setDebugMode(a)
-      }, this.getScreenText = function()
+      },
+
+      this.getScreenText = function()
       {
         return a.getScreenText()
       };
@@ -8985,22 +9040,34 @@
       this.connectBus = function(a)
       {
         a.connectInputDevice(160, wmsx.DeviceMissing.inputPortIgnored), a.connectOutputDevice(160, this.outputA0), a.connectInputDevice(161, wmsx.DeviceMissing.inputPortIgnored), a.connectOutputDevice(161, this.outputA1), a.connectInputDevice(162, this.inputA2), a.connectOutputDevice(162, wmsx.DeviceMissing.outputPortIgnored)
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         audioChannel.powerOn(), register[15] = 15
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         audioChannel.powerOff()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         audioChannel.reset()
-      }, this.getAudioChannel = function()
+      },
+
+      this.getAudioChannel = function()
       {
         return audioChannel
-      }, this.outputA0 = function(a)
+      },
+
+      this.outputA0 = function(a)
       {
         registerAddress = a > 15 ? 0 : a
-      }, this.outputA1 = function(a)
+      },
+
+      this.outputA1 = function(a)
       {
         switch (register[registerAddress] = a, registerAddress)
         {
@@ -9041,7 +9108,9 @@
           case 15:
             controllersSocket.writePin8ControllerPort(0, (16 & a) >> 4), controllersSocket.writePin8ControllerPort(1, (32 & a) >> 5)
         }
-      }, this.inputA2 = function()
+      },
+
+      this.inputA2 = function()
       {
         if (14 !== registerAddress) return register[registerAddress];
         var a = register[15] >> 6 & 1;
@@ -9057,10 +9126,14 @@
           r: wmsx.Util.storeInt8BitArrayToStringBase64(register),
           ac: audioChannel.saveState()
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         registerAddress = a.ra, register = wmsx.Util.restoreStringBase64ToInt8BitArray(a.r, register), audioChannel.loadState(a.ac)
-      }, this.eval = function(str)
+      },
+
+      this.eval = function(str)
       {
         return eval(str)
       }
@@ -9116,28 +9189,40 @@
       this.audioClockPulse = null, this.flush = function()
       {
         m = 0, n = 0
-      }, this.setFps = function(a)
+      },
+
+      this.setFps = function(a)
       {
         k = (c / a | 0) + q, k > p && (k = p)
-      }, this.audioFinishFrame = function()
+      },
+
+      this.audioFinishFrame = function()
       {
         var a = k - o;
         if (a > 0)
           for (var b = a; b > 0; b -= 1) h();
         o = 0
-      }, this.retrieveSamples = function(a, b)
+      },
+
+      this.retrieveSamples = function(a, b)
       {
         var c = m >= n ? a - (m - n) : a - (p - n + m);
         c > 0 && j(c, b);
         var d = n + a;
         return d >= p && (d -= p), s.start = n, n = d, s
-      }, this.getSampleRate = function()
+      },
+
+      this.getSampleRate = function()
       {
         return c
-      }, this.toString = function()
+      },
+
+      this.toString = function()
       {
         return "AudioSignal " + a
-      }, this.name = a;
+      },
+
+      this.name = a;
       var k, l = 9,
         m = 0,
         n = 0,
@@ -9195,46 +9280,74 @@
       this.powerOn = function()
       {
         this.reset(), c()
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         d()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         this.setMixerControl(255), this.setAmplitudeA(0), this.setAmplitudeB(0), this.setAmplitudeC(0), Q = !1
-      }, this.nextSample = function()
+      },
+
+      this.nextSample = function()
       {
         return k > 0 && (l += 2, l >= k && (l = l - k & 1, m = m ? 0 : 1)), r > 0 && (s += 2, s >= r && (s = s - r & 1, t = t ? 0 : 1)), y > 0 && (z += 2, z >= y && (z = z - y & 1, A = A ? 0 : 1)), (p || w || D) && (G += 1, G >= F && (G = 0, H = g())), 0 !== L && (J += 1, J >= I && (J = 0, K += L, (0 > K || K > 15) && (M ? e(O, P) : (N = !0, e(!0, !0))), f())), (0 === n || o && !m || p && !H ? 0 : n) + (0 === u || v && !t || w && !H ? 0 : u) + (0 === B || C && !A || D && !H ? 0 : B) + (Q ? T : 0)
-      }, this.setPeriodA = function(a)
+      },
+
+      this.setPeriodA = function(a)
       {
         k !== a && (2 > a ? (k = 0, m = 1) : k = a)
-      }, this.setPeriodB = function(a)
+      },
+
+      this.setPeriodB = function(a)
       {
         r !== a && (2 > a ? (r = 0, t = 1) : r = a)
-      }, this.setPeriodC = function(a)
+      },
+
+      this.setPeriodC = function(a)
       {
         y !== a && (2 > a ? (y = 0, A = 1) : y = a)
-      }, this.setPeriodN = function(a)
+      },
+
+      this.setPeriodN = function(a)
       {
         F !== a && (F = 1 > a ? 1 : a)
-      }, this.setPeriodE = function(a)
+      },
+
+      this.setPeriodE = function(a)
       {
         I !== a && (I = 1 > a ? 1 : a)
-      }, this.setAmplitudeA = function(a)
+      },
+
+      this.setAmplitudeA = function(a)
       {
         16 & a ? (q = !0, n = S[K]) : (q = !1, n = S[15 & a])
-      }, this.setAmplitudeB = function(a)
+      },
+
+      this.setAmplitudeB = function(a)
       {
         16 & a ? (x = !0, u = S[K]) : (x = !1, u = S[15 & a])
-      }, this.setAmplitudeC = function(a)
+      },
+
+      this.setAmplitudeC = function(a)
       {
         16 & a ? (E = !0, B = S[K]) : (E = !1, B = S[15 & a])
-      }, this.setMixerControl = function(a)
+      },
+
+      this.setMixerControl = function(a)
       {
         o = 0 === (1 & a), p = 0 === (8 & a), v = 0 === (2 & a), w = 0 === (16 & a), C = 0 === (4 & a), D = 0 === (32 & a)
-      }, this.setEnvelopeControl = function(a)
+      },
+
+      this.setEnvelopeControl = function(a)
       {
         M = (8 & a) > 0, N = (4 & a) > 0, O = (2 & a) > 0, P = (1 & a) > 0, e(!1, !1), f()
-      }, this.setPulseSignal = function(a)
+      },
+
+      this.setPulseSignal = function(a)
       {
         Q = a
       };
@@ -9315,7 +9428,9 @@
           ps: Q,
           lf: R
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         k = a.pa, l = a.pac, m = a.ca, n = a.aa, o = a.ta, p = a.na, q = a.ea, r = a.pb, s = a.pbc, t = a.cb, u = a.ab, v = a.tb, w = a.nb, x = a.eb, y = a.pc, z = a.pcc, A = a.cc, B = a.ac, C = a.tc, D = a.nc, E = a.ec, F = a.pn, G = a.pnc, H = a.cn, I = a.pe, J = a.pec, K = a.ce, L = a.de, M = a.cne, N = a.ate, O = a.ale, P = a.he, Q = a.ps, R = a.lf
       }, b()
@@ -9327,19 +9442,29 @@
       this.setAudioSocket = function(a)
       {
         c = a
-      }, this.connectAudio = function()
+      },
+
+      this.connectAudio = function()
       {
         b || (b = new wmsx.AudioSignal("PCM 8 bit", this, f, e)), c && c.connectAudioSignal(b)
-      }, this.disconnectAudio = function()
+      },
+
+      this.disconnectAudio = function()
       {
         b && c && c.disconnectAudioSignal(b)
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         a = 0
-      }, this.setSampleValue = function(b)
+      },
+
+      this.setSampleValue = function(b)
       {
         a = b - 128
-      }, this.nextSample = function()
+      },
+
+      this.nextSample = function()
       {
         return a * d
       };
@@ -9351,7 +9476,9 @@
         return {
           s: a
         }
-      }, this.loadState = function(b)
+      },
+
+      this.loadState = function(b)
       {
         a = b.s
       }
@@ -10627,10 +10754,14 @@
       {
         b = void 0 !== a && null !== a ? a.toString() : null, b && (b = b.replace(/\r\n/g, "\r")
           .replace(/\n/g, "\r")), c = 0
-      }, this.cancelTypeString = function()
+      },
+
+      this.cancelTypeString = function()
       {
         b = null, c = 0
-      }, this.keyboardExtensionClockPulse = function()
+      },
+
+      this.keyboardExtensionClockPulse = function()
       {
         if (b)
         {
@@ -10817,13 +10948,19 @@
       {
         n = c.getDiskDriveSocket()
           .getDrive(), o = c.bus, a(b)
-      }, this.disconnect = function(a, b)
+      },
+
+      this.disconnect = function(a, b)
       {
         n.allMotorsOff()
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         n.allMotorsOff()
-      }, this.cpuExtensionBegin = function(a)
+      },
+
+      this.cpuExtensionBegin = function(a)
       {
         switch (a.extNum)
         {
@@ -10844,7 +10981,9 @@
           case 15:
             return k()
         }
-      }, this.cpuExtensionFinish = function(a)
+      },
+
+      this.cpuExtensionFinish = function(a)
       {
         n.allMotorsOff()
       };
@@ -10870,7 +11009,9 @@
     wmsx.ROM.loadState = function(a)
     {
       return new wmsx.ROM(a.s, null, a.i)
-    }, wmsx.ROMDatabase = {
+    },
+
+    wmsx.ROMDatabase = {
       uncompress: function()
       {
         wmsx.ROMDatabase = JSON.parse(wmsx.Util.uncompressStringBase64ToString(this.data))
@@ -11467,13 +11608,19 @@
       this.connect = function(a) {}, this.disconnect = function(a) {}, this.getDataDesc = function() {}, this.loadData = function(a, b) {}, this.getDataToSave = function() {}, this.powerOn = function(a) {}, this.powerOff = function() {}, this.reset = function() {}, this.read = function(a)
       {
         return 255
-      }, this.write = function(a, b) {}, this.cpuExtensionBegin = function(a) {}, this.cpuExtensionFinish = function(a) {}, this.isExpanded = function()
+      },
+
+      this.write = function(a, b) {}, this.cpuExtensionBegin = function(a) {}, this.cpuExtensionFinish = function(a) {}, this.isExpanded = function()
       {
         return !1
-      }, this.dumpBytes = function(a, b, c)
+      },
+
+      this.dumpBytes = function(a, b, c)
       {
         wmsx.Util.dump(this.bytes, a, b, c)
-      }, this.dumpRead = function(a, b, c)
+      },
+
+      this.dumpRead = function(a, b, c)
       {
         var d = "",
           e = a || 0;
@@ -11489,13 +11636,17 @@
         }
         console.log(d)
       }
-    }, wmsx.Slot.base = new wmsx.Slot, wmsx.SlotEmpty = {}, wmsx.SlotEmpty.impl = function()
+    },
+
+    wmsx.Slot.base = new wmsx.Slot, wmsx.SlotEmpty = {}, wmsx.SlotEmpty.impl = function()
     {
       "use strict";
       this.read = function(a)
       {
         return 255
-      }, this.rom = new wmsx.ROM("EMPTY", [],
+      },
+
+      this.rom = new wmsx.ROM("EMPTY", [],
       {
         n: "EMPTY",
         h: "",
@@ -11506,7 +11657,9 @@
           f: this.format.name
         }
       }
-    }, wmsx.SlotEmpty.impl.prototype = wmsx.Slot.base, wmsx.SlotEmpty.singleton = new wmsx.SlotEmpty.impl, wmsx.SlotExpanded = function()
+    },
+
+    wmsx.SlotEmpty.impl.prototype = wmsx.Slot.base, wmsx.SlotEmpty.singleton = new wmsx.SlotEmpty.impl, wmsx.SlotExpanded = function()
     {
       "use strict";
 
@@ -11903,13 +12056,17 @@
           b: wmsx.Util.compressInt8BitArrayToStringBase64(e),
           ba: f
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.format = wmsx.SlotFormats[a.f], this.rom = wmsx.ROM.loadState(a.r), e = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, e), this.bytes = e, f = a.ba, g = f + e.length, h = e.length - 1, i = this.format === wmsx.SlotFormats.Mirrored
       }, a && c(this)
     },
 
-    wmsx.SlotNormal.prototype = wmsx.Slot.base, wmsx.SlotNormal.recreateFromSaveState = function(a, b)
+    wmsx.SlotNormal.prototype = wmsx.Slot.base,
+
+    wmsx.SlotNormal.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.SlotNormal;
       return c.loadState(a), c
@@ -11917,40 +12074,63 @@
 
     wmsx.SlotRAM64K = function(a)
     {
+
       "use strict";
 
       function b(b)
       {
         b.rom = a, c = wmsx.Util.arrayFill(new Array(65536), 0), b.bytes = c
       }
+
       this.powerOff = function()
       {
         wmsx.Util.arrayFill(c, 0)
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return c[a]
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         c[a] = b
       };
+
       var c;
-      this.bytes = null, this.rom = null, this.format = wmsx.SlotFormats.RAMNormal, this.saveState = function()
+      this.bytes = null,
+      this.rom = null,
+      this.format = wmsx.SlotFormats.RAMNormal,
+
+      this.saveState = function()
       {
         return {
-          f: this.format.name,
-          r: this.rom.saveState(),
-          b: wmsx.Util.compressInt8BitArrayToStringBase64(c)
-        }
-      }, this.loadState = function(a)
+                 f: this.format.name,
+                 r: this.rom.saveState(),
+                 b: wmsx.Util.compressInt8BitArrayToStringBase64(c)
+               }
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c
-      }, a && b(this)
-    }, wmsx.SlotRAM64K.prototype = wmsx.Slot.base, wmsx.SlotRAM64K.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.SlotRAM64K.prototype = wmsx.Slot.base,
+
+    wmsx.SlotRAM64K.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.SlotRAM64K;
       return c.loadState(a), c
-    }, wmsx.SlotRAMMapper = function(rom)
+    },
+
+    wmsx.SlotRAMMapper = function(rom)
     {
+
       "use strict";
 
       function init(a)
@@ -11960,31 +12140,48 @@
         var c = VALID_SIZES[b];
         bytes = wmsx.Util.arrayFill(new Array(1024 * c), 0), a.bytes = bytes, pageMask = (bytes.length >> 14) - 1
       }
+
       this.connect = function(a)
       {
         a.bus.connectInputDevice(252, this.inputAll), a.bus.connectInputDevice(253, this.inputAll), a.bus.connectInputDevice(254, this.inputAll), a.bus.connectInputDevice(255, this.inputAll), a.bus.connectOutputDevice(252, this.outputFC), a.bus.connectOutputDevice(253, this.outputFD), a.bus.connectOutputDevice(254, this.outputFE), a.bus.connectOutputDevice(255, this.outputFF)
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         a.bus.disconnectInputDevice(252, this.inputAll), a.bus.disconnectInputDevice(253, this.inputAll), a.bus.disconnectInputDevice(254, this.inputAll), a.bus.disconnectInputDevice(255, this.inputAll), a.bus.disconnectOutputDevice(252, this.outputFC), a.bus.disconnectOutputDevice(253, this.outputFD), a.bus.disconnectOutputDevice(254, this.outputFE), a.bus.disconnectOutputDevice(255, this.outputFF)
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         wmsx.Util.arrayFill(bytes, 0)
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         page0Offset = page1Offset = page2Offset = page3Offset = 0
-      }, this.outputFC = function(a)
+      },
+
+      this.outputFC = function(a)
       {
         page0Offset = (a & pageMask) << 14
-      }, this.outputFD = function(a)
+      },
+
+      this.outputFD = function(a)
       {
         page1Offset = ((a & pageMask) << 14) - 16384
-      }, this.outputFE = function(a)
+      },
+
+      this.outputFE = function(a)
       {
         page2Offset = ((a & pageMask) << 14) - 32768
-      }, this.outputFF = function(a)
+      },
+
+      this.outputFF = function(a)
       {
         page3Offset = ((a & pageMask) << 14) - 49152
-      }, this.inputAll = function(a)
+      },
+
+      this.inputAll = function(a)
       {
         switch (255 & a)
         {
@@ -11997,7 +12194,9 @@
           case 255:
             return page3Offset + 49152 >> 14
         }
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         switch (49152 & a)
         {
@@ -12010,7 +12209,9 @@
           case 49152:
             return bytes[a + page3Offset]
         }
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         switch (49152 & a)
         {
@@ -12024,10 +12225,11 @@
             return void(bytes[a + page3Offset] = b)
         }
       };
-      var page0Offset, page1Offset, page2Offset, page3Offset, pageMask = 0,
-        bytes;
+
+      var page0Offset, page1Offset, page2Offset, page3Offset, pageMask = 0, bytes;
       this.bytes = null, this.rom = null, this.format = wmsx.SlotFormats.RAMMapper;
       var VALID_SIZES = [64, 128, 256, 512, 1024, 2048, 4096];
+
       this.saveState = function()
       {
         return {
@@ -12039,55 +12241,89 @@
           p2: page2Offset,
           p3: page3Offset
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), bytes = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, bytes), this.bytes = bytes, pageMask = (bytes.length >> 14) - 1, page0Offset = a.p0, page1Offset = a.p1, page2Offset = a.p2, page3Offset = a.p3
-      }, rom && init(this), this.eval = function(str)
+      },
+
+      rom && init(this), this.eval = function(str)
       {
         return eval(str)
       }
-    }, wmsx.SlotRAMMapper.prototype = wmsx.Slot.base, wmsx.SlotRAMMapper.recreateFromSaveState = function(a, b)
+
+    },
+
+    wmsx.SlotRAMMapper.prototype = wmsx.Slot.base,
+
+    wmsx.SlotRAMMapper.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.SlotRAMMapper;
       return c.loadState(a), c
-    }, wmsx.SlotBIOS = function(a)
+    },
+
+    wmsx.SlotBIOS = function(a)
     {
+
       "use strict";
 
       function b(b)
       {
         b.rom = a, c = new Array(32768), wmsx.Util.arrayCopy(a.content, 0, c), wmsx.Util.arrayFill(c, 255, a.content.length), b.bytes = c, b.originalVideoStandard = 0 === (128 & c[43]) ? wmsx.VideoStandard.NTSC : wmsx.VideoStandard.PAL
       }
+
       this.connect = function(a)
       {
         e = new wmsx.BIOSKeyboardExtension(a.bus), d = new wmsx.ImageCassetteDriver, d.connect(this, a), a.setBIOS(this)
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         d && d.disconnect(this, a), a.setBIOS(null)
-      }, this.getKeyboardExtension = function()
+      },
+
+      this.getKeyboardExtension = function()
       {
         return e
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         d && d.powerOff()
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return 32768 > a ? c[a] : 255
-      }, this.cpuExtensionBegin = function(a)
+      },
+
+      this.cpuExtensionBegin = function(a)
       {
         return d.cpuExtensionBegin(a)
-      }, this.cpuExtensionFinish = function(a)
+      },
+
+      this.cpuExtensionFinish = function(a)
       {
         return d.cpuExtensionFinish(a)
-      }, this.setVideoStandardForced = function(a)
+      },
+
+      this.setVideoStandardForced = function(a)
       {
         a === wmsx.VideoStandard.PAL ? c[43] |= 128 : c[43] &= -129
-      }, this.setVideoStandardUseOriginal = function()
+      },
+
+      this.setVideoStandardUseOriginal = function()
       {
         this.originalVideoStandard === wmsx.VideoStandard.PAL ? c[43] |= 128 : c[43] &= -129
       };
+
       var c;
-      this.bytes = null, this.rom = null, this.format = wmsx.SlotFormats.BIOS, this.originalVideoStandard = null, this.saveState = function()
+      this.bytes = null, this.rom = null,
+      this.format = wmsx.SlotFormats.BIOS,
+      this.originalVideoStandard = null,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -12095,47 +12331,73 @@
           v: this.originalVideoStandard.name,
           b: wmsx.Util.compressInt8BitArrayToStringBase64(c)
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), this.originalVideoStandard = wmsx.VideoStandard[a.v], c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c
       };
+
       var d, e;
+
       a && b(this)
-    }, wmsx.SlotBIOS.prototype = wmsx.Slot.base, wmsx.SlotBIOS.recreateFromSaveState = function(a, b)
+
+    },
+
+    wmsx.SlotBIOS.prototype = wmsx.Slot.base,
+
+    wmsx.SlotBIOS.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.SlotBIOS;
       return c.loadState(a), c
-    }, wmsx.SlotMSX2BIOSExt = function(a)
+    },
+
+    wmsx.SlotMSX2BIOSExt = function(a)
     {
+
       "use strict";
 
       function b(b)
       {
         b.rom = a, c = wmsx.Util.asNormalArray(a.content), b.bytes = c, d = c.length
       }
+
       this.read = function(a)
       {
         return d > a ? c[a] : 255
       };
+
       var c;
       this.bytes = null;
       var d;
-      this.rom = null, this.format = wmsx.SlotFormats.MSX2BIOSExt, this.saveState = function()
+      this.rom = null,
+      this.format = wmsx.SlotFormats.MSX2BIOSExt,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
           r: this.rom.saveState(),
           b: wmsx.Util.compressInt8BitArrayToStringBase64(c)
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d = c.length
-      }, a && b(this)
-    }, wmsx.SlotMSX2BIOSExt.prototype = wmsx.Slot.base, wmsx.SlotMSX2BIOSExt.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.SlotMSX2BIOSExt.prototype = wmsx.Slot.base, wmsx.SlotMSX2BIOSExt.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.SlotMSX2BIOSExt;
       return c.loadState(a), c
-    }, wmsx.CartridgeASCII8K = function(a)
+    },
+
+    wmsx.CartridgeASCII8K = function(a)
     {
       "use strict";
 
@@ -12143,16 +12405,23 @@
       {
         b.rom = a, c = wmsx.Util.asNormalArray(a.content), b.bytes = c, h = c.length / 8192 | 0
       }
+
       this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d = -16384, e = -24576, f = -32768, g = -40960
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         return 24576 > a ? void 0 : 26624 > a ? void(d = (b % h << 13) - 16384) : 28672 > a ? void(e = (b % h << 13) - 24576) : 30720 > a ? void(f = (b % h << 13) - 32768) : void(32768 > a && (g = (b % h << 13) - 40960))
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         switch (57344 & a)
         {
@@ -12168,10 +12437,14 @@
             return 255
         }
       };
+
       var c;
       this.bytes = null;
       var d, e, f, g, h;
-      this.rom = null, this.format = wmsx.SlotFormats.ASCII8, this.saveState = function()
+      this.rom = null,
+      this.format = wmsx.SlotFormats.ASCII8,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -12183,15 +12456,26 @@
           b4: g,
           n: h
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d = a.b1, e = a.b2, f = a.b3, g = a.b4, h = a.n
-      }, a && b(this)
-    }, wmsx.CartridgeASCII8K.prototype = wmsx.Slot.base, wmsx.CartridgeASCII8K.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgeASCII8K.prototype = wmsx.Slot.base,
+
+    wmsx.CartridgeASCII8K.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeASCII8K;
       return c.loadState(a), c
-    }, wmsx.CartridgeASCII16K = function(a, b)
+    },
+
+    wmsx.CartridgeASCII16K = function(a, b)
     {
       "use strict";
 
@@ -12204,23 +12488,34 @@
       {
         a === wmsx.SlotFormats.MSXWrite ? (i = 28671, j = 32767) : (i = -1, j = -1)
       }
+
       this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         f = -16384, g = -32768
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         return a >= 24576 && 26624 > a || a === i ? void(f = (b % h << 14) - 16384) : void((a >= 28672 && 30720 > a || a === j) && (g = (b % h << 14) - 32768))
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return 16384 > a ? 255 : 32768 > a ? e[f + a] : 49152 > a ? e[g + a] : 255
       };
+
       var e;
       this.bytes = null;
       var f, g, h, i, j;
-      this.rom = null, this.format = b, this.saveState = function()
+      this.rom = null,
+      this.format = b,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -12230,15 +12525,26 @@
           b2: g,
           n: h
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.format = wmsx.SlotFormats[a.f], this.rom = wmsx.ROM.loadState(a.r), e = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, e), this.bytes = e, f = a.b1, g = a.b2, h = a.n, d(this.format)
-      }, a && c(this)
-    }, wmsx.CartridgeASCII16K.prototype = wmsx.Slot.base, wmsx.CartridgeASCII16K.recreateFromSaveState = function(a, b)
+      },
+
+      a && c(this)
+
+    },
+
+    wmsx.CartridgeASCII16K.prototype = wmsx.Slot.base,
+
+    wmsx.CartridgeASCII16K.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeASCII16K;
       return c.loadState(a), c
-    }, wmsx.CartridgeKonami = function(a)
+    },
+
+    wmsx.CartridgeKonami = function(a)
     {
       "use strict";
 
@@ -12246,16 +12552,23 @@
       {
         b.rom = a, c = wmsx.Util.asNormalArray(a.content), b.bytes = c, g = c.length / 8192 | 0
       }
+
       this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d = e = f = -16384
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         a >= 24576 && 32767 > a ? d = (b % g << 13) - 24576 : a >= 32768 && 40959 > a ? e = (b % g << 13) - 32768 : a >= 40960 && 49151 > a && (f = (b % g << 13) - 40960)
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         switch (57344 & a)
         {
@@ -12271,6 +12584,7 @@
             return 255
         }
       };
+
       var c;
       this.bytes = null;
       var d, e, f, g;
@@ -12285,15 +12599,26 @@
           b4: f,
           n: g
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d = a.b2, e = a.b3, f = a.b4, g = a.n
-      }, a && b(this)
-    }, wmsx.CartridgeKonami.prototype = wmsx.Slot.base, wmsx.CartridgeKonami.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgeKonami.prototype = wmsx.Slot.base,
+
+    wmsx.CartridgeKonami.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeKonami;
       return c.loadState(a), c
-    }, wmsx.CartridgeRType = function(a)
+    },
+
+    wmsx.CartridgeRType = function(a)
     {
       "use strict";
 
@@ -12301,23 +12626,34 @@
       {
         b.rom = a, c = wmsx.Util.asNormalArray(a.content), b.bytes = c
       }
+
       this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d = -32768
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         a >= 28672 && 32768 > a && (d = (b % 24 << 14) - 32768)
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return 16384 > a ? 255 : 32768 > a ? c[229376 + a] : 49152 > a ? c[d + a] : 255
       };
+
       var c;
       this.bytes = null;
       var d;
-      this.rom = null, this.format = wmsx.SlotFormats.RType, this.saveState = function()
+      this.rom = null,
+      this.format = wmsx.SlotFormats.RType,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -12325,37 +12661,59 @@
           b: wmsx.Util.compressInt8BitArrayToStringBase64(c),
           b2: d
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d = a.b2
-      }, a && b(this)
-    }, wmsx.CartridgeRType.prototype = wmsx.Slot.base, wmsx.CartridgeRType.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgeRType.prototype = wmsx.Slot.base,
+
+    wmsx.CartridgeRType.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeRType;
       return c.loadState(a), c
-    }, wmsx.CartridgeCrossBlaim = function(a)
+    },
+
+    wmsx.CartridgeCrossBlaim = function(a)
     {
       function b(b)
       {
         b.rom = a, c = wmsx.Util.asNormalArray(a.content), b.bytes = c
       }
+
       this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d = -16384
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         16453 === a && (d = ((3 & b) << 14) - 32768)
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return 16384 > a ? 255 : 32768 > a ? c[a - 16384] : 49152 > a ? c[d + a] : 255
       };
+
       var c;
       this.bytes = null;
       var d;
-      this.rom = null, this.format = wmsx.SlotFormats.CrossBlaim, this.saveState = function()
+      this.rom = null,
+      this.format = wmsx.SlotFormats.CrossBlaim,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -12363,47 +12721,73 @@
           b: wmsx.Util.compressInt8BitArrayToStringBase64(c),
           b1: d
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d = a.b1
-      }, a && b(this)
-    }, wmsx.CartridgeCrossBlaim.prototype = wmsx.Slot.base, wmsx.CartridgeCrossBlaim.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgeCrossBlaim.prototype = wmsx.Slot.base,
+
+    wmsx.CartridgeCrossBlaim.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeCrossBlaim;
       return c.loadState(a), c
-    }, wmsx.CartridgeDOS2 = function(a)
+    },
+
+    wmsx.CartridgeDOS2 = function(a)
     {
       "use strict";
 
       function b(b)
       {
-        b.rom = a, c = wmsx.Util.asNormalArray(a.content), b.bytes = c
+        b.rom   = a,
+        c       = wmsx.Util.asNormalArray(a.content),
+        b.bytes = c
       }
+
       this.connect = function(a)
       {
-        a.getDiskDriveSocket()
-          .dos2CartridgeConnected(this)
-      }, this.disconnect = function(a)
+        a.getDiskDriveSocket().dos2CartridgeConnected(this)
+      },
+
+      this.disconnect = function(a)
       {
-        a.getDiskDriveSocket()
-          .dos2CartridgeDisconnected(this)
-      }, this.powerOn = function()
+        a.getDiskDriveSocket().dos2CartridgeDisconnected(this)
+      },
+
+      this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d = -16384
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         32766 === a && (d = ((3 & b) << 14) - 16384)
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return a >= 16384 && 32768 > a ? c[d + a] : 255
       };
+
       var c;
-      this.bytes = null;
+      this.bytes  = null;
       var d;
-      this.rom = null, this.format = wmsx.SlotFormats.MSXDOS2, this.saveState = function()
+      this.rom    = null,
+      this.format = wmsx.SlotFormats.MSXDOS2,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -12411,15 +12795,26 @@
           b: wmsx.Util.compressInt8BitArrayToStringBase64(c),
           b1: d
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d = a.b1
-      }, a && b(this)
-    }, wmsx.CartridgeDOS2.prototype = wmsx.Slot.base, wmsx.CartridgeDOS2.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgeDOS2.prototype = wmsx.Slot.base,
+
+    wmsx.CartridgeDOS2.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeDOS2;
       return c.loadState(a), c
-    }, wmsx.CartridgeHarryFox = function(a)
+    },
+
+    wmsx.CartridgeHarryFox = function(a)
     {
       "use strict";
 
@@ -12427,23 +12822,34 @@
       {
         b.rom = a, c = wmsx.Util.asNormalArray(a.content), b.bytes = c
       }
+
       this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d = e = -16384
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         return a >= 24576 && 28672 > a ? void(d = (1 & b ? 32768 : 0) - 16384) : void(a >= 28672 && 32768 > a && (e = (1 & b ? 49152 : 16384) - 32768))
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return 16384 > a ? 255 : 32768 > a ? c[d + a] : 49152 > a ? c[e + a] : 255
       };
+
       var c;
       this.bytes = null;
       var d, e;
-      this.rom = null, this.format = wmsx.SlotFormats.HarryFox, this.saveState = function()
+      this.rom = null,
+      this.format = wmsx.SlotFormats.HarryFox,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -12452,15 +12858,26 @@
           b1: d,
           b2: e
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d = a.b1, e = a.b2
-      }, a && b(this)
-    }, wmsx.CartridgeHarryFox.prototype = wmsx.Slot.base, wmsx.CartridgeHarryFox.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgeHarryFox.prototype = wmsx.Slot.base,
+
+    wmsx.CartridgeHarryFox.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeHarryFox;
       return c.loadState(a), c
-    }, wmsx.CartridgeAlQuran = function(a, b)
+    },
+
+    wmsx.CartridgeAlQuran = function(a, b)
     {
       "use strict";
 
@@ -12474,16 +12891,23 @@
         for (var a = new Array(256), b = 0; 256 > b; ++b) a[b] = 77 ^ (b << 4 & 80 | b >> 3 & 5 | b << 1 & 160 | b << 2 & 8 | b >> 6 & 2);
         for (var c = 0, d = e.length; d > c; ++c) e[c] = a[e[c]]
       }
+
       this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         f = -16384, g = -24576, h = -32768, i = -40960
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         return 20480 > a ? void 0 : 21504 > a ? void(f = ((127 & b) << 13) - 16384) : 22528 > a ? void(g = ((127 & b) << 13) - 24576) : 23552 > a ? void(h = ((127 & b) << 13) - 32768) : void(24576 > a && (i = ((127 & b) << 13) - 40960))
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         switch (57344 & a)
         {
@@ -12499,10 +12923,14 @@
             return 255
         }
       };
+
       var e;
       this.bytes = null;
       var f, g, h, i;
-      this.rom = null, this.format = b, this.saveState = function()
+      this.rom = null,
+      this.format = b,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -12513,15 +12941,26 @@
           b3: h,
           b4: i
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.format = wmsx.SlotFormats[a.f], this.rom = wmsx.ROM.loadState(a.r), e = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, e), this.bytes = e, f = a.b1, g = a.b2, h = a.b3, i = a.b4
-      }, a && c(this)
-    }, wmsx.CartridgeAlQuran.prototype = wmsx.Slot.base, wmsx.CartridgeAlQuran.recreateFromSaveState = function(a, b)
+      },
+
+      a && c(this)
+
+    },
+
+    wmsx.CartridgeAlQuran.prototype = wmsx.Slot.base,
+
+    wmsx.CartridgeAlQuran.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeAlQuran;
       return c.loadState(a), c
-    }, wmsx.CartridgeSuperSwangi = function(a)
+    },
+
+    wmsx.CartridgeSuperSwangi = function(a)
     {
       "use strict";
 
@@ -12529,23 +12968,34 @@
       {
         b.rom = a, c = wmsx.Util.asNormalArray(a.content), b.bytes = c, e = c.length / 16384 | 0
       }
+
       this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d = -32768
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         32768 === a && (d = ((b >> 1) % e << 14) - 32768)
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return 16384 > a ? 255 : 32768 > a ? c[a - 16384] : 49152 > a ? c[d + a] : 255
       };
+
       var c;
       this.bytes = null;
       var d, e;
-      this.rom = null, this.format = wmsx.SlotFormats.SuperSwangi, this.saveState = function()
+      this.rom = null,
+      this.format = wmsx.SlotFormats.SuperSwangi,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -12553,15 +13003,26 @@
           b: wmsx.Util.compressInt8BitArrayToStringBase64(c),
           b2: d
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d = a.b2, e = c.length / 16384 | 0
-      }, a && b(this)
-    }, wmsx.CartridgeSuperSwangi.prototype = wmsx.Slot.base, wmsx.CartridgeSuperSwangi.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgeSuperSwangi.prototype = wmsx.Slot.base,
+
+    wmsx.CartridgeSuperSwangi.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeSuperSwangi;
       return c.loadState(a), c
-    }, wmsx.CartridgeZemina80 = function(a)
+    },
+
+    wmsx.CartridgeZemina80 = function(a)
     {
       "use strict";
 
@@ -12569,13 +13030,18 @@
       {
         b.rom = a, c = wmsx.Util.asNormalArray(a.content), b.bytes = c, h = c.length / 8192 | 0
       }
+
       this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d = e = f = g = -16384
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         switch (a)
         {
@@ -12588,7 +13054,9 @@
           case 16387:
             g = (b % h << 13) - 40960
         }
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         switch (57344 & a)
         {
@@ -12604,10 +13072,14 @@
             return 255
         }
       };
+
       var c;
       this.bytes = null;
       var d, e, f, g, h;
-      this.rom = null, this.format = wmsx.SlotFormats.Zemina80in1, this.saveState = function()
+      this.rom = null,
+      this.format = wmsx.SlotFormats.Zemina80in1,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -12618,15 +13090,26 @@
           b3: f,
           b4: g
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d = a.b1, e = a.b2, f = a.b3, g = a.b4, h = c.length / 8192 | 0
-      }, a && b(this)
-    }, wmsx.CartridgeZemina80.prototype = wmsx.Slot.base, wmsx.CartridgeZemina80.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgeZemina80.prototype = wmsx.Slot.base,
+
+    wmsx.CartridgeZemina80.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeZemina80;
       return c.loadState(a), c
-    }, wmsx.CartridgeZemina90 = function(a)
+    },
+
+    wmsx.CartridgeZemina90 = function(a)
     {
       "use strict";
 
@@ -12634,22 +13117,33 @@
       {
         b.rom = a, c = wmsx.Util.asNormalArray(a.content), b.bytes = c
       }
+
       this.connect = function(a)
       {
         a.bus.connectOutputDevice(119, this.output77)
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         a.bus.disconnectOutputDevice(119, this.output77)
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         this.output77(0)
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return 16384 > a ? 255 : 32768 > a ? c[e + a] : 49152 > a ? g ? c[f + a ^ 8192] : c[f + a] : 255
-      }, this.output77 = function(a, b)
+      },
+
+      this.output77 = function(a, b)
       {
         d = a;
         var c = 63 & a,
@@ -12667,15 +13161,21 @@
           b: wmsx.Util.compressInt8BitArrayToStringBase64(c),
           bc: d
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, this.output77(a.bc)
       }, a && b(this)
-    }, wmsx.CartridgeZemina90.prototype = wmsx.Slot.base, wmsx.CartridgeZemina90.recreateFromSaveState = function(a, b)
+    },
+
+    wmsx.CartridgeZemina90.prototype = wmsx.Slot.base, wmsx.CartridgeZemina90.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeZemina90;
       return c.loadState(a), c
-    }, wmsx.CartridgeZemina126 = function(a)
+    },
+
+    wmsx.CartridgeZemina126 = function(a)
     {
       "use strict";
 
@@ -12686,13 +13186,19 @@
       this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d = e = -16384
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         return 16384 === a ? void(d = (b % f << 14) - 16384) : void(16385 === a && (e = (b % f << 14) - 32768))
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return 16384 > a ? 255 : 32768 > a ? c[d + a] : 49152 > a ? c[e + a] : 255
       };
@@ -12708,15 +13214,21 @@
           b1: d,
           b2: e
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d = a.b1, e = a.b2, f = c.length / 16384 | 0
       }, a && b(this)
-    }, wmsx.CartridgeZemina126.prototype = wmsx.Slot.base, wmsx.CartridgeZemina126.recreateFromSaveState = function(a, b)
+    },
+
+    wmsx.CartridgeZemina126.prototype = wmsx.Slot.base, wmsx.CartridgeZemina126.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeZemina126;
       return c.loadState(a), c
-    }, wmsx.CartridgeSuperLodeRunner = function(a)
+    },
+
+    wmsx.CartridgeSuperLodeRunner = function(a)
     {
       "use strict";
 
@@ -12729,26 +13241,39 @@
       {
         0 === a && (e = (b % f << 14) - 32768)
       }
+
       this.connect = function(a)
       {
         a.bus.setWriteMonitor(c)
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         a.bus.setWriteMonitor(null)
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         e = 32768
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return a >= 32768 && 49152 > a ? d[e + a] : 255
       };
+
       var d;
       this.bytes = null;
       var e, f;
-      this.rom = null, this.format = wmsx.SlotFormats.SuperLodeRunner, this.saveState = function()
+      this.rom = null,
+      this.format = wmsx.SlotFormats.SuperLodeRunner,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -12756,15 +13281,28 @@
           b: wmsx.Util.compressInt8BitArrayToStringBase64(d),
           b1: e
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
-        this.rom = wmsx.ROM.loadState(a.r), d = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, d), this.bytes = d, e = a.b1, f = d.length / 16384 | 0
-      }, a && b(this)
-    }, wmsx.CartridgeSuperLodeRunner.prototype = wmsx.Slot.base, wmsx.CartridgeSuperLodeRunner.recreateFromSaveState = function(a, b)
+        this.rom   = wmsx.ROM.loadState(a.r),
+        d          = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, d),
+        this.bytes = d,
+        e          = a.b1,
+        f          = d.length / 16384 | 0
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgeSuperLodeRunner.prototype = wmsx.Slot.base, wmsx.CartridgeSuperLodeRunner.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeSuperLodeRunner;
       return c.loadState(a), c
-    }, wmsx.CartridgeDiskPatched = function(a)
+    },
+
+    wmsx.CartridgeDiskPatched = function(a)
     {
       "use strict";
 
@@ -12775,19 +13313,29 @@
       this.connect = function(a)
       {
         d = new wmsx.ImageDiskDriver, d.connect(this, a)
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         d && d.disconnect(this, a)
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         d && d.powerOff()
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return a >= 16384 && 33024 > a ? c[a - 16384] : 255
-      }, this.cpuExtensionBegin = function(a)
+      },
+
+      this.cpuExtensionBegin = function(a)
       {
         return d.cpuExtensionBegin(a)
-      }, this.cpuExtensionFinish = function(a)
+      },
+
+      this.cpuExtensionFinish = function(a)
       {
         return d.cpuExtensionFinish(a)
       };
@@ -12801,15 +13349,21 @@
           r: this.rom.saveState(),
           b: wmsx.Util.compressInt8BitArrayToStringBase64(c)
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c
       }, a && b(this)
-    }, wmsx.CartridgeDiskPatched.prototype = wmsx.Slot.base, wmsx.CartridgeDiskPatched.recreateFromSaveState = function(a, b)
+    },
+
+    wmsx.CartridgeDiskPatched.prototype = wmsx.Slot.base, wmsx.CartridgeDiskPatched.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeDiskPatched(null, null);
       return c.loadState(a), c
-    }, wmsx.CartridgeKonamiSCC = function(rom)
+    },
+
+    wmsx.CartridgeKonamiSCC = function(rom)
     {
       "use strict";
 
@@ -12825,22 +13379,34 @@
       this.connect = function(a)
       {
         scc.setAudioSocket(a.getAudioSocket()), sccConnected && connectSCC()
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         scc.disconnectAudio()
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset()
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         scc.disconnectAudio()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         bank1Offset = bank2Offset = bank3Offset = bank4Offset = -16384, sccSelected = sccConnected = !1, scc.reset()
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         return a >= 20480 && 22527 >= a ? void(bank1Offset = (b % numBanks << 13) - 16384) : a >= 28672 && 30719 >= a ? void(bank2Offset = (b % numBanks << 13) - 24576) : a >= 36864 && 38911 >= a ? (bank3Offset = (b % numBanks << 13) - 32768, void(63 === (63 & b) ? (sccSelected = !0, sccConnected || connectSCC()) : sccSelected = !1)) : sccSelected && a >= 38912 && 40959 >= a ? void scc.write(a, b) : void(a >= 45056 && 47103 >= a && (bank4Offset = (b % numBanks << 13) - 40960))
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         switch (57344 & a)
         {
@@ -12876,18 +13442,24 @@
           scs: sccSelected,
           scn: sccConnected
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), bytes = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, bytes), this.bytes = bytes, bank1Offset = a.b1, bank2Offset = a.b2, bank3Offset = a.b3, bank4Offset = a.b4, numBanks = a.n, scc.loadState(a.scc), sccSelected = a.scs, sccConnected = a.scn, sccConnected && connectSCC()
       }, rom && init(this), this.eval = function(arg)
       {
         return eval(arg)
       }
-    }, wmsx.CartridgeKonamiSCC.prototype = wmsx.Slot.base, wmsx.CartridgeKonamiSCC.recreateFromSaveState = function(a, b)
+    },
+
+    wmsx.CartridgeKonamiSCC.prototype = wmsx.Slot.base, wmsx.CartridgeKonamiSCC.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeKonamiSCC;
       return c.loadState(a), c
-    }, wmsx.CartridgeSCCExpansion = function(a)
+    },
+
+    wmsx.CartridgeSCCExpansion = function(a)
     {
       "use strict";
 
@@ -12903,22 +13475,34 @@
       this.connect = function(a)
       {
         d.setAudioSocket(a.getAudioSocket()), f && c()
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         d.disconnectAudio()
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset()
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         d.disconnectAudio()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         e = f = !1, d.reset()
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         return a >= 36864 && 38911 >= a ? void(63 === (63 & b) ? (e = !0, f || c()) : e = !1) : void(e && a >= 38912 && 40959 >= a && d.write(a, b))
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return e && a >= 38912 && 40959 >= a ? d.read(a) : 255
       };
@@ -12934,15 +13518,21 @@
           scs: e,
           scn: f
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), d.loadState(a.scc), e = a.scs, f = a.scn, f && c()
       }, a && b(this)
-    }, wmsx.CartridgeSCCExpansion.prototype = wmsx.Slot.base, wmsx.CartridgeSCCExpansion.recreateFromSaveState = function(a, b)
+    },
+
+    wmsx.CartridgeSCCExpansion.prototype = wmsx.Slot.base, wmsx.CartridgeSCCExpansion.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeSCCExpansion;
       return c.loadState(a), c
-    }, wmsx.CartridgeSCCIExpansion = function(rom, startInSCCI)
+    },
+
+    wmsx.CartridgeSCCIExpansion = function(rom, startInSCCI)
     {
       "use strict";
 
@@ -12967,19 +13557,29 @@
       this.connect = function(a)
       {
         scc.setAudioSocket(a.getAudioSocket()), sccConnected && connectSCC()
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         scc.disconnectAudio()
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset()
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         scc.disconnectAudio(), 0 === this.preLoadedContentSize && wmsx.Util.arrayFill(bytes, 255)
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         bank1Offset = bank2Offset = bank3Offset = bank4Offset = -16384, sccSelected = scciSelected = sccConnected = !1, scc.reset(), setMode(startingMode)
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         switch (57344 & a)
         {
@@ -12994,7 +13594,9 @@
           default:
             return 255
         }
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         if (49150 === a || 49151 === a) return void setMode(b);
         switch (57344 & a)
@@ -13033,18 +13635,26 @@
           sis: scciSelected,
           scn: sccConnected
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), this.preLoadedContentSize = a.pcs || 0, bytes = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, bytes), this.bytes = bytes, bank1Offset = a.b1, bank2Offset = a.b2, bank3Offset = a.b3, bank4Offset = a.b4, startingMode = a.sm || 0, setMode(void 0 !== a.m ? a.m : startingMode), scc.loadState(a.scc), sccSelected = a.scs, scciSelected = a.sis, sccConnected = a.scn, sccConnected && connectSCC()
-      }, this.eval = function(str)
+      },
+
+      this.eval = function(str)
       {
         return eval(str)
       }, rom && init(this)
-    }, wmsx.CartridgeSCCIExpansion.prototype = wmsx.Slot.base, wmsx.CartridgeSCCIExpansion.recreateFromSaveState = function(a, b)
+    },
+
+    wmsx.CartridgeSCCIExpansion.prototype = wmsx.Slot.base, wmsx.CartridgeSCCIExpansion.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeSCCIExpansion;
       return c.loadState(a), c
-    }, wmsx.CartridgeManbow2 = function(rom)
+    },
+
+    wmsx.CartridgeManbow2 = function(rom)
     {
       "use strict";
 
@@ -13065,34 +13675,50 @@
       this.getDataDesc = function()
       {
         return "SRAM"
-      }, this.loadData = function(a, b)
+      },
+
+      this.loadData = function(a, b)
       {
         if (65536 !== b.length) return null;
         for (var c = 0; 65536 > c; ++c) bytes[458752 + c] = b[c];
         return sramContentName = a, b
-      }, this.getDataToSave = function()
+      },
+
+      this.getDataToSave = function()
       {
         var a = new Uint8Array(bytes.slice(458752));
         return {
           fileName: sramContentName || "Manbow2.sram",
           content: a
         }
-      }, this.connect = function(a)
+      },
+
+      this.connect = function(a)
       {
         scc.setAudioSocket(a.getAudioSocket()), sccConnected && connectSCC()
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         scc.disconnectAudio()
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset()
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         scc.disconnectAudio()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         bank1Offset = bank2Offset = bank3Offset = bank4Offset = -16384, sccSelected = sccConnected = !1, scc.reset()
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         switch (57344 & a)
         {
@@ -13107,7 +13733,9 @@
           default:
             return 255
         }
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         switch (57344 & a)
         {
@@ -13143,18 +13771,28 @@
           scn: sccConnected,
           sn: sramContentName
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), bytes = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, bytes), this.bytes = bytes, bank1Offset = a.b1, bank2Offset = a.b2, bank3Offset = a.b3, bank4Offset = a.b4, scc.loadState(a.scc), sccSelected = a.scs, sccConnected = a.scn, sramContentName = a.sn, sccConnected && connectSCC()
-      }, this.eval = function(str)
+      },
+
+      this.eval = function(str)
       {
         return eval(str)
-      }, rom && init(this)
-    }, wmsx.CartridgeManbow2.prototype = wmsx.Slot.base, wmsx.CartridgeManbow2.recreateFromSaveState = function(a, b)
+      },
+
+      rom && init(this)
+    },
+
+    wmsx.CartridgeManbow2.prototype = wmsx.Slot.base, wmsx.CartridgeManbow2.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeManbow2;
       return c.loadState(a), c
-    }, wmsx.CartridgeKanjiFont = function(a)
+    },
+
+    wmsx.CartridgeKanjiFont = function(a)
     {
       "use strict";
 
@@ -13165,34 +13803,54 @@
       this.connect = function(a)
       {
         a.bus.connectInputDevice(216, wmsx.DeviceMissing.inputPortIgnored), a.bus.connectInputDevice(217, this.inputD9), a.bus.connectOutputDevice(216, this.outputD8), a.bus.connectOutputDevice(217, this.outputD9), a.bus.connectInputDevice(218, wmsx.DeviceMissing.inputPortIgnored), a.bus.connectInputDevice(219, this.inputDB), a.bus.connectOutputDevice(218, this.outputDA), a.bus.connectOutputDevice(219, this.outputDB)
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         a.bus.disconnectInputDevice(216, wmsx.DeviceMissing.inputPortIgnored), a.bus.disconnectInputDevice(217, this.inputD9), a.bus.disconnectOutputDevice(216, this.outputD8), a.bus.disconnectOutputDevice(217, this.outputD9), a.bus.disconnectInputDevice(218, wmsx.DeviceMissing.inputPortIgnored), a.bus.disconnectInputDevice(219, this.inputDB), a.bus.disconnectOutputDevice(218, this.outputDA), a.bus.disconnectOutputDevice(219, this.outputDB)
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset()
-      }, this.powerOff = function() {}, this.reset = function()
+      },
+
+      this.powerOff = function() {}, this.reset = function()
       {
         c = d = 0, e = f = 0
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return 255
-      }, this.write = function(a, b) {}, this.outputD8 = function(a)
+      },
+
+      this.write = function(a, b) {}, this.outputD8 = function(a)
       {
         c = 4032 & c | 63 & a, e = c << 5
-      }, this.outputD9 = function(a)
+      },
+
+      this.outputD9 = function(a)
       {
         c = 63 & c | (63 & a) << 6, e = c << 5
-      }, this.inputD9 = function()
+      },
+
+      this.inputD9 = function()
       {
         return g[131071 & e++]
-      }, this.outputDA = function(a)
+      },
+
+      this.outputDA = function(a)
       {
         d = 4032 & d | 63 & a, f = d << 5
-      }, this.outputDB = function(a)
+      },
+
+      this.outputDB = function(a)
       {
         d = 63 & d | (63 & a) << 6, f = d << 5
-      }, this.inputDB = function()
+      },
+
+      this.inputDB = function()
       {
         return h ? g[131072 + (131071 & f++)] : 255
       };
@@ -13209,15 +13867,23 @@
           r2: f,
           j2: h
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), g = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, g), this.bytes = g, c = a.c1, e = a.r1, d = a.c2, f = a.r2, h = a.j2
       }, a && b(this)
-    }, wmsx.CartridgeKanjiFont.prototype = wmsx.Slot.base, wmsx.CartridgeKanjiFont.recreateFromSaveState = function(a, b)
+    },
+
+    wmsx.CartridgeKanjiFont.prototype = wmsx.Slot.base,
+
+    wmsx.CartridgeKanjiFont.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeKanjiFont;
       return c.loadState(a), c
-    }, wmsx.CartridgePAC = function(a)
+    },
+
+    wmsx.CartridgePAC = function(a)
     {
       "use strict";
 
@@ -13231,36 +13897,53 @@
         f = a;
         for (var c = wmsx.CartridgePAC.DATA_FILE_IDENTIFIER.length, e = 0, g = d.length - 2; g > e; e++) d[e] = b[c + e]
       }
+
       this.getDataDesc = function()
       {
         return "SRAM"
-      }, this.loadData = function(a, b)
+      },
+
+      this.loadData = function(a, b)
       {
         return wmsx.CartridgePAC.isPACFileContentValid(b) ? (c(a, b), d) : null
-      }, this.getDataToSave = function()
+      },
+
+      this.getDataToSave = function()
       {
         var a = wmsx.CartridgePAC.buildPACFileContentToSave(d);
         return {
           fileName: f || "PAC SRAM.pac",
           content: a
         }
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         e = !1
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         return 24574 === a || 24575 === a ? (d[a - 16384] = b, void(e = 77 === d[8190] && 105 === d[8191])) : void(e && a >= 16384 && 24573 >= a && (d[a - 16384] = b))
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return e && a >= 16384 && 24575 >= a ? d[a - 16384] : 255
       };
+
       var d, e;
       this.sram = null;
       var f;
-      this.rom = null, this.format = wmsx.SlotFormats.PACExpansion, this.saveState = function()
+      this.rom = null,
+      this.format = wmsx.SlotFormats.PACExpansion,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -13269,22 +13952,37 @@
           s: wmsx.Util.compressInt8BitArrayToStringBase64(d),
           sn: f
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), e = a.sa, d = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.s, d), f = a.sn
-      }, a && b(this)
-    }, wmsx.CartridgePAC.prototype = wmsx.Slot.base, wmsx.CartridgePAC.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgePAC.prototype = wmsx.Slot.base, wmsx.CartridgePAC.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgePAC;
       return c.loadState(a), c
-    }, wmsx.CartridgePAC.isPACFileContentValid = function(a)
+    },
+
+    wmsx.CartridgePAC.isPACFileContentValid = function(a)
     {
       return 8206 !== a.length ? !1 : wmsx.Util.int8BitArrayToByteString(a, 0, wmsx.CartridgePAC.DATA_FILE_IDENTIFIER.length) == wmsx.CartridgePAC.DATA_FILE_IDENTIFIER
-    }, wmsx.CartridgePAC.buildPACFileContentToSave = function(a)
+    },
+
+    wmsx.CartridgePAC.buildPACFileContentToSave = function(a)
     {
       var b = new Uint8Array(wmsx.CartridgePAC.DATA_FILE_IDENTIFIER.length + a.length - 2);
       return b.set(wmsx.Util.byteStringToInt8BitArray(wmsx.CartridgePAC.DATA_FILE_IDENTIFIER)), b.set(a.slice(0, -2), wmsx.CartridgePAC.DATA_FILE_IDENTIFIER.length), b
-    }, wmsx.CartridgePAC.DATA_FILE_IDENTIFIER = "PAC2 BACKUP DATA", wmsx.CartridgeMSXMUSIC = function(a)
+    },
+
+    wmsx.CartridgePAC.DATA_FILE_IDENTIFIER = "PAC2 BACKUP DATA",
+
+    wmsx.CartridgeMSXMUSIC = function(a)
     {
       "use strict";
 
@@ -13292,29 +13990,45 @@
       {
         b.rom = a, c = wmsx.Util.asNormalArray(a.content), b.bytes = c
       }
+
       this.connect = function(a)
       {
         d.connect(a)
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         d.disconnect(a)
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         d.powerOn(), this.reset()
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         d.powerOff()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d.reset()
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return a >= 16384 && 32768 > a ? c[a - 16384] : 255
       };
+
       var c;
-      this.bytes = null, this.rom = null, this.format = wmsx.SlotFormats.MSXMUSIC;
+      this.bytes = null,
+      this.rom = null,
+      this.format = wmsx.SlotFormats.MSXMUSIC;
       var d = new wmsx.YM2413Audio("MSX-MUSIC");
-      this.fm = d, this.saveState = function()
+      this.fm = d,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -13322,15 +14036,24 @@
           b: wmsx.Util.compressInt8BitArrayToStringBase64(c),
           fm: d.saveState()
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d.loadState(a.fm)
-      }, a && b(this)
-    }, wmsx.CartridgeMSXMUSIC.prototype = wmsx.Slot.base, wmsx.CartridgeMSXMUSIC.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgeMSXMUSIC.prototype = wmsx.Slot.base, wmsx.CartridgeMSXMUSIC.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeMSXMUSIC;
       return c.loadState(a), c
-    }, wmsx.CartridgeFMPAC = function(a)
+    },
+
+    wmsx.CartridgeFMPAC = function(a)
     {
       "use strict";
 
@@ -13349,35 +14072,52 @@
         h = a;
         for (var c = wmsx.CartridgePAC.DATA_FILE_IDENTIFIER.length, d = 0, e = f.length - 2; e > d; d++) f[d] = b[c + d]
       }
+
       this.getDataDesc = function()
       {
         return "SRAM"
-      }, this.loadData = function(a, b)
+      },
+
+      this.loadData = function(a, b)
       {
         return wmsx.CartridgePAC.isPACFileContentValid(b) ? (d(a, b), f) : null
-      }, this.getDataToSave = function()
+      },
+
+      this.getDataToSave = function()
       {
         var a = wmsx.CartridgePAC.buildPACFileContentToSave(f);
         return {
           fileName: h || "PAC SRAM.pac",
           content: a
         }
-      }, this.connect = function(a)
+      },
+
+      this.connect = function(a)
       {
         k = a, c()
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         l.disconnect(a)
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         l.powerOn(), this.reset()
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         l.powerOff()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         g = !1, j = -16384, i = 0, c(), l.reset()
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         switch (a)
         {
@@ -13398,18 +14138,24 @@
             f[a - 16384] = b, g = 77 === f[8190] && 105 === f[8191]
         }
         g && a >= 16384 && 24573 >= a && (f[a - 16384] = b)
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return 32758 === a ? i : 32759 === a ? j + 16384 >> 14 : g ? a >= 16384 && 24575 >= a ? f[a - 16384] : 255 : a >= 16384 && 32768 > a ? e[j + a] : 255
       };
+
       var e;
       this.bytes = null;
       var f, g;
       this.sram = null;
       var h, i, j, k;
-      this.rom = null, this.format = wmsx.SlotFormats.FMPAC;
+      this.rom = null,
+      this.format = wmsx.SlotFormats.FMPAC;
       var l = new wmsx.YM2413Audio("FM-PAC");
-      this.fm = l, this.saveState = function()
+      this.fm = l,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -13422,15 +14168,24 @@
           sn: h,
           fm: l.saveState()
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), e = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, e), this.bytes = e, j = a.b1, i = a.fe, g = a.sa, f = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.s, f), h = a.sn, l.loadState(a.fm), c()
-      }, a && b(this)
-    }, wmsx.CartridgeFMPAC.prototype = wmsx.Slot.base, wmsx.CartridgeFMPAC.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgeFMPAC.prototype = wmsx.Slot.base, wmsx.CartridgeFMPAC.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeFMPAC;
       return c.loadState(a), c
-    }, wmsx.CartridgeGameMaster2 = function(a)
+    },
+
+    wmsx.CartridgeGameMaster2 = function(a)
     {
       "use strict";
 
@@ -13441,25 +14196,35 @@
       this.getDataDesc = function()
       {
         return "SRAM"
-      }, this.loadData = function(a, b)
+      },
+
+      this.loadData = function(a, b)
       {
         if (8192 !== b.length) return null;
         for (var c = 0; 8192 > c; ++c) g[c] = b[c];
         return h = a, b
-      }, this.getDataToSave = function()
+      },
+
+      this.getDataToSave = function()
       {
         var a = new Uint8Array(g);
         return {
           fileName: h || "GameMaster2.sram",
           content: a
         }
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d = 1, e = 2, f = 3
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         return 24576 > a || a >= 49152 ? void 0 : 28672 > a ? void(d = b) : a >= 32768 && 36864 > a ? void(e = b) : a >= 40960 && 45056 > a ? void(f = b) : void(a >= 45056 && 16 & f && (g[((32 & f) << 7) + a - 45056] = b))
       },
@@ -13511,7 +14276,9 @@
     {
       var c = b || new wmsx.CartridgeGameMaster2;
       return c.loadState(a), c
-    }, wmsx.CartridgeASCII8KSRAM = function(a, b)
+    },
+
+    wmsx.CartridgeASCII8KSRAM = function(a, b)
     {
       "use strict";
 
@@ -13523,32 +14290,45 @@
         var f = Math.max(32, 1 << Math.ceil(wmsx.Util.log2(i)));
         j = f - 1, k = b === wmsx.SlotFormats.Wizardry ? 128 : f
       }
+
       this.getDataDesc = function()
       {
         return "SRAM"
-      }, this.loadData = function(a, b)
+      },
+
+      this.loadData = function(a, b)
       {
         var c = m + 1;
         if (b.length !== c) return null;
         for (var d = 0; c > d; ++d) l[d] = b[d];
         return n = a, b
-      }, this.getDataToSave = function()
+      },
+
+      this.getDataToSave = function()
       {
         var a = new Uint8Array(l);
         return {
           fileName: n || "Data.sram",
           content: a
         }
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         e = f = g = h = 0
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         return 24576 > a || a >= 49152 ? void 0 : 26624 > a ? void(e = b) : 28672 > a ? void(f = b) : 30720 > a ? void(g = b) : 32768 > a ? void(h = b) : 40960 > a && g & k ? void(l[((3 & g) << 13) + a - 32768 & m] = b) : void(h & k && (l[((3 & h) << 13) + a - 40960 & m] = b))
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         switch (57344 & a)
         {
@@ -13559,12 +14339,16 @@
           default    : return 255
         }
       };
+
       var d;
       this.bytes = null;
       var e, f, g, h, i, j, k, l;
       this.sram = null;
       var m, n;
-      this.rom = null, this.format = b, this.saveState = function()
+      this.rom = null,
+      this.format = b,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -13580,15 +14364,26 @@
           sn: n,
           ssm: k
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.format = wmsx.SlotFormats[a.f], this.rom = wmsx.ROM.loadState(a.r), d = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, d), this.bytes = d, e = a.b1, f = a.b2, g = a.b3, h = a.b4, i = a.n, j = a.rsm, l = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.s, l), this.sram = l, m = l.length - 1, n = a.sn, k = a.ssm
-      }, a && c(this)
-    }, wmsx.CartridgeASCII8KSRAM.prototype = wmsx.Slot.base, wmsx.CartridgeASCII8KSRAM.recreateFromSaveState = function(a, b)
+      },
+
+      a && c(this)
+
+    },
+
+    wmsx.CartridgeASCII8KSRAM.prototype = wmsx.Slot.base,
+
+    wmsx.CartridgeASCII8KSRAM.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeASCII8K;
       return c.loadState(a), c
-    }, wmsx.CartridgeASCII16KSRAM = function(a, b)
+    },
+
+    wmsx.CartridgeASCII16KSRAM = function(a, b)
     {
       "use strict";
 
@@ -13600,32 +14395,45 @@
         var f = Math.max(16, 1 << Math.ceil(wmsx.Util.log2(g)));
         h = f - 1, i = f
       }
+
       this.getDataDesc = function()
       {
         return "SRAM"
-      }, this.loadData = function(a, b)
+      },
+
+      this.loadData = function(a, b)
       {
         var c = k + 1;
         if (b.length !== c) return null;
         for (var d = 0; c > d; ++d) j[d] = b[d];
         return l = a, b
-      }, this.getDataToSave = function()
+      },
+
+      this.getDataToSave = function()
       {
         var a = new Uint8Array(j);
         return {
           fileName: l || "Data.sram",
           content: a
         }
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         e = f = 0
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         return a >= 24576 && 26624 > a ? void(e = b) : a >= 28672 && 30720 > a ? void(f = b) : void(a >= 32768 && 49152 > a && f & i && (j[a - 32768 & k] = b))
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         switch (49152 & a)
         {
@@ -13637,12 +14445,16 @@
             return 255
         }
       };
+
       var d;
       this.bytes = null;
       var e, f, g, h, i, j;
       this.sram = null;
       var k, l;
-      this.rom = null, this.format = b, this.saveState = function()
+      this.rom = null,
+      this.format = b,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -13656,15 +14468,24 @@
           sn: l,
           ssm: i
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.format = wmsx.SlotFormats[a.f], this.rom = wmsx.ROM.loadState(a.r), d = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, d), this.bytes = d, e = a.b1, f = a.b2, g = a.n, h = a.rsm, j = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.s, j), this.sram = j, k = j.length - 1, l = a.sn, i = a.ssm
-      }, a && c(this)
-    }, wmsx.CartridgeASCII16KSRAM.prototype = wmsx.Slot.base, wmsx.CartridgeASCII16KSRAM.recreateFromSaveState = function(a, b)
+      },
+
+      a && c(this)
+
+    },
+
+    wmsx.CartridgeASCII16KSRAM.prototype = wmsx.Slot.base, wmsx.CartridgeASCII16KSRAM.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeASCII16KSRAM;
       return c.loadState(a), c
-    }, wmsx.CartridgeHalnote = function(a)
+    },
+
+    wmsx.CartridgeHalnote = function(a)
     {
       "use strict";
 
@@ -13672,28 +14493,39 @@
       {
         b.rom = a, c = wmsx.Util.asNormalArray(a.content), b.bytes = c, k = wmsx.Util.arrayFill(new Array(16384), 0), b.sram = k
       }
+
       this.getDataDesc = function()
       {
         return "SRAM"
-      }, this.loadData = function(a, b)
+      },
+
+      this.loadData = function(a, b)
       {
         if (16384 !== b.length) return null;
         for (var c = 0; 16384 > c; ++c) k[c] = b[c];
         return m = a, b
-      }, this.getDataToSave = function()
+      },
+
+      this.getDataToSave = function()
       {
         var a = new Uint8Array(k);
         return {
           fileName: m || "Halnote.sram",
           content: a
         }
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d = -16384, e = -24576, f = -32768, g = -40960, h = 495616, i = 493568, j = l = !1
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         switch (a)
         {
@@ -13710,7 +14542,9 @@
           case 32767:
             i = (b << 11) - 30720 + 524288
         }
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         switch (57344 & a)
         {
@@ -13729,12 +14563,16 @@
             return 255
         }
       };
+
       var c;
       this.bytes = null;
       var d, e, f, g, h, i, j, k;
       this.sram = null;
       var l, m;
-      this.rom = null, this.format = wmsx.SlotFormats.Halnote, this.saveState = function()
+      this.rom    = null,
+      this.format = wmsx.SlotFormats.Halnote,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -13751,15 +14589,24 @@
           se: l,
           sn: m
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d = a.b1, e = a.b2, f = a.b3, g = a.b4, h = a.sb1, i = a.sb2, j = a.sbe, k = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.s, k), this.sram = k, l = a.se, m = a.sn
-      }, a && b(this)
-    }, wmsx.CartridgeHalnote.prototype = wmsx.Slot.base, wmsx.CartridgeHalnote.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgeHalnote.prototype = wmsx.Slot.base, wmsx.CartridgeHalnote.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeHalnote;
       return c.loadState(a), c
-    }, wmsx.CartridgeMajutsushi = function(a)
+    },
+
+    wmsx.CartridgeMajutsushi = function(a)
     {
       "use strict";
 
@@ -13770,22 +14617,34 @@
       this.connect = function(a)
       {
         h.setAudioSocket(a.getAudioSocket()), h.connectAudio()
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         h.disconnectAudio()
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset(), h.connectAudio()
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         h.disconnectAudio(), this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d = e = f = -16384, h.reset()
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         a >= 20480 && 24575 > a ? h.setSampleValue(b) : a >= 24576 && 32767 > a ? d = (b % g << 13) - 24576 : a >= 32768 && 40959 > a ? e = (b % g << 13) - 32768 : a >= 40960 && 49151 > a && (f = (b % g << 13) - 40960)
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         switch (57344 & a)
         {
@@ -13801,10 +14660,15 @@
             return 255
         }
       };
+
       var c;
       this.bytes = null;
-      var d, e, f, g, h = new wmsx.PCM8BitAudio;
-      this.rom = null, this.format = wmsx.SlotFormats.Majutsushi, this.saveState = function()
+      var d, e, f, g,
+          h = new wmsx.PCM8BitAudio;
+      this.rom    = null,
+      this.format = wmsx.SlotFormats.Majutsushi,
+
+      this.saveState = function()
       {
         return {
           f: this.format.name,
@@ -13816,15 +14680,24 @@
           n: g,
           p: h.saveState()
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d = a.b2, e = a.b3, f = a.b4, g = a.n, h.loadState(a.p)
-      }, a && b(this)
-    }, wmsx.CartridgeMajutsushi.prototype = wmsx.Slot.base, wmsx.CartridgeMajutsushi.recreateFromSaveState = function(a, b)
+      },
+
+      a && b(this)
+
+    },
+
+    wmsx.CartridgeMajutsushi.prototype = wmsx.Slot.base, wmsx.CartridgeMajutsushi.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeMajutsushi;
       return c.loadState(a), c
-    }, wmsx.CartridgeSynthesizer = function(a)
+    },
+
+    wmsx.CartridgeSynthesizer = function(a)
     {
       "use strict";
 
@@ -13836,22 +14709,34 @@
       this.connect = function(a)
       {
         d.setAudioSocket(a.getAudioSocket()), d.connectAudio()
-      }, this.disconnect = function(a)
+      },
+
+      this.disconnect = function(a)
       {
         d.disconnectAudio()
-      }, this.powerOn = function()
+      },
+
+      this.powerOn = function()
       {
         this.reset(), d.connectAudio()
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         d.disconnectAudio(), this.reset()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         d.reset()
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         16384 === (49168 & a) && d.setSampleValue(b)
-      }, this.read = function(a)
+      },
+
+      this.read = function(a)
       {
         return a >= 16384 && 49152 > a ? c[a - 16384] : 255
       };
@@ -13866,25 +14751,35 @@
           b: wmsx.Util.compressInt8BitArrayToStringBase64(c),
           p: d.saveState()
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.rom = wmsx.ROM.loadState(a.r), c = wmsx.Util.uncompressStringBase64ToInt8BitArray(a.b, c), this.bytes = c, d.loadState(a.p)
       }, a && b(this)
-    }, wmsx.CartridgeSynthesizer.prototype = wmsx.Slot.base, wmsx.CartridgeSynthesizer.recreateFromSaveState = function(a, b)
+    },
+
+    wmsx.CartridgeSynthesizer.prototype = wmsx.Slot.base, wmsx.CartridgeSynthesizer.recreateFromSaveState = function(a, b)
     {
       var c = b || new wmsx.CartridgeSynthesizer;
       return c.loadState(a), c
-    }, wmsx.MachineTypeSocket = function(a)
+    },
+
+    wmsx.MachineTypeSocket = function(a)
     {
       "use strict";
       var b = this;
       this.isActive = function(b)
       {
         return a.machineName == b
-      }, this.getMachine = function()
+      },
+
+      this.getMachine = function()
       {
         return a.machineName
-      }, this.changeMachine = function(c)
+      },
+
+      this.changeMachine = function(c)
       {
         if (a.machineName != c)
         {
@@ -13907,15 +14802,21 @@
               .start()
           }
         }
-      }, this.addMachineTypeStateListener = function(a)
+      },
+
+      this.addMachineTypeStateListener = function(a)
       {
         c.indexOf(a) < 0 && (c.push(a), a.machineTypeStateUpdate())
-      }, this.fireMachineTypeStateUpdate = function()
+      },
+
+      this.fireMachineTypeStateUpdate = function()
       {
         for (var a = 0; a < c.length; ++a) c[a].machineTypeStateUpdate()
       };
       var c = []
-    }, wmsx.ExtensionsSocket = function(a)
+    },
+
+    wmsx.ExtensionsSocket = function(a)
     {
       "use strict";
 
@@ -13960,25 +14861,37 @@
       this.connectFileLoader = function(a)
       {
         f = a
-      }, this.addExtensionsAndCartridgesStateListener = function(b)
+      },
+
+      this.addExtensionsAndCartridgesStateListener = function(b)
       {
         a.getCartridgeSocket()
           .addCartridgesStateListener(this, !0), i.indexOf(b) < 0 && (i.push(b), b.extensionsAndCartridgesStateUpdate())
-      }, this.cartridgesStateUpdate = function()
+      },
+
+      this.cartridgesStateUpdate = function()
       {
         b(), this.fireExtensionsAndCartridgesStateUpdate()
-      }, this.isActive = function(a, b)
+      },
+
+      this.isActive = function(a, b)
       {
         var c = h.inserted(b ? g[a].SLOT2 : g[a].SLOT);
         return !!c && c.format.name == g[a].format
-      }, this.isActiveAnySlot = function(a)
+      },
+
+      this.isActiveAnySlot = function(a)
       {
         return this.isActive(a, !1) || g[a].SLOT2 && this.isActive(a, !0)
-      }, this.isValid = function(a)
+      },
+
+      this.isValid = function(a)
       {
         var b = g[a].requireFlag;
         return !b || WMSX[b]
-      }, this.toggleExtension = function(b, d, e)
+      },
+
+      this.toggleExtension = function(b, d, e)
       {
         if (void 0 !== g[b])
         {
@@ -13993,15 +14906,21 @@
               .getSlotDesc(e ? g[b].SLOT2 : g[b].SLOT) : "disabled"), !0)
           })
         }
-      }, this.getInitialLoaderURLSpecs = function()
+      },
+
+      this.getInitialLoaderURLSpecs = function()
       {
         var a = [];
         for (var b in g) 1 & WMSX.EXTENSIONS[b] && a.push(d(b, !1)), g[b].SLOT2 && 2 & WMSX.EXTENSIONS[b] && a.push(d(b, !0));
         return a
-      }, this.fireExtensionsAndCartridgesStateUpdate = function()
+      },
+
+      this.fireExtensionsAndCartridgesStateUpdate = function()
       {
         for (var a = 0; a < i.length; ++a) i[a].extensionsAndCartridgesStateUpdate()
-      }, this.refreshSlotsFromConfig = function(a)
+      },
+
+      this.refreshSlotsFromConfig = function(a)
       {
         var b = [],
           c = [];
@@ -14021,7 +14940,10 @@
       var f, g = WMSX.EXTENSIONS_CONFIG,
         h = a.getSlotSocket(),
         i = []
-    }, wmsx.DeviceMissing = {
+    },
+
+    wmsx.DeviceMissing =
+    {
       inputPort: function(a)
       {
         return 255
@@ -14038,22 +14960,32 @@
         self.debugMode = a
       },
       debugMode: 0
-    }, wmsx.Clock = function(clockPulse)
+    },
+
+    wmsx.Clock = function(clockPulse)
     {
       "use strict";
       this.go = function()
       {
         running || (useRequestAnimationFrame = vSynch && cyclesPerSecond === wmsx.Clock.HOST_NATIVE_FPS, running = !0, useRequestAnimationFrame ? animationFrame = requestAnimationFrame(pulse) : interval = setInterval(pulse, cycleTimeMs))
-      }, this.pause = function()
+      },
+
+      this.pause = function()
       {
         running = !1, animationFrame && (cancelAnimationFrame(animationFrame), animationFrame = null), interval && (clearInterval(interval), interval = null)
-      }, this.getFrequency = function()
+      },
+
+      this.getFrequency = function()
       {
         return cyclesPerSecond
-      }, this.setFrequency = function(a)
+      },
+
+      this.setFrequency = function(a)
       {
         running ? (this.pause(), internalSetFrequency(a), this.go()) : internalSetFrequency(a)
-      }, this.setVSynch = function(a)
+      },
+
+      this.setVSynch = function(a)
       {
         running ? (this.pause(), vSynch = a, this.go()) : vSynch = a
       };
@@ -14075,7 +15007,11 @@
         useRequestAnimationFrame, animationFrame = null,
         interval = null,
         vSynch = !0
-    }, wmsx.Clock.HOST_NATIVE_FPS = WMSX.SCREEN_FORCE_HOST_NATIVE_FPS, wmsx.Clock.detectHostNativeFPSAndCallback = function(a)
+    },
+
+    wmsx.Clock.HOST_NATIVE_FPS = WMSX.SCREEN_FORCE_HOST_NATIVE_FPS,
+
+    wmsx.Clock.detectHostNativeFPSAndCallback = function(a)
     {
       if (-1 === WMSX.SCREEN_VSYNCH_MODE) return wmsx.Util.warning("Video native V-Synch disabled in configuration"), void(a && a(wmsx.Clock.HOST_NATIVE_FPS));
       if (-1 !== wmsx.Clock.HOST_NATIVE_FPS) return wmsx.Util.warning("Host video frequency forced in configuration: " + wmsx.Clock.HOST_NATIVE_FPS), void(a && a(wmsx.Clock.HOST_NATIVE_FPS));
@@ -14099,21 +15035,29 @@
           else wmsx.Clock.HOST_NATIVE_FPS = -1, wmsx.Util.error("Could not detect video native frequency. V-Synch DISABLED!"), a && a(wmsx.Clock.HOST_NATIVE_FPS)
         };
       j()
-    }, wmsx.ClockMultiplexer = function(a)
+    },
+
+    wmsx.ClockMultiplexer = function(a)
     {
       "use strict";
       this.addSlave = function(a, b)
       {
         c.indexOf(a) >= 0 || (wmsx.Util.arrayAdd(c, a), wmsx.Util.arrayAdd(d, b), wmsx.Util.arrayAdd(e, 0))
-      }, this.removeSlave = function(a)
+      },
+
+      this.removeSlave = function(a)
       {
         var b = c.indexOf(a);
         0 > b || (c.splice(b, 1), d.splice(b, 1), e.splice(b, 1))
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         for (var a = c.length - 1; a >= 0; a -= 1) e[a] = 0;
         b = 0
-      }, this.pulses = function(f)
+      },
+
+      this.pulses = function(f)
       {
         if (b > f) return b -= f, a(f);
         do {
@@ -14131,7 +15075,9 @@
         c = [],
         d = [],
         e = []
-    }, wmsx.BUS = function(machine, cpu)
+    },
+
+    wmsx.BUS = function(machine, cpu)
     {
       "use strict";
 
@@ -14164,14 +15110,20 @@
       {
         this.setPrimarySlotConfig(0);
         for (var a = 0; 4 > a; a++) slots[a].powerOn()
-      }, this.powerOff = function()
+      },
+
+      this.powerOff = function()
       {
         for (var a = 0; 4 > a; a++) slots[a].powerOff()
-      }, this.reset = function()
+      },
+
+      this.reset = function()
       {
         this.setPrimarySlotConfig(0);
         for (var a = 0; 4 > a; a++) slots[a].reset()
-      }, this.insertSlot = function(a, b)
+      },
+
+      this.insertSlot = function(a, b)
       {
         if (a = a || slotEmpty, slots[b] !== a) switch (slots[b].disconnect(machine), slots[b] = a, slots[b].connect(machine), b)
         {
@@ -14184,10 +15136,14 @@
           case 3:
             return void(slot3 = a)
         }
-      }, this.getSlot = function(a)
+      },
+
+      this.getSlot = function(a)
       {
         return slots[a]
-      }, this.getSlotForAddress = getSlotForAddress, this.read = function(a)
+      },
+
+      this.getSlotForAddress = getSlotForAddress, this.read = function(a)
       {
         switch (primarySlotConfig >> (a >> 14 << 1) & 3)
         {
@@ -14200,7 +15156,9 @@
           case 3:
             return slot3.read(a)
         }
-      }, this.write = function(a, b)
+      },
+
+      this.write = function(a, b)
       {
         switch (writeMonitor && writeMonitor(a, b), primarySlotConfig >> (a >> 14 << 1) & 3)
         {
@@ -14213,45 +15171,71 @@
           case 3:
             return void slot3.write(a, b)
         }
-      }, this.input = function(a)
+      },
+
+      this.input = function(a)
       {
         return devicesInputPorts[255 & a](a)
-      }, this.output = function(a, b)
+      },
+
+      this.output = function(a, b)
       {
         return devicesOutputPorts[255 & a](b, a)
-      }, this.setPrimarySlotConfig = function(a)
+      },
+
+      this.setPrimarySlotConfig = function(a)
       {
         primarySlotConfig = a
-      }, this.getPrimarySlotConfig = function()
+      },
+
+      this.getPrimarySlotConfig = function()
       {
         return primarySlotConfig
-      }, this.cpuExtensionBegin = function(a)
+      },
+
+      this.cpuExtensionBegin = function(a)
       {
         return getSlotForAddress(a.extPC)
           .cpuExtensionBegin(a)
-      }, this.cpuExtensionFinish = function(a)
+      },
+
+      this.cpuExtensionFinish = function(a)
       {
         return getSlotForAddress(a.extPC)
           .cpuExtensionFinish(a)
-      }, this.connectInputDevice = function(a, b)
+      },
+
+      this.connectInputDevice = function(a, b)
       {
         devicesInputPorts[a] = b
-      }, this.connectOutputDevice = function(a, b)
+      },
+
+      this.connectOutputDevice = function(a, b)
       {
         devicesOutputPorts[a] = b
-      }, this.disconnectInputDevice = function(a, b)
+      },
+
+      this.disconnectInputDevice = function(a, b)
       {
         b && devicesInputPorts[a] !== b || (devicesInputPorts[a] = deviceInputMissing)
-      }, this.disconnectOutputDevice = function(a, b)
+      },
+
+      this.disconnectOutputDevice = function(a, b)
       {
         b && devicesOutputPorts[a] !== b || (devicesOutputPorts[a] = deviceOutputMissing)
-      }, this.getOutputDevice = function(a)
+      },
+
+      this.getOutputDevice = function(a)
       {
         return devicesOutputPorts[a]
-      }, this.getInputDevice = function(a)
+      },
+
+      this.getInputDevice = function(a)
       {
         return devicesInputPorts[a]
-      }, this.setWriteMonitor = function(a)
+      },
+
+      this.setWriteMonitor = function(a)
       {
         writeMonitor = a
       };
@@ -14269,14 +15253,18 @@
           s2: slot2.saveState(),
           s3: slot3.saveState()
         }
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         this.insertSlot(wmsx.SlotCreator.recreateFromSaveState(a.s0, slot0), 0), this.insertSlot(wmsx.SlotCreator.recreateFromSaveState(a.s1, slot1), 1), this.insertSlot(wmsx.SlotCreator.recreateFromSaveState(a.s2, slot2), 2), this.insertSlot(wmsx.SlotCreator.recreateFromSaveState(a.s3, slot3), 3), this.setPrimarySlotConfig(a.p)
       }, init(), this.eval = function(str)
       {
         return eval(str)
       }
-    }, wmsx.Machine = function()
+    },
+
+    wmsx.Machine = function()
     {
       "use strict";
 
@@ -14289,16 +15277,15 @@
       {
         "number" == typeof a && (a = [a]);
         var b = a[0],
-          c = a[1],
-          d = bus.getSlot(b);
+            c = a[1],
+            d = bus.getSlot(b);
         return c >= 0 ? d = d.isExpanded() ? d.getSubSlot(c) : null : d.isExpanded() && (d = d.getSubSlot(0)), d
       }
 
       function getSlotDesc(a)
       {
         var b = "number" == typeof a ? a : a[0];
-        return b.toString() + (bus.getSlot(b)
-          .isExpanded() ? "-" + (a[1] || 0) : "")
+        return b.toString() + (bus.getSlot(b).isExpanded() ? "-" + (a[1] || 0) : "")
       }
 
       function insertSlot(a, b)
@@ -14306,8 +15293,8 @@
         if ("number" == typeof b && (b = [b]), a && a !== EMPTY_SLOT || (getSlot(b) || EMPTY_SLOT) !== EMPTY_SLOT)
         {
           var c = b[0],
-            d = b[1],
-            e = bus.getSlot(c);
+              d = b[1],
+              e = bus.getSlot(c);
           if (d >= 0)
           {
             if (!e.isExpanded())
@@ -14323,7 +15310,12 @@
 
       function setVideoStandard(a, b)
       {
-        self.showOSD((videoStandardIsAuto ? "AUTO: " : "FORCED: ") + a.desc, !1), (b || videoStandard !== a) && (videoStandard = a, vdp.setVideoStandard(videoStandard), mainVideoClockUpdateSpeed())
+        self.showOSD((videoStandardIsAuto ? "AUTO: " : "FORCED: ") + a.desc, !1),
+        (b || videoStandard !== a) && (
+                                        videoStandard = a,
+                                        vdp.setVideoStandard(videoStandard),
+                                        mainVideoClockUpdateSpeed()
+                                      )
       }
 
       function setVideoStandardAuto()
@@ -14802,7 +15794,7 @@
       this.getSavestateSocket       = function()      { return saveStateSocket },
       this.getCassetteSocket        = function()      { return cassetteSocket },
       this.getDiskDriveSocket       = function()      { return diskDriveSocket },
-      this.showOSD                  = function(a,b,c) { this.getVideoOutput() .showOSD(a, b, c) },
+      this.showOSD                  = function(a,b,c) { this.getVideoOutput().showOSD(a, b, c) },
       this.setVideoStandardSoft     = function(a)     { videoStandardSoft = a, videoStandardIsAuto && videoStandard !== a ? setVideoStandard(a) : videoStandardIsAuto || videoStandard === a || self.showOSD("Cannot change Video Standard. Its FORCED: " + videoStandard.desc, !0, !0) },
       this.setLoading               = function(a)     { isLoading = a },
       this.userPause                = function(a,b)   { var c = userPaused; return userPaused !== a && (userPaused = !!a, userPauseMoreFrames = -1, userPaused && !b ? audioSocket.muteAudio() : audioSocket.unMuteAudio()), c },
@@ -14810,17 +15802,40 @@
       this.setBIOS                  = function(a)     { bios = a === EMPTY_SLOT ? null : a, videoStandardSoft = null, setVideoStandardAuto() },
       this.setDefaults              = function()      { setVideoStandardAuto(), vdp.setDefaults(), speedControl = 1, alternateSpeed = null, mainVideoClockUpdateSpeed() },
       this.machineName              = null,
-      this.machineType              = 0,
+      this.machineType              =  0,
       this.powerIsOn                = !1;
 
       var speedControl          =  1,
           alternateSpeed        = !1,
           isLoading             = !1,
           basicAutoRunDone      = !1,
-          mainVideoClock, cpu, bus, ppi, vdp, psg, rtc, syf, userPaused = !1,
+          mainVideoClock,
+          cpu,
+          bus,
+          ppi,
+          vdp,
+          psg,
+          rtc,
+          syf,
+          userPaused            = !1,
           userPauseMoreFrames   =  0,
           systemPaused          = !1,
-          machineTypeSocket, slotSocket, biosSocket, extensionsSocket, expansionSocket, cartridgeSocket, saveStateSocket, cassetteSocket, diskDriveSocket, machineControlsSocket, controllersSocket, audioSocket, bios, videoStandard, videoStandardSoft, videoStandardIsAuto = !1,
+          machineTypeSocket,
+          slotSocket,
+          biosSocket,
+          extensionsSocket,
+          expansionSocket,
+          cartridgeSocket,
+          saveStateSocket,
+          cassetteSocket,
+          diskDriveSocket,
+          machineControlsSocket,
+          controllersSocket,
+          audioSocket,
+          bios,
+          videoStandard,
+          videoStandardSoft,
+          videoStandardIsAuto   = !1,
           vSynchMode, BIOS_SLOT = WMSX.BIOS_SLOT,
           CARTRIDGE0_SLOT       = WMSX.CARTRIDGE1_SLOT,
           CARTRIDGE1_SLOT       = WMSX.CARTRIDGE2_SLOT,
@@ -14839,13 +15854,41 @@
         wmsx.Util.log("Done running " + a + " frames in " + d + " ms"), wmsx.Util.log(a / (d / 1e3) + "  frames/sec"), mainVideoClock.go()
       },
 
+      // sendCmd
+      document.getElementById("cmd-area").onkeyup = function(e)
+      {
+
+        function showChar(e)
+        {
+          if(e.keyCode!=16)
+          { // If the pressed key is anything other than SHIFT
+            var c = String.fromCharCode(e.keyCode);
+            if(e.shiftKey)
+            { // If the SHIFT key is down, return the ASCII code for the capital letter
+           // alert("ASCII Code: "+e.keyCode+" Character: "+c);
+            }
+            else
+            { // If the SHIFT key is not down, convert to the ASCII code for the lowecase letter
+              c = c.toLowerCase(c);
+           // alert("ASCII Code: "+c.charCodeAt(0)+" Character: "+c);
+            }
+            return c
+          }
+        }
+
+        bios.getKeyboardExtension().typeString(showChar(e))
+
+      }
+
       this.eval = function(str) { return eval(str) },
 
       init()
 
     },
 
-    wmsx.Machine.BASE_CPU_CLOCK = 3584160, wmsx.MachineControls =
+    wmsx.Machine.BASE_CPU_CLOCK = 3584160,
+
+    wmsx.MachineControls =
     {
       POWER           :  51,
       RESET           :  52,
@@ -15624,7 +16667,9 @@
       d()
     },
 
-    wmsx.DOMKeys = new wmsx.DOMKeysImpl, wmsx.DOMKeyboard = function(a, b)
+    wmsx.DOMKeys = new wmsx.DOMKeysImpl,
+
+    wmsx.DOMKeyboard = function(a, b)
     {
       "use strict";
 
@@ -16012,7 +17057,9 @@
         v = 0,
         w = 0;
       c()
-    }, wmsx.GamepadJoysticksControls = function(a)
+    },
+
+    wmsx.GamepadJoysticksControls = function(a)
     {
       "use strict";
 
@@ -18792,10 +19839,14 @@
         {
           j.show(a, b, c)
         }, 0))
-      }, this.hide = function(a)
+      },
+
+      this.hide = function(a)
       {
         k.classList.remove("wmsx-show"), t = !1, WMSX.room.screen.focus(), a && p >= 0 && (b.insertDisk(u, p), b.autoPowerCycle(v))
-      }, this.diskDrivesMediaStateUpdate = function(a)
+      },
+
+      this.diskDrivesMediaStateUpdate = function(a)
       {
         t && a === u && (e(), d())
       };
@@ -19006,25 +20057,37 @@
       this.connect = function(a)
       {
         a.connectMedia(this)
-      }, this.connectPeripherals = function(b)
+      },
+
+      this.connectPeripherals = function(b)
       {
         a = b
-      }, this.saveState = function(a, c)
+      },
+
+      this.saveState = function(a, c)
       {
         var e = d(c);
         return e && b("save" + a, e)
-      }, this.loadState = function(a)
+      },
+
+      this.loadState = function(a)
       {
         var b = c("save" + a);
         return e(b)
-      }, this.saveStateFile = function(b)
+      },
+
+      this.saveStateFile = function(b)
       {
         var c = d(b);
         c && a.startDownloadBinary("WMSX SaveState" + g, c, "System State file")
-      }, this.loadStateFile = function(a)
+      },
+
+      this.loadStateFile = function(a)
       {
         return e(a)
-      }, this.saveResourceToFile = function(a, c)
+      },
+
+      this.saveResourceToFile = function(a, c)
       {
         try
         {
@@ -19035,7 +20098,9 @@
         {
           wmsx.Util.error(e)
         }
-      }, this.loadResourceFromFile = function(a)
+      },
+
+      this.loadResourceFromFile = function(a)
       {
         try
         {
@@ -19152,19 +20217,29 @@
       this.connect = function(a)
       {
         l = a, l.connectDeck(this)
-      }, this.connectPeripherals = function(a, b)
+      },
+
+      this.connectPeripherals = function(a, b)
       {
         m = a, n = b
-      }, this.loadTapeFile = function(a, b, c)
+      },
+
+      this.loadTapeFile = function(a, b, c)
       {
         return 0 !== wmsx.Util.arrayIndexOfSubArray(b, s, 0) ? null : (o = wmsx.Util.leafFilename(a), p = wmsx.Util.asNormalArray(b), g(), m.showOSD("Cassette: " + a + ". " + j(), !0), k(), l.autoPowerCycle(c), p)
-      }, this.loadEmptyTape = function()
+      },
+
+      this.loadEmptyTape = function()
       {
         o = "New Tape.cas", p = [], g(), m.showOSD("Cassette loaded with new blank Tape", !0), k()
-      }, this.removeTape = function()
+      },
+
+      this.removeTape = function()
       {
         c() || (o = null, p = null, q = -1, m.showOSD("Cassette Tape removed", !0), k())
-      }, this.saveTapeFile = function()
+      },
+
+      this.saveTapeFile = function()
       {
         if (!c())
         {
@@ -19181,22 +20256,34 @@
           catch (d)
           {}
         }
-      }, this.rewind = function()
+      },
+
+      this.rewind = function()
       {
         c() || (g(), m.showOSD("Cassette Tape rewound." + j(), !0))
-      }, this.seekToEnd = function()
+      },
+
+      this.seekToEnd = function()
       {
         c() || (f(), m.showOSD("Cassette forwarded to Tape end", !0))
-      }, this.seekForward = function()
+      },
+
+      this.seekForward = function()
       {
         return c() ? void 0 : (d() || b(1, 1), d() ? this.seekToEnd() : void m.showOSD("Cassette skipped forward." + j(), !0))
-      }, this.seekBackward = function()
+      },
+
+      this.seekBackward = function()
       {
         return c() ? void 0 : (e() || b(-1, -1), e() ? this.rewind() : void m.showOSD("Cassette skipped backward." + j(), !0))
-      }, this.peekFileInfoAtCurrentPosition = function()
+      },
+
+      this.peekFileInfoAtCurrentPosition = function()
       {
         return i(q)
-      }, this.userTypeCurrentAutoRunCommand = function()
+      },
+
+      this.userTypeCurrentAutoRunCommand = function()
       {
         if (!c())
         {
@@ -19206,27 +20293,41 @@
           return a ? void l.getDriver()
             .typeCurrentAutoRunCommand() : void m.showOSD("No executable at current Tape position!", !0, !0)
         }
-      }, this.readHeader = function()
+      },
+
+      this.readHeader = function()
       {
         return !p || d() ? !1 : (b(1), d() ? !1 : (q += 8, !0))
-      }, this.readByte = function()
+      },
+
+      this.readByte = function()
       {
         return !p || d() ? null : p[q++]
-      }, this.writeHeader = function(a)
+      },
+
+      this.writeHeader = function(a)
       {
         p || this.loadEmptyTape(), h();
         for (var b = 0; b < s.length; b++) p[q++] = s[b];
         return !0
-      }, this.writeByte = function(a)
+      },
+
+      this.writeByte = function(a)
       {
         return p || this.loadEmptyTape(), p[q++] = a, !0
-      }, this.finishWriting = function()
+      },
+
+      this.finishWriting = function()
       {
         p && h()
-      }, this.motor = function(a)
+      },
+
+      this.motor = function(a)
       {
         return r = null !== a ? a : !r, k(), !0
-      }, this.saveState = function()
+      },
+
+      this.saveState = function()
       {
         return {
           f: o,
@@ -20288,40 +21389,114 @@
       {
         e(), f()
       }
+
       var c = this;
+
       this.powerOn = function(a)
       {
-        d(), c.screen.powerOn(), c.speaker.powerOn(), c.controllersHub.powerOn(), c.machine.getBIOSSocket()
-          .inserted() && !c.machine.powerIsOn && c.machine.powerOn(a)
-      }, this.powerOff = function()
+        d(),
+        c.screen.powerOn(),
+        c.speaker.powerOn(),
+        c.controllersHub.powerOn(),
+        c.machine.getBIOSSocket().inserted() && !c.machine.powerIsOn && c.machine.powerOn(a)
+      },
+
+      this.powerOff = function()
       {
-        c.machine.powerOff(), c.controllersHub.powerOff(), c.speaker.powerOff(), c.screen.powerOff()
-      }, this.setLoading = function(a)
+        c.machine.powerOff(),
+        c.controllersHub.powerOff(),
+        c.speaker.powerOff(),
+        c.screen.powerOff()
+      },
+
+      this.setLoading = function(a)
       {
         this.isLoading !== a && (this.isLoading = a, this.machine.setLoading(this.isLoading), this.screen.setLoading(this.isLoading))
       };
+
       var d = function()
-        {
-          function a()
-          {
-            document.hidden ? b = c.machine.systemPause(!0) : b || c.machine.systemPause(!1)
-          }
-          var b;
-          document.addEventListener("visibilitychange", a)
-        },
-        e = function()
-        {
-          c.peripheralControls = new wmsx.DOMPeripheralControls, c.machineControls = new wmsx.DOMMachineControls(c.peripheralControls), c.controllersHub = new wmsx.ControllersHub(c.machineControls), c.keyboard = c.controllersHub.getKeyboard(), c.fileDownloader = new wmsx.FileDownloader, c.stateMedia = new wmsx.LocalStorageSaveStateMedia, c.cassetteDeck = new wmsx.FileCassetteDeck, c.diskDrive = new wmsx.FileDiskDrive, c.fileLoader = new wmsx.FileLoader, c.screen = new wmsx.CanvasDisplay(a), c.speaker = new wmsx.WebAudioSpeaker, c.fileLoader.connectPeripherals(c.cassetteDeck, c.diskDrive), c.fileDownloader.connectPeripherals(c.screen), c.screen.connectPeripherals(c.fileLoader, c.fileDownloader, c.peripheralControls, c.controllersHub, c.diskDrive), c.machineControls.connectPeripherals(c.screen), c.controllersHub.connectPeripherals(c.screen), c.stateMedia.connectPeripherals(c.fileDownloader), c.cassetteDeck.connectPeripherals(c.screen, c.fileDownloader), c.diskDrive.connectPeripherals(c.screen, c.fileDownloader), c.peripheralControls.connectPeripherals(c.screen, c.controllersHub, c.fileLoader, c.cassetteDeck, c.diskDrive)
-        },
-        f = function()
-        {
-          c.machine = new wmsx.Machine, c.stateMedia.connect(c.machine.getSavestateSocket()), c.fileLoader.connect(c.machine), c.screen.connect(c.machine.getVideoOutput(), c.machine.getMachineControlsSocket(), c.machine.getMachineTypeSocket(), c.machine.getExtensionsSocket(), c.machine.getCartridgeSocket(), c.machine.getControllersSocket()), c.speaker.connect(c.machine.getAudioSocket()), c.machineControls.connect(c.machine.getMachineControlsSocket()), c.controllersHub.connect(c.machine.getControllersSocket(), c.machine.getMachineControlsSocket(), c.machine.getBIOSSocket()), c.cassetteDeck.connect(c.machine.getCassetteSocket()), c.diskDrive.connect(c.machine.getDiskDriveSocket()), c.peripheralControls.connect(c.machine.getMachineControlsSocket(), c.machine.getCartridgeSocket()), c.machine.getCartridgeSocket()
-            .connectFileDownloader(c.fileDownloader)
-        };
-      this.machine = null, this.screen = null, this.speaker = null, this.machineControls = null, this.controllersHub = null, this.keyboard = null, this.fileDownloader = null, this.cassetteDeck = null, this.diskDrive = null, this.stateMedia = null, this.fileLoader = null, this.peripheralControls = null, this.isLoading = !1, b()
+              {
+                function a()
+                {
+                  document.hidden ? b = c.machine.systemPause(!0) : b || c.machine.systemPause(!1)
+                }
+                var b;
+                document.addEventListener("visibilitychange", a)
+              },
+
+          e = function()
+              {
+                c.peripheralControls = new wmsx.DOMPeripheralControls,
+                c.machineControls    = new wmsx.DOMMachineControls(c.peripheralControls),
+                c.controllersHub     = new wmsx.ControllersHub(c.machineControls),
+                c.keyboard           = c.controllersHub.getKeyboard(),
+                c.fileDownloader     = new wmsx.FileDownloader,
+                c.stateMedia         = new wmsx.LocalStorageSaveStateMedia,
+                c.cassetteDeck       = new wmsx.FileCassetteDeck,
+                c.diskDrive          = new wmsx.FileDiskDrive,
+                c.fileLoader         = new wmsx.FileLoader,
+                c.screen             = new wmsx.CanvasDisplay(a),
+                c.speaker            = new wmsx.WebAudioSpeaker,
+                c.fileLoader         .connectPeripherals(c.cassetteDeck, c.diskDrive),
+                c.fileDownloader     .connectPeripherals(c.screen),
+                c.screen             .connectPeripherals(c.fileLoader, c.fileDownloader, c.peripheralControls, c.controllersHub, c.diskDrive),
+                c.machineControls    .connectPeripherals(c.screen),
+                c.controllersHub     .connectPeripherals(c.screen),
+                c.stateMedia         .connectPeripherals(c.fileDownloader),
+                c.cassetteDeck       .connectPeripherals(c.screen, c.fileDownloader),
+                c.diskDrive          .connectPeripherals(c.screen, c.fileDownloader),
+                c.peripheralControls .connectPeripherals(c.screen, c.controllersHub, c.fileLoader, c.cassetteDeck, c.diskDrive)
+              },
+
+          f = function()
+              {
+                c.machine = new wmsx.Machine,
+                c.stateMedia.connect         ( c.machine.getSavestateSocket() ),
+                c.fileLoader.connect         ( c.machine ),
+                c.screen.connect             (
+                                               c.machine.getVideoOutput(),
+                                               c.machine.getMachineControlsSocket(),
+                                               c.machine.getMachineTypeSocket(),
+                                               c.machine.getExtensionsSocket(),
+                                               c.machine.getCartridgeSocket(),
+                                               c.machine.getControllersSocket()
+                                             ),
+                c.speaker.connect            ( c.machine.getAudioSocket() ),
+                c.machineControls.connect    ( c.machine.getMachineControlsSocket() ),
+                c.controllersHub.connect     (
+                                               c.machine.getControllersSocket(),
+                                               c.machine.getMachineControlsSocket(),
+                                               c.machine.getBIOSSocket()
+                                             ),
+                c.cassetteDeck.connect       ( c.machine.getCassetteSocket() ),
+                c.diskDrive.connect          ( c.machine.getDiskDriveSocket() ),
+                c.peripheralControls.connect (
+                                               c.machine.getMachineControlsSocket(),
+                                               c.machine.getCartridgeSocket()
+                                             ),
+                c.machine.getCartridgeSocket().connectFileDownloader(c.fileDownloader)
+              };
+
+      this.machine            = null,
+      this.screen             = null,
+      this.speaker            = null,
+      this.machineControls    = null,
+      this.controllersHub     = null,
+      this.keyboard           = null,
+      this.fileDownloader     = null,
+      this.cassetteDeck       = null,
+      this.diskDrive          = null,
+      this.stateMedia         = null,
+      this.fileLoader         = null,
+      this.peripheralControls = null,
+      this.isLoading          = !1,
+      b()
+
     },
 
-    WMSX.userPreferences = {}, WMSX.userPreferences.defaults =
+    WMSX.userPreferences = {},
+
+    WMSX.userPreferences.defaults =
     {
       JP1DEVICE   : -1,
       JP1XAXIS    :  0,
@@ -20392,22 +21567,39 @@
 
         function a()
         {
-          for (var a, b = (window.location.search || "")
-              .split("+")
-              .join(" "), c = /[?&]?([^=]+)=([^&]*)/g, d = {}; a = c.exec(b);)
+          for (
+                var a,
+                    b = (window.location.search || "").split("+").join(" "),
+                    c = /[?&]?([^=]+)=([^&]*)/g,
+                    d = {};
+                    a = c.exec(b);
+              )
           {
-            var e = decodeURIComponent(a[1])
-              .trim()
-              .toUpperCase();
-            e = wmsx.Configurator.abbreviations[e] || e, d[e] = decodeURIComponent(a[2])
-              .trim()
+            var e    = decodeURIComponent(a[1]).trim().toUpperCase();
+                e    = wmsx.Configurator.abbreviations[e] || e,
+                d[e] = decodeURIComponent(a[2]).trim()
           }
           return d
         }
 
         function b()
         {
-          WMSX.RAMMAPPER_SIZE |= 0, WMSX.AUTO_POWER_ON_DELAY |= 0, WMSX.MEDIA_CHANGE_DISABLED = WMSX.MEDIA_CHANGE_DISABLED === !0 || "true" == WMSX.MEDIA_CHANGE_DISABLED, WMSX.SCREEN_RESIZE_DISABLED = WMSX.SCREEN_RESIZE_DISABLED === !0 || "true" == WMSX.SCREEN_RESIZE_DISABLED, WMSX.SCREEN_FULLSCREEN_DISABLED = WMSX.SCREEN_FULLSCREEN_DISABLED === !0 || "true" == WMSX.SCREEN_FULLSCREEN_DISABLED, WMSX.SCREEN_FILTER_MODE |= 0, WMSX.SCREEN_CRT_MODE |= 0, WMSX.SCREEN_DEFAULT_SCALE = parseFloat(WMSX.SCREEN_DEFAULT_SCALE), WMSX.SCREEN_DEFAULT_ASPECT = parseFloat(WMSX.SCREEN_DEFAULT_ASPECT), WMSX.SCREEN_CONTROL_BAR |= 0, WMSX.SCREEN_MSX1_COLOR_MODE |= 0, WMSX.SCREEN_FORCE_HOST_NATIVE_FPS |= 0, WMSX.SCREEN_VSYNCH_MODE |= 0, WMSX.AUDIO_SIGNAL_BUFFER_FRAMES |= 0, WMSX.AUDIO_BUFFER_BASE |= 0, WMSX.AUDIO_BUFFER_SIZE |= 0
+          WMSX.RAMMAPPER_SIZE               |= 0,
+          WMSX.AUTO_POWER_ON_DELAY          |= 0,
+          WMSX.MEDIA_CHANGE_DISABLED         = WMSX.MEDIA_CHANGE_DISABLED      === !0 || "true" == WMSX.MEDIA_CHANGE_DISABLED,
+          WMSX.SCREEN_RESIZE_DISABLED        = WMSX.SCREEN_RESIZE_DISABLED     === !0 || "true" == WMSX.SCREEN_RESIZE_DISABLED,
+          WMSX.SCREEN_FULLSCREEN_DISABLED    = WMSX.SCREEN_FULLSCREEN_DISABLED === !0 || "true" == WMSX.SCREEN_FULLSCREEN_DISABLED,
+          WMSX.SCREEN_FILTER_MODE           |= 0,
+          WMSX.SCREEN_CRT_MODE              |= 0,
+          WMSX.SCREEN_DEFAULT_SCALE          = parseFloat(WMSX.SCREEN_DEFAULT_SCALE),
+          WMSX.SCREEN_DEFAULT_ASPECT         = parseFloat(WMSX.SCREEN_DEFAULT_ASPECT),
+          WMSX.SCREEN_CONTROL_BAR           |= 0,
+          WMSX.SCREEN_MSX1_COLOR_MODE       |= 0,
+          WMSX.SCREEN_FORCE_HOST_NATIVE_FPS |= 0,
+          WMSX.SCREEN_VSYNCH_MODE           |= 0,
+          WMSX.AUDIO_SIGNAL_BUFFER_FRAMES   |= 0,
+          WMSX.AUDIO_BUFFER_BASE            |= 0,
+          WMSX.AUDIO_BUFFER_SIZE            |= 0
         }
 
         var c = {};
@@ -20467,110 +21659,104 @@
 
       slotURLSpecs: function()
       {
+
         function a(a, c)
         {
           b[b.length] = {
                           url: a,
-                          onSuccess: function(a)
-                          {
-                            WMSX.room.fileLoader.loadFromContentAsSlot(a.url, a.content, c, !0)
-                          }
+                          onSuccess: function(a) { WMSX.room.fileLoader.loadFromContentAsSlot(a.url, a.content, c, !0) }
                         }
         }
+
         var b = [];
-        WMSX.BIOS_URL && a(WMSX.BIOS_URL, WMSX.BIOS_SLOT), WMSX.BIOSEXT_URL && a(WMSX.BIOSEXT_URL, WMSX.BIOSEXT_SLOT);
+
+        WMSX.BIOS_URL    && a( WMSX.BIOS_URL    , WMSX.BIOS_SLOT    ),
+        WMSX.BIOSEXT_URL && a( WMSX.BIOSEXT_URL , WMSX.BIOSEXT_SLOT );
+
         for (var c in WMSX)
-          if (wmsx.Util.stringStartsWith(c, "SLOT") && wmsx.Util.stringEndsWith(c, "URL"))
-          {
-            var d = c.match(/[0-9]+/g);
-            if (d)
+            if (wmsx.Util.stringStartsWith(c, "SLOT") && wmsx.Util.stringEndsWith(c, "URL"))
             {
-              var e = d.map(function(a)
+              var d = c.match(/[0-9]+/g);
+              if (d)
               {
-                return 0 | a
-              });
-              a(WMSX[c], e)
+                var e = d.map( function(a) { return 0 | a } );
+                a(WMSX[c], e)
+              }
             }
-          }
+
         return b
+
       },
 
       mediaURLSpecs: function()
       {
+
         var a = wmsx.FileLoader.OPEN_TYPE;
-        return [WMSX.AUTODETECT_URL &&
-          {
-            url: WMSX.AUTODETECT_URL,
-            onSuccess: function(b)
-            {
-              WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.AUTO, 0, !0)
-            }
-        },
-          WMSX.CARTRIDGE1_URL &&
-          {
-            url: WMSX.CARTRIDGE1_URL,
-            onSuccess: function(b)
-            {
-              WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.ROM, 0, !0, !1, WMSX.CARTRIDGE1_FORMAT)
-            }
-        },
-          WMSX.CARTRIDGE2_URL &&
-          {
-            url: WMSX.CARTRIDGE2_URL,
-            onSuccess: function(b)
-            {
-              WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.ROM, 1, !0, !1, WMSX.CARTRIDGE2_FORMAT)
-            }
-        },
-          WMSX.DISKA_URL &&
-          {
-            url: WMSX.DISKA_URL,
-            onSuccess: function(b)
-            {
-              WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.DISK, 0, !0)
-            }
-        }, !WMSX.DISKA_URL && WMSX.DISKA_FILES_URL ?
-          {
-            url: WMSX.DISKA_FILES_URL,
-            onSuccess: function(b)
-            {
-              WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.AUTO_AS_DISK, 0, !0)
-            }
-        } : null, WMSX.DISKB_URL &&
-          {
-            url: WMSX.DISKB_URL,
-            onSuccess: function(b)
-            {
-              WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.DISK, 1, !0)
-            }
-        }, !WMSX.DISKB_URL && WMSX.DISKB_FILES_URL ?
-          {
-            url: WMSX.DISKB_FILES_URL,
-            onSuccess: function(b)
-            {
-              WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.AUTO_AS_DISK, 1, !0)
-            }
-        } : null, WMSX.TAPE_URL &&
-          {
-            url: WMSX.TAPE_URL,
-            onSuccess: function(b)
-            {
-              WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.TAPE, 0, !0)
-            }
-        }]
+
+        return [
+
+                 WMSX.AUTODETECT_URL &&
+                 {
+                   url: WMSX.AUTODETECT_URL,
+                   onSuccess: function(b) { WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.AUTO, 0, !0) }
+                 },
+
+                 WMSX.CARTRIDGE1_URL &&
+                 {
+                   url: WMSX.CARTRIDGE1_URL,
+                   onSuccess: function(b) { WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.ROM, 0, !0, !1, WMSX.CARTRIDGE1_FORMAT) }
+                 },
+
+                 WMSX.CARTRIDGE2_URL &&
+                 {
+                   url: WMSX.CARTRIDGE2_URL,
+                   onSuccess: function(b) { WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.ROM, 1, !0, !1, WMSX.CARTRIDGE2_FORMAT) }
+                 },
+
+                 WMSX.DISKA_URL &&
+                 {
+                   url: WMSX.DISKA_URL,
+                   onSuccess: function(b) { WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.DISK, 0, !0) }
+                 },
+
+                 ! WMSX.DISKA_URL && WMSX.DISKA_FILES_URL ?
+                 {
+                   url: WMSX.DISKA_FILES_URL,
+                   onSuccess: function(b) { WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.AUTO_AS_DISK, 0, !0) }
+                 } : null,
+
+                 WMSX.DISKB_URL &&
+                 {
+                   url: WMSX.DISKB_URL,
+                   onSuccess: function(b) { WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.DISK, 1, !0) }
+                 },
+
+                 ! WMSX.DISKB_URL && WMSX.DISKB_FILES_URL ?
+                 {
+                   url: WMSX.DISKB_FILES_URL,
+                   onSuccess: function(b) { WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.AUTO_AS_DISK, 1, !0) }
+                 } : null,
+
+                 WMSX.TAPE_URL &&
+                 {
+                   url: WMSX.TAPE_URL,
+                   onSuccess: function(b) { WMSX.room.fileLoader.loadFromContent(b.url, b.content, a.TAPE, 0, !0) }
+                 }
+
+               ]
+
       },
 
       extensionsInitialURLSpecs: function()
       {
-        return WMSX.room.machine.getExtensionsSocket()
-          .getInitialLoaderURLSpecs()
+        return WMSX.room.machine.getExtensionsSocket().getInitialLoaderURLSpecs()
       },
 
       detectDefaultMachine: function()
       {
         var a = WMSX.MACHINES_CONFIG[WMSX.MACHINE] && WMSX.MACHINES_CONFIG[WMSX.MACHINE].autoType || 3,
-          b = wmsx.Util.userLanguage(),
-          c = "A";
+            b = wmsx.Util.userLanguage(),
+            c = "A";
         0 === b.indexOf("ja") && (c = "J");
         var d;
         switch (a)
@@ -20635,7 +21821,11 @@
          )
          throw new Error('WMSX cannot be started. HTML document is missing screen element with id "' + WMSX.SCREEN_ELEMENT_ID + '"');
 
-      wmsx.Configurator.applyConfig(), WMSX.room = new wmsx.Room(WMSX.screenElement), WMSX.room.powerOn(), WMSX.room.setLoading(!0);
+      wmsx.Configurator.applyConfig(),
+
+      WMSX.room = new wmsx.Room(WMSX.screenElement),
+      WMSX.room.powerOn(),
+      WMSX.room.setLoading(!0);
 
       var c = Date.now();
 
@@ -20647,11 +21837,13 @@
          )
          new wmsx.MultiDownloader
          (
+
            [
              {
                url: WMSX.STATE_URL
              }
            ],
+
            function(a)
            {
              wmsx.Clock.detectHostNativeFPSAndCallback
@@ -20662,25 +21854,34 @@
                  (
                    function()
                    {
-                     WMSX.room.setLoading(!1), WMSX.room.fileLoader.loadFromContent(a[0].url, a[0].content, wmsx.FileLoader.OPEN_TYPE.STATE, 0, !1)
+                     WMSX.room.setLoading(!1),
+                     WMSX.room.fileLoader.loadFromContent
+                     (
+                       a[0].url,
+                       a[0].content,
+                       wmsx.FileLoader.OPEN_TYPE.STATE,
+                       0,
+                       !1
+                     )
                    }
                  )
                }
              )
            }
-         )
-         .start();
+
+         ).start();
 
       else
 
       {
+
         var d = wmsx.Configurator.slotURLSpecs(),
             e = wmsx.Configurator.mediaURLSpecs(),
             f = wmsx.Configurator.extensionsInitialURLSpecs();
+
         new wmsx.MultiDownloader
             (
-              d.concat(e)
-              .concat(f),
+              d.concat(e).concat(f),
               function()
               {
                 wmsx.Clock.detectHostNativeFPSAndCallback
@@ -20691,47 +21892,43 @@
                     (
                       function()
                       {
-                        WMSX.room.setLoading(!1), a && WMSX.room.machine.userPowerOn(!0)
+                        WMSX.room.setLoading(!1),
+                        a && WMSX.room.machine.userPowerOn(!0)
                       }
                     )
                   }
                 )
               }
-            )
-            .start()
+            ).start()
+
       }
 
       WMSX.shutdown = function()
       {
-        WMSX.room && WMSX.room.powerOff(), wmsx.Util.log("shutdown")
+        WMSX.room && WMSX.room.powerOff(),
+        wmsx.Util.log("shutdown")
       }
 
     },
 
     WMSX.preLoadImagesAndStart = function()
     {
+
       function a(a)
       {
         WMSX.start && WMSX.AUTO_START && (a || b && 0 === c) && WMSX.start()
       }
+
       var b = !1,
-        c = wmsx.Images.embedded ? 0 : wmsx.Images.urls.length;
-      if (document.addEventListener("DOMContentLoaded", function()
-        {
-          b = !0, a(!1)
-        }), c > 0)
-        for (var d in wmsx.Images.urls)
-        {
-          var e = new Image;
-          e.src = wmsx.Images.urls[d], e.onload = function()
-          {
-            c--, a(!1)
-          }
-        }
-      window.addEventListener("load", function()
-      {
-        a(!0)
-      })
+          c = wmsx.Images.embedded ? 0 : wmsx.Images.urls.length;
+
+      if ( document.addEventListener ( "DOMContentLoaded", function() { b = !0, a(!1) } ), c > 0 )
+         for (var d in wmsx.Images.urls)
+         {
+           var e = new Image;
+           e.src = wmsx.Images.urls[d], e.onload = function() { c--, a(!1) }
+         }
+      window.addEventListener( "load", function() { a(!0) } )
     },
 
     WMSX.VERSION                 = "version 2.2",
@@ -20782,68 +21979,40 @@
       romDiffs:
       {
 
-        "MSX1_NTSC.bios":
-        {
-          based: "MSX1_PAL.bios",
-          diffs:
-          {
-            43: [17],
-            30548: [64, 0, 69, 20]
-          }
-        },
-        "MSX2_NTSC.bios":
-        {
-          based: "MSX2_PAL.bios",
-          diffs:
-          {
-            43: [17],
-            31703: [0],
-            30548: [64, 0, 69, 20]
-          }
-        },
-        "MSX2EXT_NTSC.bios":
-        {
-          based: "MSX2EXT_PAL.bios",
-          diffs:
-          {
-            10751: [0],
-            11094: [0]
-          }
-        },
-        "MSX2PEXT_PAL.bios":
-        {
-          based: "MSX2PEXT_JAP.bios",
-          diffs:
-          {
-            1406: [0, 5, 2, 15, 4, 4],
-            11363: [2]
-          }
-        },
-        "MSX2P_NTSC.bios":
-        {
-          based: "MSX2P_PAL.bios",
-          diffs:
-          {
-            43: [17],
-            30548: [64, 0, 69, 20]
-          }
-        },
-        "MSX2PEXT_NTSC.bios":
-        {
-          based: "MSX2PEXT_PAL.bios",
-          diffs:
-          {
-            11363: [0]
-          }
-        },
-        "KanjiBasic_PAL.bios":
-        {
-          based: "[KanjiBasic].bios",
-          diffs:
-          {
-            15515: [2]
-          }
-        }
+        "MSX1_NTSC.bios"      : {
+                                  based: "MSX1_PAL.bios",
+                                  diffs: { 43: [17], 30548: [64, 0, 69, 20] }
+                                },
+
+        "MSX2_NTSC.bios"      : {
+                                  based: "MSX2_PAL.bios",
+                                  diffs: { 43: [17], 31703: [0], 30548: [64, 0, 69, 20] }
+                                },
+
+        "MSX2EXT_NTSC.bios"   : {
+                                  based: "MSX2EXT_PAL.bios",
+                                  diffs: { 10751: [0], 11094: [0] }
+                                },
+
+        "MSX2PEXT_PAL.bios"   : {
+                                  based: "MSX2PEXT_JAP.bios",
+                                  diffs: { 1406: [0, 5, 2, 15, 4, 4], 11363: [2] }
+                                },
+
+        "MSX2P_NTSC.bios"     : {
+                                  based: "MSX2P_PAL.bios",
+                                  diffs: { 43: [17], 30548: [64, 0, 69, 20] }
+                                },
+
+        "MSX2PEXT_NTSC.bios"  : {
+                                  based: "MSX2PEXT_PAL.bios",
+                                  diffs: { 11363: [0] }
+                                },
+
+        "KanjiBasic_PAL.bios" : {
+                                  based: "[KanjiBasic].bios",
+                                  diffs: { 15515: [2] }
+                                }
 
       }
 
