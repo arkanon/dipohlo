@@ -4,14 +4,18 @@
 
 <!--
 
+     Arkanon <arkanon@lsd.org.br>
      2016/09/11 20:04:50
      2016/09/11 00:54:00
      2016/09/01 23:29:41
      2016/09/01 04:47:00
 
-     http://jsbeautifier.org
-     http://dopiaza.org/tools/datauri
-     file:///media/arkanon/backup-export/projetos/___arkanon/git/meus/dipohlo/wmsx.html?STATE_URL=/media/arkanon/backup-export/projetos/___arkanon/git/meus/dipohlo/webmsx-hotlogo.wst
+     WebMSX version 2.2
+     Copyright 2015 by Paulo Augusto Peccin. See license.txt distributed with this file.
+     <http://github.com/ppeccin/WebMSX>
+
+     <http://jsbeautifier.org>
+     <http://dopiaza.org/tools/datauri>
 
      goTo: sendCmd
 
@@ -70,8 +74,6 @@
 
   <script>
 
-    // WebMSX version 2.0
-    // Copyright 2015 by Paulo Augusto Peccin. See license.txt distributed with this file.
     // Main Emulator parameters.
     // May be overridden dynamically by URL query parameters, if ALLOW_URL_PARAMETERS = true.
     // Machine type and Components are defined by Configuration Presets.
@@ -1189,33 +1191,46 @@
 
                     function c(a, b)
                     {
-                      return this instanceof c ? (this.files = {}, this.comment = null, this.root = "", a && this.load(a, b), void(this.clone = function()
-                      {
-                        var a = new c;
-                        for (var b in this) "function" != typeof this[b] && (a[b] = this[b]);
-                        return a
-                      })) : new c(a, b)
+                      return this instanceof c
+                      ? (
+                          this.files   = {},
+                          this.comment = null,
+                          this.root    = "",
+                          a && this.load(a, b),
+                          void
+                          (
+                            this.clone = function()
+                            {
+                              var a = new c;
+                              for (var b in this) "function" != typeof this[b] && (a[b] = this[b]);
+                              return a
+                            }
+                          )
+                        )
+                      : new c(a, b)
                     }
-                    var d = a("./base64");
-                    c.prototype = a("./object"), c.prototype.load = a("./load"), c.support = a("./support"), c.defaults = a("./defaults"), c.utils = a("./deprecatedPublicUtils"), c.base64 = {
-                      encode: function(a)
-                      {
-                        return d.encode(a)
-                      },
-                      decode: function(a)
-                      {
-                        return d.decode(a)
-                      }
-                    }, c.compressions = a("./compressions"), b.exports = c
+
+                    var d                = a("./base64");
+                        c.prototype      = a("./object"),
+                        c.prototype.load = a("./load"),
+                        c.support        = a("./support"),
+                        c.defaults       = a("./defaults"),
+                        c.utils          = a("./deprecatedPublicUtils"),
+                        c.base64         = {
+                                             encode: function(a) { return d.encode(a) },
+                                             decode: function(a) { return d.decode(a) }
+                                           },
+                        c.compressions = a("./compressions"),
+                        b.exports = c
                   },
                   {
-                    "./base64": 1,
-                    "./compressions": 3,
-                    "./defaults": 6,
-                    "./deprecatedPublicUtils": 7,
-                    "./load": 10,
-                    "./object": 13,
-                    "./support": 17
+                    "./base64"                : 1,
+                    "./compressions"          : 3,
+                    "./defaults"              : 6,
+                    "./deprecatedPublicUtils" : 7,
+                    "./load"                  : 10,
+                    "./object"                : 13,
+                    "./support"               : 17
                   }
                 ],
 
@@ -1224,7 +1239,7 @@
                   {
                     "use strict";
                     var c = a("./base64"),
-                      d = a("./zipEntries");
+                        d = a("./zipEntries");
                     b.exports = function(a, b)
                     {
                       var e, f, g, h;
@@ -1293,44 +1308,56 @@
                   {
                     "use strict";
                     var c = a("./support"),
-                      d = a("./utils"),
-                      e = a("./crc32"),
-                      f = a("./signature"),
-                      g = a("./defaults"),
-                      h = a("./base64"),
-                      i = a("./compressions"),
-                      j = a("./compressedObject"),
-                      k = a("./nodeBuffer"),
-                      l = a("./utf8"),
-                      m = a("./stringWriter"),
-                      n = a("./uint8ArrayWriter"),
-                      o = function(a)
-                      {
-                        if (a._data instanceof j && (a._data = a._data.getContent(), a.options.binary = !0, a.options.base64 = !1, "uint8array" === d.getTypeOf(a._data)))
-                        {
-                          var b = a._data;
-                          a._data = new Uint8Array(b.length), 0 !== b.length && a._data.set(b, 0)
-                        }
-                        return a._data
-                      },
-                      p = function(a)
-                      {
-                        var b = o(a),
-                          e = d.getTypeOf(b);
-                        return "string" === e ? !a.options.binary && c.nodebuffer ? k(b, "utf-8") : a.asBinary() : b
-                      },
-                      q = function(a)
-                      {
-                        var b = o(this);
-                        return null === b || "undefined" == typeof b ? "" : (this.options.base64 && (b = h.decode(b)), b = a && this.options.binary ? A.utf8decode(b) : d.transformTo("string", b), a || this.options.binary || (b = d.transformTo("string", A.utf8encode(b))), b)
-                      },
-                      r = function(a, b, c)
-                      {
-                        this.name = a, this.dir = c.dir, this.date = c.date, this.comment = c.comment, this._data = b, this.options = c, this._initialMetadata = {
-                          dir: c.dir,
-                          date: c.date
-                        }
-                      };
+                        d = a("./utils"),
+                        e = a("./crc32"),
+                        f = a("./signature"),
+                        g = a("./defaults"),
+                        h = a("./base64"),
+                        i = a("./compressions"),
+                        j = a("./compressedObject"),
+                        k = a("./nodeBuffer"),
+                        l = a("./utf8"),
+                        m = a("./stringWriter"),
+                        n = a("./uint8ArrayWriter"),
+
+                        o = function(a)
+                            {
+                              if (a._data instanceof j && (a._data = a._data.getContent(), a.options.binary = !0, a.options.base64 = !1, "uint8array" === d.getTypeOf(a._data)))
+                              {
+                                var b = a._data;
+                                a._data = new Uint8Array(b.length), 0 !== b.length && a._data.set(b, 0)
+                              }
+                              return a._data
+                            },
+
+                        p = function(a)
+                            {
+                              var b = o(a),
+                                  e = d.getTypeOf(b);
+                              return "string" === e ? !a.options.binary && c.nodebuffer ? k(b, "utf-8") : a.asBinary() : b
+                            },
+
+                        q = function(a)
+                            {
+                              var b = o(this);
+                              return null === b || "undefined" == typeof b ? "" : (this.options.base64 && (b = h.decode(b)), b = a && this.options.binary ? A.utf8decode(b) : d.transformTo("string", b), a || this.options.binary || (b = d.transformTo("string", A.utf8encode(b))), b)
+                            },
+
+                        r = function(a, b, c)
+                            {
+                              this.name    = a,
+                              this.dir     = c.dir,
+                              this.date    = c.date,
+                              this.comment = c.comment,
+                              this._data   = b,
+                              this.options = c,
+                              this._initialMetadata =
+                              {
+                                dir  : c.dir,
+                                date : c.date
+                              }
+                            };
+
                     r.prototype = {
                       asText: function()
                       {
@@ -2018,7 +2045,12 @@
                       readBlockZip64EndOfCentral: function()
                       {
                         this.zip64EndOfCentralSize = this.reader.readInt(8), this.versionMadeBy = this.reader.readString(2), this.versionNeeded = this.reader.readInt(2), this.diskNumber = this.reader.readInt(4), this.diskWithCentralDirStart = this.reader.readInt(4), this.centralDirRecordsOnThisDisk = this.reader.readInt(8), this.centralDirRecords = this.reader.readInt(8), this.centralDirSize = this.reader.readInt(8), this.centralDirOffset = this.reader.readInt(8), this.zip64ExtensibleData = {};
-                        for (var a, b, c, d = this.zip64EndOfCentralSize - 44, e = 0; d > e;) a = this.reader.readInt(2), b = this.reader.readInt(4), c = this.reader.readString(b), this.zip64ExtensibleData[a] = {
+                        for (var a, b, c, d = this.zip64EndOfCentralSize - 44, e = 0; d > e;)
+                        a = this.reader.readInt(2),
+                        b = this.reader.readInt(4),
+                        c = this.reader.readString(b),
+                        this.zip64ExtensibleData[a] =
+                        {
                           id: a,
                           length: b,
                           value: c
@@ -19691,7 +19723,41 @@
       var e = function()
               {
                 var b;
-                d.cover = document.createElement("div"), d.cover.id = "wmsx-paste-cover", b = d.cover.style, b.position = "absolute", b.top = b.bottom = 0, b.left = b.right = 0, b.background = "rgba(0, 0, 0, 0.6)", b.transition = "opacity .1s ease-out", b.zIndex = 10, a.appendChild(d.cover), d.box = document.createElement("input"), d.box.id = "wmsx-paste-box", d.box.value = "📋   PASTE NOW", d.box.readOnly = "readonly", d.box.innerHTML = "PASTE NOW!", b = d.box.style, b.position = "absolute", b.top = b.bottom = 0, b.left = b.right = 0, b.width = "270px", b.height = "66px", b.margin = "auto", b.background = "rgba(255, 40, 40, 0.75)", b.font = "bold 26px sans-serif", b.textAlign = "center", b.color = "transparent", b.border = "2px dashed rgba(240, 240, 240, 0.70)", b.boxSizing = "initial", b.borderRadius = "10px", b.textShadow = "0 0 0 rgb(240, 240, 240)", b.webkitFontSmoothing = "antialiased", b.MozOsxFontSmoothing = "grayscale", b.padding = "0", b.outline = "none", d.cover.appendChild(d.box), f()
+                d.cover               = document.createElement("div"),
+                d.cover.id            = "wmsx-paste-cover",
+                b                     = d.cover.style,
+                b.position            = "absolute",
+                b.top                 = b.bottom = 0,
+                b.left                = b.right  = 0,
+                b.background          = "rgba(0, 0, 0, 0.6)",
+                b.transition          = "opacity .1s ease-out",
+                b.zIndex              = 10,
+                a.appendChild(d.cover),
+                d.box                 = document.createElement("input"),
+                d.box.id              = "wmsx-paste-box",
+                d.box.value           = "📋   PASTE NOW",
+                d.box.readOnly        = "readonly",
+                d.box.innerHTML       = "PASTE NOW!",
+                b                     = d.box.style,
+                b.position            = "absolute",
+                b.top                 = b.bottom = 0,
+                b.left                = b.right  = 0,
+                b.width               = "270px",
+                b.height              = "66px",
+                b.margin              = "auto",
+                b.background          = "rgba(255, 40, 40, 0.75)",
+                b.font                = "bold 26px sans-serif",
+                b.textAlign           = "center",
+                b.color               = "transparent",
+                b.border              = "2px dashed rgba(240, 240, 240, 0.70)",
+                b.boxSizing           = "initial",
+                b.borderRadius        = "10px",
+                b.textShadow          = "0 0 0 rgb(240, 240, 240)",
+                b.webkitFontSmoothing = "antialiased",
+                b.MozOsxFontSmoothing = "grayscale",
+                b.padding             = "0",
+                b.outline             = "none",
+                d.cover.appendChild(d.box), f()
               },
 
           f = function()
