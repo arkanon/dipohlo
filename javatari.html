@@ -5,14 +5,18 @@
 <!--
 
      Arkanon <arkanon@lsd.org.br>
-     2016/09/24 23:01:33
+     2016/09/25 03:33:00
+     2016/09/24 21:50:00
 
      Javatari.js 0.91
-     Copyright 2015 by Paulo Augusto Peccin. See license.txt distributed with this file.
      <http://github.com/ppeccin/javatari.js>
+
+     Copyright 2015 by Paulo Augusto Peccin.
+     <http://github.com/ppeccin/javatari.js/blob/master/license.txt>
 
      <http://jsbeautifier.org>
      <http://dopiaza.org/tools/datauri>
+     <http://ftp.pigwa.net/stuff/collections/nir_dary_cds/ATARI%202600/ROM/>
 
 -->
 
@@ -38,7 +42,7 @@
     // You may change any of these after loading the project and before starting the Emulator.
     Javatari = {
                  VERSION                    : "version 0.91", // Don't change this one!
-                 ROM_AUTO_LOAD_URL          : enduro,         // Full or relative URL of ROM
+                 ROM_AUTO_LOAD_URL          : "https://raw.githubusercontent.com/arkanon/dipohlo/gh-pages/rom/hero.bin",         // Full or relative URL of ROM
                  AUTO_START                 : true,           // Set false to start emulator manually with Javatari.start()
                  SCREEN_ELEMENT_ID          : "javatari-screen",
                  CONSOLE_PANEL_ELEMENT_ID   : "javatari-console-panel",
@@ -22855,26 +22859,46 @@
         {
           j("File reading error: " + a.target.error.name)
         }, b.readAsArrayBuffer(a)
-      }, this.loadFromURL = function(a)
+      },
+
+      this.loadFromURL = function(a)
       {
+
         jt.Util.log("Reading ROM from URL: " + a);
-        var b = new XMLHttpRequest;
-        b.withCredentials = !0, b.open("GET", a, !0), b.responseType = "arraybuffer", b.timeout = 2e3, b.onload = function()
-        {
-          if (200 === b.status)
-          {
-            var c = new Uint8Array(b.response);
-            i(a, c)
-          }
-          else j("URL reading error: " + (b.statusText || b.status))
-        }, b.onerror = function()
-        {
-          j("URL reading error: " + (b.statusText || b.status))
-        }, b.ontimeout = function()
-        {
-          j("URL reading error: " + (b.statusText || b.status))
-        }, b.send()
+
+        var b                 = new XMLHttpRequest;
+            b.withCredentials = !0,
+            b.open("GET", a, !0),
+            b.responseType    = "arraybuffer",
+            b.timeout         = 2e3,
+
+            b.onload          = function()
+                                {
+                                  if (200 === b.status)
+                                  {
+                                    var c = new Uint8Array(b.response);
+                                    i(a, c)
+                                  }
+                                  else
+                                  {
+                                    j("URL reading error: " + (b.statusText || b.status))
+                                  }
+                                },
+
+            b.onerror         = function()
+                                {
+                                  j("URL reading error: " + (b.statusText || b.status))
+                                },
+
+            b.ontimeout       = function()
+                                {
+                                  j("URL reading error: " + (b.statusText || b.status))
+                                },
+
+            b.send()
+
       };
+
       var b, c, d, e, f = function(b)
         {
           if (b.returnValue = !1, b.preventDefault && b.preventDefault(), b.stopPropagation && b.stopPropagation(), b.target.focus(), this.files && this.files.length)
