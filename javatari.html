@@ -5,6 +5,7 @@
 <!--
 
      Arkanon <arkanon@lsd.org.br>
+     2016/09/27 00:50:20
      2016/09/25 03:33:00
      2016/09/24 21:50:00
 
@@ -22814,19 +22815,32 @@
     jt.ROMLoader = function()
     {
       var a = this;
+
       this.connect = function(a, d)
       {
-        b = a, c = d
-      }, this.registerForDnD = function(a)
+        b = a,
+        c = d
+      },
+
+      this.registerForDnD = function(a)
       {
-        a.addEventListener("dragover", g, !1), a.addEventListener("drop", h, !1)
-      }, this.registerForFileInputElement = function(a)
+        a.addEventListener("dragover", g, !1),
+        a.addEventListener("drop"    , h, !1)
+      },
+
+      this.registerForFileInputElement = function(a)
       {
         e = a
-      }, this.openFileChooserDialog = function(a)
+      },
+
+      this.openFileChooserDialog = function(a)
       {
-        d || k(), l = a !== !1, d.click()
-      }, this.openURLChooserDialog = function(a)
+        d || k(),
+        l = a !== !1,
+        d.click()
+      },
+
+      this.openURLChooserDialog = function(a)
       {
         l = a !== !1;
         var b;
@@ -22836,8 +22850,7 @@
         }
         catch (c)
         {}
-        if (b = prompt("Load ROM from URL:", b || ""), b && (b = b.toString()
-            .trim()))
+        if (b = prompt("Load ROM from URL:", b || ""), b && (b = b.toString().trim()))
         {
           try
           {
@@ -22847,7 +22860,9 @@
           {}
           this.loadFromURL(b)
         }
-      }, this.loadFromFile = function(a)
+      },
+
+      this.loadFromFile = function(a)
       {
         jt.Util.log("Reading ROM file: " + a.name);
         var b = new FileReader;
@@ -22855,23 +22870,22 @@
         {
           var c = new Uint8Array(b.target.result);
           i(a.name, c)
-        }, b.onerror = function(a)
+        },
+        b.onerror = function(a)
         {
           j("File reading error: " + a.target.error.name)
-        }, b.readAsArrayBuffer(a)
+        },
+        b.readAsArrayBuffer(a)
       },
 
       this.loadFromURL = function(a)
       {
-
         jt.Util.log("Reading ROM from URL: " + a);
-
         var b                 = new XMLHttpRequest;
-            b.withCredentials = !0,
+            b.withCredentials = !1,
             b.open("GET", a, !0),
             b.responseType    = "arraybuffer",
             b.timeout         = 2e3,
-
             b.onload          = function()
                                 {
                                   if (200 === b.status)
@@ -22879,100 +22893,102 @@
                                     var c = new Uint8Array(b.response);
                                     i(a, c)
                                   }
-                                  else
-                                  {
-                                    j("URL reading error: " + (b.statusText || b.status))
-                                  }
+                                  else     { j("URL reading error 1: " + (b.statusText || b.status)) }
                                 },
-
-            b.onerror         = function()
-                                {
-                                  j("URL reading error: " + (b.statusText || b.status))
-                                },
-
-            b.ontimeout       = function()
-                                {
-                                  j("URL reading error: " + (b.statusText || b.status))
-                                },
-
+            b.onerror         = function() { j("URL reading error 2: " + (b.statusText || b.status)) },
+            b.ontimeout       = function() { j("URL reading error 3: " + (b.statusText || b.status)) },
             b.send()
-
       };
 
-      var b, c, d, e, f = function(b)
-        {
-          if (b.returnValue = !1, b.preventDefault && b.preventDefault(), b.stopPropagation && b.stopPropagation(), b.target.focus(), this.files && this.files.length)
-          {
-            var c = this.files[0];
-            try
-            {
-              d.value = ""
-            }
-            catch (e)
-            {}
-            return a.loadFromFile(c), !1
-          }
-        },
-        g = function(a)
-        {
-          a.returnValue = !1, a.preventDefault && a.preventDefault(), a.stopPropagation && a.stopPropagation(), a.dataTransfer.dropEffect = Javatari.CARTRIDGE_CHANGE_DISABLED ? "none" : "link"
-        },
-        h = function(b)
-        {
-          if (b.returnValue = !1, b.preventDefault && b.preventDefault(), b.stopPropagation && b.stopPropagation(), b.target.focus(), l = b.altKey !== !0, !Javatari.CARTRIDGE_CHANGE_DISABLED && b.dataTransfer)
-          {
-            var c = b.dataTransfer && b.dataTransfer.files;
-            if (c && c.length > 0) return void a.loadFromFile(c[0]);
-            var d = b.dataTransfer.getData("URL");
-            d && d.length > 0 && a.loadFromURL(d)
-          }
-        },
-        i = function(a, d)
-        {
-          var e, f, g;
-          try
-          {
-            if (g = new Array(d.length), jt.Util.arrayCopy(d, 0, g, 0, g.length), c.loadStateFile(g)) return void jt.Util.log("SaveState file loaded");
-            f = new jt.ROM(a, g), e = jt.CartridgeDatabase.createCartridgeFromRom(f), b && b.insert(e, l)
-          }
-          catch (h)
-          {
-            if (!h.javatari) throw jt.Util.log(h.stack), h;
-            try
-            {
-              for (var i = new JSZip(d), k = i.file(m), n = 0; n < k.length; n++)
+      var b, c, d, e,
+          f = function(b)
               {
-                var o = k[n];
-                jt.Util.log("Trying zip file content: " + o.name);
+                if (
+                     b.returnValue = !1,
+                     b.preventDefault  && b.preventDefault(),
+                     b.stopPropagation && b.stopPropagation(),
+                     b.target.focus(),
+                     this.files && this.files.length
+                   )
+                {
+                  var c = this.files[0];
+                  try
+                  {
+                    d.value = ""
+                  }
+                  catch (e)
+                  {}
+                  return a.loadFromFile(c), !1
+                }
+              },
+
+          g = function(a)
+              {
+                a.returnValue = !1, a.preventDefault && a.preventDefault(), a.stopPropagation && a.stopPropagation(), a.dataTransfer.dropEffect = Javatari.CARTRIDGE_CHANGE_DISABLED ? "none" : "link"
+              },
+
+          h = function(b)
+              {
+                if (b.returnValue = !1, b.preventDefault && b.preventDefault(), b.stopPropagation && b.stopPropagation(), b.target.focus(), l = b.altKey !== !0, !Javatari.CARTRIDGE_CHANGE_DISABLED && b.dataTransfer)
+                {
+                  var c = b.dataTransfer && b.dataTransfer.files;
+                  if (c && c.length > 0) return void a.loadFromFile(c[0]);
+                  var d = b.dataTransfer.getData("URL");
+                  d && d.length > 0 && a.loadFromURL(d)
+                }
+              },
+
+          i = function(a, d)
+              {
+                var e, f, g;
                 try
                 {
-                  var p = o.asUint8Array();
-                  return g = new Array(p.length), jt.Util.arrayCopy(p, 0, g, 0, g.length), f = new jt.ROM(o.name, g), e = jt.CartridgeDatabase.createCartridgeFromRom(f), void(b && b.insert(e, l))
+                  if (g = new Array(d.length), jt.Util.arrayCopy(d, 0, g, 0, g.length), c.loadStateFile(g)) return void jt.Util.log("SaveState file loaded");
+                  f = new jt.ROM(a, g), e = jt.CartridgeDatabase.createCartridgeFromRom(f), b && b.insert(e, l)
                 }
-                catch (q)
-                {}
-              }
-              j("No valid ROM files inside zip file")
-            }
-            catch (r)
-            {
-              j(h.message)
-            }
-          }
-        },
-        j = function(a)
-        {
-          jt.Util.log("" + a), jt.Util.message("Could not load ROM:\n\n" + a)
-        },
-        k = function()
-        {
-          d = document.createElement("input"), d.id = "ROMLoaderFileInput", d.type = "file", d.accept = n, d.style.display = "none", d.addEventListener("change", f), e.appendChild(d)
-        },
-        l = !0,
-        m = /^.*\.(bin|BIN|rom|ROM|a26|A26|jst|JST)$/,
-        n = ".bin,.rom,.a26,.zip,.jst",
-        o = "javatarilasturl";
+                catch (h)
+                {
+                  if (!h.javatari) throw jt.Util.log(h.stack), h;
+                  try
+                  {
+                    for (var i = new JSZip(d), k = i.file(m), n = 0; n < k.length; n++)
+                    {
+                      var o = k[n];
+                      jt.Util.log("Trying zip file content: " + o.name);
+                      try
+                      {
+                        var p = o.asUint8Array();
+                        return g = new Array(p.length), jt.Util.arrayCopy(p, 0, g, 0, g.length), f = new jt.ROM(o.name, g), e = jt.CartridgeDatabase.createCartridgeFromRom(f), void(b && b.insert(e, l))
+                      }
+                      catch (q)
+                      {}
+                    }
+                    j("No valid ROM files inside zip file")
+                  }
+                  catch (r)
+                  {
+                    j(h.message)
+                  }
+                }
+              },
+
+          j = function(a)
+              {
+                jt.Util.log("" + a), jt.Util.message("Could not load ROM:\n\n" + a)
+              },
+
+          k = function()
+              {
+                d = document.createElement("input"), d.id = "ROMLoaderFileInput", d.type = "file", d.accept = n, d.style.display = "none", d.addEventListener("change", f), e.appendChild(d)
+              },
+
+          l = !0,
+          m = /^.*\.(bin|BIN|rom|ROM|a26|A26|jst|JST)$/,
+          n = ".bin,.rom,.a26,.zip,.jst",
+          o = "javatarilasturl";
+
       Javatari.loadROMFromURL = this.loadFromURL
+
     },
 
     jt.Settings = function()
@@ -23147,84 +23163,168 @@
     SettingsGUI.css = function()
     {
       return '#jt-cover {position: fixed;top: 0;right: 0;bottom: 0;left: 0;visibility: hidden;opacity: 0;background-color: rgba(0, 0, 0, 0.6);transition: all .2s ease-out;}#jt-cover.show {visibility: visible;opacity: 1;}#jt-modal {position: relative;overflow: hidden;width: 560px;top: 80px;left: -120px;margin: 0 auto;color: rgba(0, 0, 0, 0.90);font-family: arial, sans-serif;box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, .4);transition: all .2s ease-out;}#jt-modal.show {left: 0;}#jt-modal .hotkey {height: 27px;padding: 3px 5px;font-size: 13px;box-sizing: border-box;}#jt-modal .hotkey .command {position: relative;float: left;font-weight: 600;color: rgba(0, 0, 0, .50);}#jt-modal .hotkey .desc {float: left;padding-top: 3px;}#jt-modal .key {position: relative;display: inline-block;top: -1px;min-width: 25px;height: 21px;padding: 4px 6px 3px;box-sizing: border-box;font-weight: 600;font-size: 12px;line-height: 12px;color: rgba(0, 0, 0, .68);background-color: white;border-radius: 3px;border: 1px solid rgb(210, 210, 210);box-shadow: 0 1px 0 1px rgba(0, 0, 0, .5);text-align: center;}#jt-modal .key-ctrlalt {width: 31px;padding-left: 0;padding-right: 2px;}#jt-menu {position: relative;background-color: white;border-bottom: 1px solid rgb(200, 200, 200);}#jt-menu #jt-back {position: absolute;width: 18px;height: 32px;margin: 3px;padding: 0 11px;font-size: 35px;color: white;cursor: pointer;}#jt-menu #jt-back:hover {background-color: rgba(0, 0, 0, .12);}#jt-menu #jt-back-arrow {position: relative;overflow: hidden;top: -7px;}#jt-menu .caption {height: 29px;margin: 0 -1px;padding: 9px 0 0 48px;font-size: 19px;color: white;background-color: rgb(235, 62, 35);box-shadow: 0 1px 4px rgba(0, 0, 0, .8);}#jt-menu .items {position: relative;width: 70%;height: 39px;margin: 0 auto;font-weight: 600;}#jt-menu .item {float: left;width: 33.3%;height: 100%;padding-top: 13px;font-size: 14px;color: rgba(0, 0, 0, .43);text-align: center;cursor: pointer}#jt-menu .selected {color: rgb(224, 56, 34);}#jt-menu #jt-menu-selection {position: absolute;left: 0;bottom: 0;width: 33.3%;height: 3px;background-color: rgb(235, 62, 35);transition: left 0.3s ease-in-out}#jt-content {position: relative;left: 0;width: 1680px;height: 370px;background-color: rgb(220, 220, 220);transition: left 0.3s ease-in-out}#jt-help, #jt-controls, #jt-about {position: absolute;width: 560px;height: 100%;box-sizing: border-box;}#jt-help {padding-top: 22px;}#jt-help .left {float: left;padding-left: 30px;}#jt-help .right {float: left;padding-left: 34px;}#jt-help .left .command {width: 104px;}#jt-help .right .command {width: 109px;}#jt-help .command.right-bottom {width: 164px;}#jt-controls {left: 560px;}#jt-controls .player {position: absolute;top: 15px;width: 217px;color: rgba(0, 0, 0, .8);}#jt-controls .p1 {left: 28px;}#jt-controls .p2 {right: 28px;}#jt-controls .title {padding-bottom: 4px;margin: 0 14px 8px 12px;font-size: 18px;text-align: center;border-bottom: 2px solid rgba(242, 66, 35, .55);}#jt-controls .player .command {position: relative;float: left;width: 33%;height: 45px;font-size: 13px;text-align: center;}#jt-controls .command.fire1, #jt-controls .command.fire2 {top: 14px;}#jt-controls .command.left, #jt-controls .command.right {top: 27px;}#jt-controls .command.down {float: none;clear: both;margin: 0 auto;}#jt-controls .command.controller {height: 90px;}#jt-controls #jt-control-p1-controller, #jt-controls #jt-control-p2-controller {width: 70px;height: 89px;margin-left: 1px;background: url(' + jt.Images.urls.sprites + ') no-repeat -466px 0;}#jt-controls .player .key {min-width: 33px;height: 23px;padding: 5px 6px 4px;margin-top: 2px;cursor: pointer;}#jt-controls .player .key:hover {box-shadow: 0 1px 0 1px rgba(0, 0, 0, .5), 1px 2px 6px 4px rgb(170, 170, 170);}#jt-controls .player .key.redefining {color: white;background-color: rgb(87, 128, 255);border-color: rgb(71, 117, 255);}#jt-controls .player .key.undefined {background-color: rgb(255, 150, 130);border-color: rgb(255, 130, 90);}#jt-controls .modes {position: absolute;top: 200px;left: 0;right: 0;width: 200px;margin: 0 auto;}#jt-controls .modes .hotkey {position: relative;padding-left: 8px;cursor: pointer;}#jt-controls .modes .hotkey:hover {background-color: white;box-shadow: 1px 1px 3px 1px rgb(180, 180, 180);}#jt-controls .modes .command {margin-right: 12px;}#jt-controls-defaults, #jt-controls-revert {position: absolute;bottom: 18px;padding: 7px 10px;font-size: 12px;font-weight: 600;border-radius: 1px;cursor: pointer}#jt-controls-defaults:hover, #jt-controls-revert:hover {background-color: white;box-shadow: 1px 1px 3px 1px rgb(180, 180, 180);}#jt-controls-revert {right: 30px;color: rgba(0, 0, 0, 0.8);}#jt-controls-defaults {right: 115px;color: rgb(0, 80, 230);}#jt-about {left: 1120px;}#jt-about #jt-logo-version {width: 248px;height: 220px;margin: 28px auto 14px;font-size: 18px;color: rgba(255, 255, 255, 0.97);padding-top: 190px;box-sizing: border-box;text-align: center;background: black url(' + jt.Images.urls.logo + ') no-repeat 5px 13px;background-size: 233px 173px;box-shadow: 3px 3px 14px rgb(75, 75, 75);}#jt-about .info {font-size: 18px;line-height: 30px;text-align: center;}#jt-about a {color: rgb(0, 80, 230);text-decoration: none;}#jt-about #jt-browserinfo {position: absolute;left: 0;right: 0;bottom: 7px;font-size: 10px;text-align: center;color: transparent;}';
-
     },
 
     jt.Room = function(a, b, c)
     {
+
       function d()
       {
-        g(), h()
+        g(),
+        h()
       }
+
       var e = this;
+
       this.powerOn = function(a)
       {
-        i(), e.screen.powerOn(), e.consolePanel && this.consolePanel.powerOn(), e.speaker.powerOn(), e.controls.powerOn(), f(), e.console.getCartridgeSocket()
-          .inserted() && !e.console.powerIsOn && e.console.powerOn(a)
-      }, this.powerOff = function()
+        i(),
+        e.screen.powerOn(),
+        e.consolePanel && this.consolePanel.powerOn(),
+        e.speaker.powerOn(),
+        e.controls.powerOn(),
+        f(),
+        e.console.getCartridgeSocket().inserted() && !e.console.powerIsOn && e.console.powerOn(a)
+      },
+
+      this.powerOff = function()
       {
-        e.console.powerOff(), e.controls.powerOff(), e.speaker.powerOff(), e.screen.powerOff(), e.consolePanel && this.consolePanel.powerOff()
+        e.console.powerOff(),
+        e.controls.powerOff(),
+        e.speaker.powerOff(),
+        e.screen.powerOff(),
+        e.consolePanel && this.consolePanel.powerOff()
       };
+
       var f = function()
-        {
-          e.console.getCartridgeSocket()
-            .inserted() || c && e.console.getCartridgeSocket()
-            .insert(c, !1)
-        },
-        g = function()
-        {
-          e.stateMedia = new jt.LocalStorageSaveStateMedia, e.romLoader = new jt.ROMLoader, e.screen = new jt.CanvasDisplay(a), e.screen.connectPeripherals(e.romLoader, e.stateMedia), b && (e.consolePanel = new jt.ConsolePanel(b), e.consolePanel.connectPeripherals(e.screen, e.romLoader)), e.speaker = new jt.WebAudioSpeaker, e.controls = new jt.DOMConsoleControls, e.controls.connectPeripherals(e.screen, e.consolePanel)
-        },
-        h = function()
-        {
-          e.console = new jt.AtariConsole, e.stateMedia.connect(e.console.getSavestateSocket()), e.romLoader.connect(e.console.getCartridgeSocket(), e.console.getSavestateSocket()), e.screen.connect(e.console.getVideoOutput(), e.console.getControlsSocket(), e.console.getCartridgeSocket()), e.consolePanel && e.consolePanel.connect(e.console.getControlsSocket(), e.console.getCartridgeSocket(), e.controls), e.speaker.connect(e.console.getAudioOutput()), e.controls.connect(e.console.getControlsSocket(), e.console.getCartridgeSocket())
-        },
-        i = function()
-        {
-          function a()
-          {
-            document.hidden ? e.speaker.mute() : e.speaker.play()
-          }
-          document.addEventListener("visibilitychange", a)
-        };
-      this.screen = null, this.consolePanel = null, this.speaker = null, this.controls = null, this.console = null, this.stateMedia = null, this.romLoader = null, d()
+              {
+                e.console.getCartridgeSocket().inserted() || c && e.console.getCartridgeSocket().insert(c, !1)
+              },
+
+          g = function()
+              {
+                e.stateMedia = new jt.LocalStorageSaveStateMedia,
+                e.romLoader  = new jt.ROMLoader,
+                e.screen     = new jt.CanvasDisplay(a),
+                e.screen.connectPeripherals(e.romLoader, e.stateMedia),
+                b && (
+                       e.consolePanel = new jt.ConsolePanel(b),
+                       e.consolePanel.connectPeripherals(e.screen, e.romLoader)
+                     ),
+                e.speaker    = new jt.WebAudioSpeaker,
+                e.controls   = new jt.DOMConsoleControls,
+                e.controls.connectPeripherals(e.screen, e.consolePanel)
+              },
+
+          h = function()
+              {
+
+                e.console = new jt.AtariConsole,
+
+                e.stateMedia.connect
+                (
+                  e.console.getSavestateSocket()
+                ),
+
+                e.romLoader.connect
+                (
+                  e.console.getCartridgeSocket(),
+                  e.console.getSavestateSocket()
+                ),
+
+                e.screen.connect
+                (
+                  e.console.getVideoOutput(),
+                  e.console.getControlsSocket(),
+                  e.console.getCartridgeSocket()
+                ),
+
+                e.consolePanel && e.consolePanel.connect
+                (
+                  e.console.getControlsSocket(),
+                  e.console.getCartridgeSocket(),
+                  e.controls
+                ),
+
+                e.speaker.connect
+                (
+                  e.console.getAudioOutput()
+                ),
+
+                e.controls.connect
+                (
+                  e.console.getControlsSocket(),
+                  e.console.getCartridgeSocket()
+                )
+
+              },
+
+          i = function()
+              {
+                function a()
+                {
+                  document.hidden ? e.speaker.mute() : e.speaker.play()
+                }
+                document.addEventListener("visibilitychange", a)
+              };
+
+      this.screen       = null,
+      this.consolePanel = null,
+      this.speaker      = null,
+      this.controls     = null,
+      this.console      = null,
+      this.stateMedia   = null,
+      this.romLoader    = null,
+
+      d()
+
     },
 
     Javatari.start = function()
     {
-      if (Javatari.preferences.load(), !Javatari.screenElement && (Javatari.screenElement = document.getElementById(Javatari.SCREEN_ELEMENT_ID), !Javatari.screenElement)) throw new Error('Javatari cannot be started. HTML document is missing screen element with id "' + Javatari.SCREEN_ELEMENT_ID + '"');
-      Javatari.consolePanelElement || (Javatari.consolePanelElement = document.getElementById(Javatari.CONSOLE_PANEL_ELEMENT_ID)), Javatari.room = new jt.Room(Javatari.screenElement, Javatari.consolePanelElement), Javatari.room.powerOn(), Javatari.ROM_AUTO_LOAD_URL && Javatari.room.romLoader.loadFromURL(Javatari.ROM_AUTO_LOAD_URL), Javatari.shutdown = function()
+      if (
+            Javatari.preferences.load(),
+           !Javatari.screenElement && (Javatari.screenElement = document.getElementById(Javatari.SCREEN_ELEMENT_ID), !Javatari.screenElement)
+         ) throw new Error('Javatari cannot be started. HTML document is missing screen element with id "' + Javatari.SCREEN_ELEMENT_ID + '"');
+      Javatari.consolePanelElement || (Javatari.consolePanelElement = document.getElementById(Javatari.CONSOLE_PANEL_ELEMENT_ID)),
+      Javatari.room = new jt.Room(Javatari.screenElement, Javatari.consolePanelElement),
+      Javatari.room.powerOn(),
+   // Javatari.ROM_AUTO_LOAD_URL && Javatari.room.romLoader.loadFromURL(Javatari.ROM_AUTO_LOAD_URL),
+      Javatari.ROM_AUTO_LOAD_URL && Javatari.room.romLoader.loadFromURL(Javatari.ROM_AUTO_LOAD_URL),
+      Javatari.shutdown = function()
       {
-        Javatari.room && Javatari.room.powerOff(), jt.Util.log("shutdown"), delete Javatari
-      }, delete Javatari.start, delete Javatari.preLoadImagesAndStart, jt.Util.log(Javatari.VERSION + " started")
+        Javatari.room && Javatari.room.powerOff(),
+        jt.Util.log("shutdown"),
+        delete Javatari
+      },
+      delete Javatari.start,
+      delete Javatari.preLoadImagesAndStart,
+      jt.Util.log(Javatari.VERSION + " started")
     },
 
     Javatari.preLoadImagesAndStart = function()
     {
+
       function a(a)
       {
         Javatari.start && Javatari.AUTO_START !== !1 && (a || d && 0 === e) && Javatari.start()
       }
+
       var b = ["sprites.png", "logo.png", "screenborder.png"],
-        c = b.length,
-        d = !1,
-        e = c;
-      document.addEventListener("DOMContentLoaded", function()
-      {
-        d = !0, a(!1)
-      });
+          c = b.length,
+          d = !1,
+          e = c;
+
+      document.addEventListener("DOMContentLoaded", function() { d = !0, a(!1) });
+
       for (var f = 0; c > f; f++)
       {
         var g = new Image;
-        g.src = Javatari.FILES_PATH + b[f], g.onload = function()
-        {
-          e--, a(!1)
-        }
+        g.src = Javatari.FILES_PATH + b[f], g.onload = function() { e--, a(!1) }
       }
-      window.addEventListener("load", function()
-      {
-        a(!0)
-      })
+
+      window.addEventListener("load", function() { a(!0) })
+
     },
 
     Javatari.preLoadImagesAndStart();
