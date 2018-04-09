@@ -1,4 +1,13 @@
 
+International
+http://webmsx.org/?SCREEN_DEFAULT_ASPECT=1.0&BASIC_ENTER=esc%20propor%C2%87%C2%B1o&BASIC_TYPE=un%20pt%2030%20ul%20repita%20360%20[pf%201%20pe%201]%20mudepropor%C2%87%C2%B1o%201%20repita%20360%20[pf%201%20pd%201]&MACHINE=MSX1A&SCREEN_CONTROL_BAR=0&SCREEN_DEFAULT_SCALE=2.0&CARTRIDGE2_URL=http://www.icongames.com.br/msxfiles/apps/hotlogo.zip&DISKA_FILES_URL=https://github.com/arkanon/dipohlo/blob/gh-pages/webmsx-disk.zip?raw=true
+
+HotBit 1.2
+http://webmsx.org/?SCREEN_DEFAULT_ASPECT=1.0&BASIC_ENTER=esc%20propor%C2%87%C2%B1o&BASIC_TYPE=un%20pt%2030%20ul%20repita%20360%20[pf%201%20pe%201]%20mudepropor%C2%87%C2%B1o%201%20repita%20360%20[pf%201%20pd%201]&MACHINE=MSX1A&SCREEN_CONTROL_BAR=0&SCREEN_DEFAULT_SCALE=2.0&CARTRIDGE1_URL=http://www.msxpro.com/hardware/roms/hotbit12.zip&CARTRIDGE2_URL=http://www.icongames.com.br/msxfiles/apps/hotlogo.zip&DISKA_FILES_URL=https://github.com/arkanon/dipohlo/blob/gh-pages/webmsx-disk.zip?raw=true
+
+Gradiente Expert 1.1
+http://webmsx.org/?SCREEN_DEFAULT_ASPECT=1.0&BASIC_ENTER=esc%20propor%C2%87%C2%B1o&BASIC_TYPE=un%20pt%2030%20ul%20repita%20360%20[pf%201%20pe%201]%20mudepropor%C2%87%C2%B1o%201%20repita%20360%20[pf%201%20pd%201]&MACHINE=MSX1A&SCREEN_CONTROL_BAR=0&SCREEN_DEFAULT_SCALE=2.0&CARTRIDGE1_URL=http://www.msxpro.com/hardware/roms/expert11.zip&CARTRIDGE2_URL=http://www.icongames.com.br/msxfiles/apps/hotlogo.zip&DISKA_FILES_URL=https://github.com/arkanon/dipohlo/blob/gh-pages/webmsx-disk.zip?raw=true
+
 Alt+L  toggle keyboard layout
 
 Alt+C  copy screen text
