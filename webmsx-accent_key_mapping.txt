@@ -1,15 +1,43 @@
 
-ã [±]
-â []
-á [ ]
-é []
-í [¡]
-ó [¢]
-ú [£]
-ç []
-º [§]
-π [¾]
+Alt+L  toggle keyboard layout
+
+Alt+C  copy screen text
+Alt+V  open text paste box
+Alt+B  open text input box
+
+F9  / Pause       = STOP
+F10 / Screen Lock = SELECT
+      Page Down   = CODE
+      Page Up     = GRAPH
+      End         = DEAD
+
+
+CODE + ' 1 2 3 4 5 6 7 8 9 0 - =
+       ŋ ƒ ‡ § ¢ ÿ α ß τ ç δ ε Θ
+
+          Q W E R T Y U I O P ' [
+          â ê î ô û á é í ó ú ? ø
+
+           A S D F G H J K L Ç ~ ]
+           ä ë ï ö ü ã æ ĩ õ ? ? ω
+
+          \ Z X C V B N M , . ; /
+          ? à è ì ò ù µ ñ å ª ũ º
+
+
+CODE + H = ã [±]
+CODE + Q = â []
+CODE + Y = á [ ]
+CODE + U = é []
+CODE + I = í [¡]
+CODE + O = ó [¢]
+CODE + P = ú [£]
+CODE + 9 = ç []
+           º [§]
+           π [¾]
+
+        DEAD a = à
+SHIFT + DEAD a = á
 
 BAGAËSOFT
 ÀÜÂÜÀÜÂÜÀ
-
