@@ -1,5 +1,6 @@
 {
   "MACHINE"                : "MSX1A",
+  "CARTRIDGE1_URL"         : "http://www.msxpro.com/hardware/roms/expert11.zip",
   "CARTRIDGE2_URL"         : "http://www.msxblog.es/wp-content/uploads/2009/09/msxlogo_por.zip",
   "DISKA_FILES_URL"        : "https://github.com/arkanon/dipohlo/blob/gh-pages/webmsx-disk.zip?raw=true",
   "BASIC_ENTER"            : "esc propor%C2%87±o",
